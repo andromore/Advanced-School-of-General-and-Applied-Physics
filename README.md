@@ -1,2 +1,2 @@
-# High-School-of-General-and-Applied-Physics
+# Advanced-School-of-General-and-Applied-Physics
 Репозиторий Высшей Школы Общей и Прикладной Физики
