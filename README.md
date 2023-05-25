@@ -1,4 +1,4 @@
-# Advanced-School-of-General-and-Applied-Physics
+# Advanced School of General and Applied Physics
 Репозиторий Высшей Школы Общей и Прикладной Физики
 
 Если требуется что-то добавить, в разделе "Discussions" создан чат "Добавить".
