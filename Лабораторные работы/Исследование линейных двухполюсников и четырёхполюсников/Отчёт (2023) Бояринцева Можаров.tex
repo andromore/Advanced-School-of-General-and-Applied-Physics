@@ -1,0 +1,894 @@
+\documentclass[a4paper, usenames, dvipsnames]{article}
+
+\title{Исследование линейных свойств двухполюсников и четырёхполюсников}
+\author{Бояринцева Н.А. \and Можаров А.Р.}
+\date{22 ноября 2023}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{indentfirst}
+\usepackage[hidelinks]{hyperref}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage[left=3.5cm, right=3.5cm, top=2.5cm, bottom=3cm]{geometry}
+\usepackage{xcolor}
+
+\renewcommand{\thesubfigure}{.\arabic{subfigure}}
+\DeclareCaptionLabelFormat{My}{Рис. \thefigure #2: }
+\captionsetup[subfigure]{labelformat=My}
+
+\begin{document}
+
+\maketitle
+
+\section*{\centering Теоретическая часть}
+
+\subsection*{Гармонические сигналы}
+
+{\it Гармоническим сигнал} --- сигнал, изменяющийся с течением времени
+по закону косинуса или синуса (по {\it гармоническому закону}),
+но ввиду соотношения
+\begin{gather*}
+    cos(x) = sin\left(x + \dfrac{\pi}{2}\right)
+\end{gather*}
+нет особой разницы в выборе между косинусом и синусом,
+хотя в большинстве случаев используется косинус.
+
+Пусть имеется гармонический сигнал:
+\begin{gather*}
+    A(t) = A_0 \cdot cos(\omega t + \varphi)
+\end{gather*}
+
+С целью облегчения расчётов,
+такие сигналы представляются в комплексной форме так,
+чтобы исходный сигнал в точности равнялся действительной части комплексного сигнала.
+Если представить исходный сигнал в виде:
+\begin{gather*}
+    A(t) = A_0 \cdot cos(\omega t + \varphi) + i \cdot A_0 \cdot sin(\omega t + \varphi)
+\end{gather*}
+то используя формулу Эйлера ($e^{i\varphi} = cos(\varphi) + i \cdot sin(\varphi)$)
+получаем представление исходного сигнала в виде:
+\begin{gather*}
+    A(t) = A_0 \cdot e^{i(\omega t + \varphi)}
+\end{gather*}
+Преобразуем сигнал, выделив в нём части,
+зависящие и независящие от времени, т.е.
+\begin{gather*}
+    A(t) = A_0 \cdot e^{i(\omega t + \varphi)} =
+    A_0 \cdot e^{i\varphi} \cdot e^{i(\omega t)} =
+    \hat{A} \cdot e^{i(\omega t)}
+\end{gather*}
+где $\hat{A} = A_0 \cdot e^{i\varphi}$ называют {\it комплексной амплитудой} сигнала.
+Таким образом, по определению, комплексная амплитуда {\it не зависит от времени},
+т.е. {\it просто некоторое комплексное число}.
+
+Стоит отметить, что {\it модуль $A_0$ комплексной амплитуды}
+$\hat{A} = A_0 \cdot e^{i\varphi}$ соответствует амплитуде исходного сигнала,
+а {\it аргумент комплексной амплитуды $\varphi$} соответствует
+сдвигу фазы исходного сигнала.
+
+Отметим свойства комплексных амплитуд при некоторых преобразованиях над сигналами:
+\begin{enumerate}
+    \item Сложение сигналов:
+
+          Пусть имеется два гармонических сигнала одной и той же частоты
+          $A(t) = \hat{A} \cdot e^{i(\omega t)}$ и $B(t) = \hat{B} \cdot e^{i(\omega t)}$.
+          При сложении эти сигналов получаем сигнал:
+          \begin{gather*}
+              C(t) = A(t) + B(t) = \hat{A} \cdot e^{i(\omega t)} + \hat{B} \cdot e^{i(\omega t)}
+              = (\hat{A} + \hat{B}) \cdot e^{i(\omega t)} = \hat{C} \cdot e^{i(\omega t)}
+          \end{gather*}
+          где $\hat{C} = \hat{A} + \hat{B}$ --- комплексная амплитуда суммарного сигнала.
+
+          Т.е. {\it суммой двух гармонических сигналов одной и той же частоты
+          является гармонический сигнал той же частоты и комплексной амплитуды,
+          равной сумме комплексных амплитуд исходных сигналов}.
+
+          Заметим, что если суммируемые сигналы имеют разную частоту,
+          то комплексная амплитуда суммарного сигнала будет зависеть от времени,
+          что противоречит её определению.
+
+    \item Увеличение амплитуды сигнала:\label{Увеличение амплитуды по фазе}
+
+          Пусть имеется сигнал $A(t) = \hat{A} \cdot e^{i(\omega t)}$.
+          При умножении этого сигнала на некоторое действительное число $k$
+          получится сигнал:
+          \begin{gather*}
+              B(t) = k \cdot A(t) = k \cdot \hat{A} \cdot e^{i(\omega t)} = \hat{B} \cdot e^{i(\omega t)}
+          \end{gather*}
+          где $\hat{B} = k \cdot \hat{A}$ --- комплексная амплитуда увеличенного сигнала.
+
+          Т.е. {\it при увеличении гармонического сигнала в некоторое число раз,
+          его комплексная амплитуда также увеличится в это же количество раз}.
+
+          Само собой разумеется, что увеличенный сигнал будет гармоническим той же частоты.
+
+    \item Сдвиг сигнала по фазе:\label{Сдвиг сигнала по фазе}
+
+          Пусть имеется сигнал $A(t) = \hat{A} \cdot e^{i(\omega t)}$.
+          При умножении этого сигнала на некоторое комплексное число $e^{i\psi}$
+          (по модулю равное единице) получится сигнал:
+          \begin{gather*}
+              B(t) = e^{i\psi} \cdot A(t) = e^{i\psi} \cdot A_0 \cdot e^{i\varphi} \cdot e^{i(\omega t)}
+              = A_0 \cdot e^{i(\psi + \varphi)} \cdot e^{i(\omega t)} = \hat{A}' \cdot e^{i(\omega t)}
+          \end{gather*}
+          где $\hat{A}' = A_0 \cdot e^{i(\varphi + \psi)}$ --- комплексная амплитуда сдвинутого
+          по фазе сигнала.
+
+          Т.е. {\it при умножении сигнала на комплексное число, модуль которого равен единице,
+          сдвиг сигнала по фазе будет численно равен аргументу комплексного числа}.
+
+    \item[2+3.] Обобщение увеличения амплитуды сигнала и сдвига по фазе:
+
+        На что и указывает нумерация, этот пункт является
+        обобщением пунктов \ref{Увеличение амплитуды по фазе}
+        и \ref{Сдвиг сигнала по фазе} данного списка.
+
+        {\it При умножении сигнала на комплексное число, сигнал будет увеличен по амплитуде
+        в модуль этого комплексного числа раз
+        и сдвинут по фазе на аргумент этого комплексного числа}.
+
+    \item Дифференцирование сигнала по времени:
+
+          Пусть имеется гармонический сигнал $A(t) = \hat{A} \cdot e^{i(\omega t)}$.
+          Продифференцируем его по времени. Получится следующий сигнал:
+          \begin{gather*}
+              B(t) = \dfrac{d(A(t))}{d(t)} = i\omega \cdot \hat{A} \cdot e^{i(\omega t)}
+              = \hat{B} \cdot e^{i\left(\omega t + \dfrac{\pi}{2}\right)}
+          \end{gather*}
+          где $\hat{B} = \omega \cdot \hat{A}$ --- комплексная амплитуда дифференцированного сигнала.
+
+          Т.е. {\it при дифференцировании гармонического сигнала получается
+          гармонический сигнал той же частоты, что и исходный,
+          увеличенный в количество раз, численно равное его угловой частоте,
+          и сдвинутый по фазе на $\dfrac{\pi}{2}$}.
+
+    \item[4'.] Интегрирование сигнала по времени:
+
+        При интегрировании сигнала $A(t) = \hat{A} \cdot e^{i(\omega t)}$
+        получится такой сигнал $B(t)$, что при дифференцировании сигнала
+        $B(t)$ получится сигнал $A(t)$.
+
+        Тогда если сигнал $B(t)$ имеет вид:
+        \begin{gather*}
+            B(t) = \hat{B} \cdot e^{i(\omega t)}
+        \end{gather*}
+        то сигнал $A(t)$, полученный путём дифференцирования сигнала $B(t)$,
+        будет иметь вид:
+        \begin{gather*}
+            A(t) = \omega \cdot \hat{B} \cdot e^{i(\omega t + \dfrac{\pi}{2})}
+        \end{gather*}
+        Из последнего равенства выразим сигнал $B(t)$ через сигнал $A(t)$:
+        \begin{gather*}
+            A(t) = \hat{A} \cdot e^{i(\omega t)} = \omega \cdot \hat{B} \cdot e^{i(\omega t + \dfrac{\pi}{2})} \\
+            \dfrac{1}{\omega} \hat{A} \cdot e^{i\left(\omega t - \dfrac{\pi}{2}\right)} = \hat{B} \cdot e^{i(\omega t)} = B(t)
+        \end{gather*}
+
+        Т.е. {\it при интегрировании гармонического сигнала получается
+        гармонический сигнал той же частоты, что и исходный,
+        уменьшенный в количество раз, численно равное его угловой частоте,
+        и сдвинутый по фазе на $-\dfrac{\pi}{2}$}.
+\end{enumerate}
+
+На практике, комплексная амплитуда применяется для упрощения расчётов
+электрических цепей, подключённых к гармоническим источникам.
+
+\subsection*{Двухполюсники и импеданс}
+
+Под {\it двухполюсником} понимается электрическая цепь,
+имеющая два наружных контакта,
+с помощью которых она подключается к другим цепям.
+
+Под {\it линейными элементами} электрической цепи понимаются элементы,
+ведущие себя линейно, т.е. напряжение на которых является линейной функцией тока.
+Т.е.
+\begin{gather*}
+    U(t) = \alpha \cdot I(t) \Leftrightarrow I(t) = \beta \cdot U(t)
+\end{gather*}
+где $\beta = \dfrac{1}{\alpha}$.
+
+Самыми распространёнными линейными элементами являются:
+\begin{enumerate}
+    \item Резисторы
+
+          Согласно закону Ома в интегральной форме:
+          \begin{gather*}
+              U(t) = R \cdot I(t)
+          \end{gather*}
+
+          При $I_2(t) = k \cdot I_1(t)$ напряжение $U_2(t)$ имеет вид:
+          \begin{gather*}
+              U_2(t) = R \cdot I_2(t) = k \cdot R \cdot I_1(t) = k \cdot U_2(t)
+          \end{gather*}
+    \item Конденсаторы
+
+          Напряжение и ток на конденсаторе связаны соотношением:
+          \begin{gather*}
+              I(t) = C \cdot \dfrac{d(U(t))}{d(t)}
+          \end{gather*}
+
+          При $U_2(t) = k \cdot U_1(t)$ ток $I_2(t)$ имеет вид:
+          \begin{gather*}
+              I_2(t) = C \cdot \dfrac{d(U_2(t))}{d(t)} = C \cdot \dfrac{d(k \cdot U_1(t))}{d(t)} = k \cdot C \cdot \dfrac{d(U_1(t))}{d(t)} = k \cdot I_1(t)
+          \end{gather*}
+
+    \item Катушки индуктивности
+
+          Ток и напряжение на катушке индуктивности связаны соотношением:
+          \begin{gather*}
+              U(t) = L \cdot \dfrac{d(I(t))}{d(t)}
+          \end{gather*}
+
+          При $I_2(t) = k \cdot I_1(t)$ напряжение $U_2(t)$ имеет вид:
+          \begin{gather*}
+              U_2(t) = L \cdot \dfrac{d(I_2(t))}{d(t)} = L \cdot \dfrac{d(k \cdot I_1(t))}{d(t)} = k \cdot L \cdot \dfrac{d(I_1(t))}{d(t)} = k \cdot U_1(t)
+          \end{gather*}
+\end{enumerate}
+
+При подключении линейных двухполюсников к гармонической э.д.с.
+в них возникают гармонические напряжения и токи той же частоты, что
+и частота подключаемой э.д.с.
+\begin{gather*}
+    U(t) = U_0 \cdot cos(\omega t - \varphi) \hspace{2em} I(t) = I_0 \cdot cos(\omega t)
+\end{gather*}
+где $\varphi$ --- сдвиг фаз напряжения относительно тока.
+
+Т.к. эти сигналы гармонические,
+то их можно представить с использованием комплексных амплитуд:
+\begin{gather*}
+    U(t) = \hat{U} \cdot e^{i(\omega t)} \hspace{2em} I(t) = \hat{I} \cdot e^{i(\omega t)}
+\end{gather*}
+
+{\it Импедансом двухполюсника} называется отношение комплексной амплитуды напряжения
+гармонического сигнала к комплексной амплитуде тока, протекающего через двухполюсник.
+\begin{gather*}
+    Z = \dfrac{\hat{U}}{\hat{I}} = \dfrac{U_0}{I_0} \cdot e^{i\varphi} = \hat{Z} \cdot e^{i\varphi}
+\end{gather*}
+где $\hat{Z}$ --- модуль импеданса, а $\varphi$ --- аргумент импеданса.
+
+Согласно определению, импеданс имеет размерность сопротивления,
+не зависит от времени и определён только для линейных двухполюсников,
+подключённых к гармоническим источникам.
+
+Импедансы базовых линейных элементов имеют вид:
+\begin{enumerate}
+    \item Импеданс резистора
+
+          Из закона Ома в интегральной форме при гармоническом сигнале:
+          \begin{gather*}
+              U(t) = \hat{U} \cdot e^{i(\omega t)} = R \cdot I(t) = R \cdot \hat{I} \cdot e^{i(\omega t)}
+          \end{gather*}
+          Т.е. $\hat{U} = R \cdot \hat{I}$, а тогда импеданс резистора:
+          \begin{gather*}
+              Z_R = \dfrac{\hat{U}}{\hat{I}} = \dfrac{R \cdot \hat{I}}{\hat{I}} = R
+          \end{gather*}
+
+    \item Импеданс конденсатора
+
+          Ток и напряжение на конденсаторе при гармоническом сигнале связаны соотношением:
+          \begin{gather*}
+              I(t) = \hat{I} \cdot e^{i(\omega t)} = C \cdot \dfrac{d(U(t))}{d(t)} = i\omega C \cdot \hat{U} \cdot e^{i(\omega t)}
+          \end{gather*}
+          Т.е. $\hat{I} = i\omega C \cdot \hat{U}$, а тогда:
+          \begin{gather*}
+              Z_C = \dfrac{\hat{U}}{\hat{I}} = \dfrac{\hat{U}}{i\omega C \cdot \hat{U}} = \dfrac{1}{i\omega C} = -i\dfrac{1}{\omega C}
+          \end{gather*}
+    \item Импеданс катушки индуктивности
+
+          Напряжение и ток на катушке индуктивности при гармоническом сигнале связаны соотношением:
+          \begin{gather*}
+              U(t) = \hat{U} \cdot e^{i(\omega t)} = L \cdot \dfrac{d(I(t))}{d(t)} = i\omega L \cdot \hat{I} \cdot e^{i(\omega t)}
+          \end{gather*}
+          Т.е. $\hat{U} = i\omega L \cdot \hat{I}$, а тогда:
+          \begin{gather*}
+              Z_L = \dfrac{\hat{U}}{\hat{I}} = \dfrac{i\omega L \cdot \hat{I}}{\hat{I}} = i \omega L
+          \end{gather*}
+\end{enumerate}
+
+Рассмотрим свойства импеданса при последовательном и параллельном подключении линейных двухполюсников
+при гармоническом напряжении:
+\begin{enumerate}
+    \item Последовательное
+
+          При последовательном подключении имеем соотношения для напряжений $\hat{U}_{12} = \hat{U}_1 + \hat{U}_2$
+          и $\hat{I}_{12} = \hat{I}_1 = \hat{I}_2$ для токов, соответственно.
+          Тогда импеданс имеет вид:
+          \begin{gather*}
+              Z_{12} = \dfrac{\hat{U}_{12}}{\hat{I}_{12}} = \dfrac{\hat{U}_1 + \hat{U}_2}{\hat{I}_{12}} = \dfrac{\hat{U}_1}{\hat{I}_1} + \dfrac{\hat{U}_2}{\hat{I}_2} = Z_1 + Z_2
+          \end{gather*}
+    \item Параллельное
+
+          При параллельном подключении имеем соотношения для напряжений $\hat{U}_{12} = \hat{U}_1 = \hat{U}_2$
+          и $\hat{I}_{12} = \hat{I}_1 + \hat{I}_2$ для токов, соответственно.
+          Тогда импеданс имеет вид:
+          \begin{gather*}
+              \dfrac{1}{Z_{12}} = \dfrac{\hat{I}_{12}}{\hat{U}_{12}} = \dfrac{\hat{I}_1 + \hat{I}_2}{\hat{U}_{12}} = \dfrac{\hat{I}_1}{\hat{U}_1} + \dfrac{\hat{I}_2}{\hat{U}_2} = \dfrac{1}{Z_1} + \dfrac{1}{Z_2}
+          \end{gather*}
+\end{enumerate}
+Т.е. при последовательном и параллельном соединении импеданс эквивалентной схемы считается ровно также,
+как и сопротивление.
+
+Прямое измерение импеданса требует измерения амплитуд гармонических напряжения и тока
+и измерения сдвига фазы между ними.
+
+\subsection*{Четырёхполюсники}
+
+Под {\it четырёхполюсником} понимается электрическая цепь,
+имеющая четыре наружных контакта,
+с помощью которых она подключается к другим цепям.
+Как правило, имеет смысл одну пару контактов называть входными,
+а другую выходными.
+
+Важнейшей характеристикой четырехполюсника является его {\it коэффициент передачи},
+равный отношению комплексной амплитуды напряжения на выходе к комплексной
+амплитуде напряжения и входе:
+\begin{gather*}
+    K = \dfrac{\hat{U}_\text{вых.}}{\hat{U}_\text{вх.}} = \hat{K} \cdot e^{i\varphi}
+\end{gather*}
+
+Заметим, что для теоретического расчёта четырёхполюсников,
+входное напряжение на котором изменяется по гармоническому закону,
+можно использовать {\it законы Кирхгофа для переменных (гармонических) токов}:
+\begin{enumerate}
+    \item {\it Первый закон Кирхгофа}:
+
+          {\it Сумма токов, входящих в некоторый узел,
+          равна сумме токов, выходящих из узла}.
+
+          Или просто:
+
+          {\it Сумма токов в узле равна нулю}.
+          \begin{gather*}
+              \sum I_i = 0
+          \end{gather*}
+          где токи, входящие в узел и выходящие из узла, имеют разные знаки.
+
+          Это правило применяется для комплексных представлений гармонических токов.
+    \item {\it Второй закон Кирхгофа}:
+
+          {\it Сумма ЭДС в некотором контуре равна
+          сумме падений напряжения в этом контуре}.
+          \begin{gather*}
+              \sum \mathcal{E}_i = \sum U_i
+          \end{gather*}
+
+          Причём ЭДС берутся в их комплексном представлении,
+          а падения напряжения будут представляться в виде
+          произведений комплексного представления тока на элементе
+          на импеданс этого элемента.
+
+          Т.е. второй закон Кирхгофа имеет вид:
+          \begin{gather*}
+              \sum \mathcal{E}_i = \sum Z_i I_i
+          \end{gather*}
+\end{enumerate}
+
+\subsection*{Осциллограф}
+
+Пусть на входы $x$ и $y$ осциллографа подаются гармонические сигналы,
+причём сигнал, подаваемый на $y$, имеет ту же частоту,
+что и сигнал, подаваемый на $x$, но смещён по фазе. Т.е.:
+\begin{eqnarray*}
+    x = x_0 \cdot cos(\omega t) & y = y_0 \cdot cos(\omega t + \varphi)
+\end{eqnarray*}
+Слегка преобразуем эти два уравнения:
+\begin{eqnarray*}
+    \dfrac{x}{x_0} = cos(\omega t) & \dfrac{y}{y_0} = cos(\omega t + \varphi) \\
+    \left(\dfrac{x}{x_0}\right)^{\hspace{-0.3em}2} = cos^2(\omega t) & \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} = cos^2(\omega t + \varphi) \\
+\end{eqnarray*}
+Левое преобразовано, займёмся правым:
+\begin{gather*}
+    \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} = {\color{ForestGreen}cos^2(\omega t + \varphi)} = {\color{ForestGreen}\left(cos(\omega t)\cdot cos(\varphi) - sin(\omega t) \cdot sin(\varphi)\right)^{2}} = \\
+    = cos^2(\omega t) \cdot cos^2(\varphi) - 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot sin(\omega t) \cdot sin(\varphi) + {\color{ForestGreen}sin^2(\omega t) \cdot sin^2(\varphi)} = \\
+    = cos^2(\omega t) \cdot cos^2(\varphi) - 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot sin(\omega t) \cdot sin(\varphi) + sin^2(\varphi) - \\
+    - {\color{ForestGreen}cos^2(\omega t) \cdot sin^2(\varphi)} = {\color{Blue}cos^2(\omega t) \cdot cos^2(\varphi)} - 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot {\color{ForestGreen}sin(\omega t) \cdot sin(\varphi)} + \\
+    + sin^2(\varphi) - cos^2(\omega t) + {\color{Blue}cos^2(\omega t) \cdot cos^2(\varphi)} = 2 \cdot cos^2(\omega t) \cdot cos^2(\varphi) - \\
+    - 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot (cos(\omega t) \cdot cos(\varphi) - cos(\omega t + \varphi)) + sin^2(\varphi) - cos^2(\omega t) = \\
+    = {\color{Red}2 \cdot cos^2(\omega t) \cdot cos^2(\varphi)} - {\color{Red}2 \cdot cos^2(\omega t) \cdot cos^2(\varphi)} + \\
+    + 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot cos(\omega t + \varphi) + sin^2(\varphi) - cos^2(\omega t) = \\
+    = 2 \cdot cos(\omega t) \cdot cos(\varphi) \cdot cos(\omega t + \varphi) + sin^2(\varphi) - cos^2(\omega t) \\
+    \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} - 2 \cdot {\color{ForestGreen} cos(\omega t)} \cdot {\color{ForestGreen} cos(\omega t + \varphi)} \cdot cos(\varphi) = sin^2(\varphi) \\
+    \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} - 2 \cdot \dfrac{x}{x_0} \cdot \dfrac{y}{y_0} \cdot cos(\varphi) = sin^2(\varphi)
+\end{gather*}
+Получаем:
+\begin{eqnarray*}
+    \left(\dfrac{x}{x_0}\right)^{\hspace{-0.3em}2} = cos^2(\omega t) & \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} - 2 \cdot \dfrac{x}{x_0} \cdot \dfrac{y}{y_0} \cdot cos(\varphi) = sin^2(\varphi)
+\end{eqnarray*}
+Сложим эти уравнения:
+\begin{gather*}
+    \left(\dfrac{x}{x_0}\right)^{\hspace{-0.3em}2} + \left(\dfrac{y}{y_0}\right)^{\hspace{-0.3em}2} - 2 \cdot \dfrac{x}{x_0} \cdot \dfrac{y}{y_0} \cdot cos(\varphi) = sin^2(\varphi)
+\end{gather*}
+На экране осциллографа это уравнение будет иметь вид рис. \ref{Уравнение на экране осциллографа}.
+\begin{figure}[h]
+    \begin{subfigure}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[scale=0.75, axis x line=middle, axis y line=middle, grid=both, xmin=-2, xmax=2, ymin=-2, ymax=2]
+                \addplot[color=red, domain=-1:1]{x};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{$\varphi = 0$}
+        \label{Осциллограф с нулевым углом}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[scale=0.75, axis x line=middle, axis y line=middle, grid=both, xmin=-2, xmax=2, ymin=-2, ymax=2]
+                \addplot[color=red, samples=100]({cos(deg(x))},{cos(deg(x) + 30)});
+            \end{axis}
+        \end{tikzpicture}
+        \caption{$\varphi \in (0, \dfrac{\pi}{2})$}
+        \label{Осциллограф с маленьким углом}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[scale=0.75, axis x line=middle, axis y line=middle, grid=both, xmin=-2, xmax=2, ymin=-2, ymax=2]
+                \addplot[color=red, samples=100]({cos(deg(x))},{cos(deg(x) + 90)});
+            \end{axis}
+        \end{tikzpicture}
+        \caption{$\varphi = \dfrac{\pi}{2}$}
+        \label{Осциллограф с прямым углом}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[scale=0.75, axis x line=middle, axis y line=middle, grid=both, xmin=-2, xmax=2, ymin=-2, ymax=2]
+                \addplot[color=red, domain=-1:1]{-x};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{$\varphi = \pi$}
+        \label{Осциллограф с развёрнутым углом}
+    \end{subfigure}
+    \caption{Уравнение на экране осциллографа}
+    \label{Уравнение на экране осциллографа}
+\end{figure}
+
+Т.е. при $\varphi$ равном $0$ и $\pi$ уравнение вырождается в прямые $y = x$ и $y = -x$,
+соответствующие рис. \ref{Осциллограф с нулевым углом} и рис. \ref{Осциллограф с развёрнутым углом}.
+При $\varphi$ равном $\dfrac{\pi}{2}$ уравнение вырождается в окружность, соответственно рис. \ref{Осциллограф с прямым углом}.
+При $\varphi$ в диапазоне от $0$ до $\dfrac{\pi}{2}$ уравнение будет иметь вид <<эллипса>>,
+изображённого на рис. \ref{Осциллограф с маленьким углом}, а в диапазоне от $\dfrac{\pi}{2}$ до $\pi$ уравнение будет иметь вид,
+зеркальный данному <<эллипсу>> относительно оси $Oy$.
+
+\newpage\section*{\centering Практическая часть}
+
+\subsection*{Двухполюсники}
+
+В данной работе используются двухполюсники,
+схемы которых представлены на рис. \ref{Двухполюсники}.
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.24\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (1, 2) to [short, o-] (2, 2) to [R, l=$R$] (2, 0) to [C, l=$C$] (2, -2) to [short, -o] (1, -2);
+        \end{circuitikz}
+        \caption{Схема 1}
+        \label{Схема 1}
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (1, 2) to [short, o-] (2, 2) to [R, l=$R$] (2, 0) to [L, l=$L$] (2, -2) to [short, -o] (1, -2);
+        \end{circuitikz}
+        \caption{Схема 2}
+        \label{Схема 2}
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (1, 2) to [short, o-] (2, 2) to [R, l=$R_1$, -*] (2, 0.125) -- (2.5, 0.125) to [R, l=$R_2$] (2.5, -1.75) to [short, -*] (2, -1.75) -- (2, -2) to [short, -o] (1, -2);
+            \draw (2, 0.125) -- (1.5, 0.125) to [C, l_=$C$] (1.5, -1.75) -- (2, -1.75);
+        \end{circuitikz}
+        \caption{Схема 3}
+        \label{Схема 3}
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (1, 2) to [short, o-] (2, 2) to [R, l=$R_1$, -*] (2, 0.125) -- (2.5, 0.125) to [R, l=$R_2$] (2.5, -1.75) to [short, -*] (2, -1.75) -- (2, -2) to [short, -o] (1, -2);
+            \draw (2, 0.125) -- (1.5, 0.125) to [L, l_=$L$] (1.5, -1.75) -- (2, -1.75);
+        \end{circuitikz}
+        \caption{Схема 4}
+        \label{Схема 4}
+    \end{subfigure}
+    \vspace{0.5em}
+
+    Здесь $R = R_1 = R_2 = 13$ кОм, $C = 0,05$ мкФ, $L = 0,28$ Гн.
+    \vspace{-0.5em}
+
+    \caption{Двухполюсники}
+    \label{Двухполюсники}
+\end{figure}
+
+\begin{enumerate}
+    \item Схема 1 (рис. \ref{Схема 1})
+
+          Импеданс данной схемы будет считаться как импеданс
+          резистора и конденсатора при последовательном соединении:
+          \begin{gather*}
+              Z = Z_R + Z_C = R - i\dfrac{1}{\omega C}
+          \end{gather*}
+          Его модуль:
+          \begin{gather*}
+              \hat{Z} = \sqrt{R^2 + \left(\dfrac{1}{\omega^2 C^2}\right)^2}
+          \end{gather*}
+          И аргумент:
+          \begin{gather*}
+              \varphi = arc\ tg\left(\dfrac{1}{\omega R C}\right)
+          \end{gather*}
+          Построим на одном графике теоретическую и практическую зависимости
+          модуля $\hat{Z}$ (рис. \ref{График модуля для схемы 1})
+          и аргумента $\varphi$ (рис. \ref{График сдвига фазы для схемы 1})
+          импеданса от частоты $\nu$ для схемы 1.
+          \begin{figure}[h]
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75]
+                          \addplot coordinates{(314.1592653589793, 64975.744287337795)(628.3185307179587, 34383.307525940225)(942.4777960769379, 24886.06782406018)(1884.9555921538758, 16780.31861842709)(3769.9111843077517, 14040.82523336797)(6283.185307179586, 13384.024744606302)(9424.77796076938, 13172.059964843664)(12566.370614359172, 13097.061868642846)(31415.926535897932, 13015.578540140632)(62831.853071795864, 13003.896384685719)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(314.1592653589793, 49263.15789473685)(628.3185307179587, 26742.85714285714)(942.4777960769379, 20892.85714285714)(1884.9555921538758, 15731.09243697479)(3769.9111843077517, 13866.666666666666)(6283.185307179586, 13371.42857142857)(9424.77796076938, 13276.595744680852)(12566.370614359172, 13183.098591549297)(31415.926535897932, 13090.90909090909)(62831.853071795864, 13000.0)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График модуля для схемы 1}
+                  \label{График модуля для схемы 1}
+              \end{subfigure}
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75]
+                          \addplot coordinates{(314.1592653589793, 1.3693622050286478)(628.3185307179587, 1.1830635724113359)(942.4777960769379, 1.0211559136739947)(1884.9555921538758, 0.6845287420396644)(3769.9111843077517, 0.3874606567087217)(6283.185307179586, 0.240129307790185)(9424.77796076938, 0.1618087291176168)(12566.370614359172, 0.12182066314274588)(31415.926535897932, 0.048931661800794606)(62831.853071795864, 0.024480484350980197)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(314.1592653589793, 1.2449133695738581)(628.3185307179587, 1.0296968008377507)(942.4777960769379, 0.8754894447836139)(1884.9555921538758, 0.5598893394767656)(3769.9111843077517, 0.30081247525662086)(6283.185307179586, 0.1780826340909459)(9424.77796076938, 0.1194326682273138)(12566.370614359172, 0.09592167560673757)(31415.926535897932, 0.03917085539798163)(62831.853071795864, 0.016667438368071507)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для схемы 1}
+                  \label{График сдвига фазы для схемы 1}
+              \end{subfigure}
+              \caption{Графики для схемы 1}
+              \label{Графики для схемы 1}
+          \end{figure}
+    \item Схема 2 (рис. \ref{Схема 2})
+
+          Импеданс данной схемы будет считаться как импеданс
+          резистора и катушки индуктивности при последовательном соединении:
+          \begin{gather*}
+              Z = Z_R + Z_L = R + i\omega L
+          \end{gather*}
+          Его модуль:
+          \begin{gather*}
+              \hat{Z} = \sqrt{R^2 + \left(\omega L\right)^2}
+          \end{gather*}
+          И аргумент:
+          \begin{gather*}
+              \varphi = arc\ tg\left(\dfrac{\omega L}{R}\right)
+          \end{gather*}
+          Построим на одном графике теоретическую и практическую зависимости
+          модуля $\hat{Z}$ (рис. \ref{График модуля для схемы 2})
+          и аргумента $\varphi$ (рис. \ref{График сдвига фазы для схемы 2})
+          импеданса от частоты $\nu$ для схемы 2.
+          \begin{figure}[h]
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75, legend pos=north west]
+                          \addplot coordinates{(3141.592653589793, 13029.726665784106)(6283.185307179586, 13118.50250372281)(9424.77796076938, 13265.142022059496)(12566.370614359172, 13467.755260648542)(31415.926535897932, 15696.42311179654)(62831.853071795864, 21874.889577279293)(94247.7796076938, 29417.66963137742)(125663.70614359173, 37510.57419012203)(314159.2653589793, 88920.01940201124)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(3141.592653589793, 13090.90909090909)(6283.185307179586, 13276.595744680852)(9424.77796076938, 13371.42857142857)(12566.370614359172, 13764.705882352942)(31415.926535897932, 16000.000000000002)(62831.853071795864, 23168.31683168317)(94247.7796076938, 32054.794520547945)(125663.70614359173, 47755.102040816324)(314159.2653589793, 118481.01265822785)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График модуля для схемы 2}
+                  \label{График модуля для схемы 2}
+              \end{subfigure}
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75, legend pos=south east]
+                          \addplot coordinates{(3141.592653589793, 0.06756208573249245)(6283.185307179586, 0.13451294962810145)(9424.77796076938, 0.20027391089537838)(12566.370614359172, 0.26432715776665255)(31415.926535897932, 0.5948828308606143)(62831.853071795864, 0.9344153742670995)(94247.7796076938, 1.1130681629534371)(125663.70614359173, 1.21688545535666)(314159.2653589793, 1.4240716432599743)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(3141.592653589793, 0.07840197475892492)(6283.185307179586, 0.14232397365120558)(9424.77796076938, 0.20135792079033077)(12566.370614359172, 0.2801195993939269)(31415.926535897932, 0.620198349137597)(62831.853071795864, 1.0379922748255979)(94247.7796076938, 1.098247267555791)(125663.70614359173, 1.1639348462527306)(314159.2653589793, 0.9230875989913451)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для схемы 2}
+                  \label{График сдвига фазы для схемы 2}
+              \end{subfigure}
+              \caption{Графики для схемы 2}
+              \label{Графики для схемы 2}
+          \end{figure}
+    \item Схема 3 (рис. \ref{Схема 3})
+
+          Импеданс данной схемы будет считаться как импеданс
+          последовательного соединения резистора
+          с параллельным соединением другого резистора и конденсатора:
+          \begin{gather*}
+              Z = Z_{R1} + \dfrac{Z_{R2} Z_C}{Z_{R2} + Z_C} = R_1 + \dfrac{R_2}{1 + (\omega R_2 C)^2} - i\dfrac{\omega C R_2^2}{1 + (\omega R_2 C)^2}
+          \end{gather*}
+          Его модуль:
+          \begin{gather*}
+              \hat{Z} = \sqrt{\left(R_1 + \dfrac{R_2}{1 + (\omega R_2 C)^2}\right)^2 + \left(\dfrac{\omega C R_2^2}{1 + (\omega R_2 C)^2}\right)^2}
+          \end{gather*}
+          И аргумент:
+          \begin{gather*}
+              \varphi = arc\ tg\left(\dfrac{\omega C R^2_2}{R_1 + R_2 + R_1 \cdot (\omega R_2 C)^2}\right)
+          \end{gather*}
+          Построим на одном графике теоретическую и практическую зависимости
+          модуля $\hat{Z}$ (рис. \ref{График модуля для схемы 3})
+          и аргумента $\varphi$ (рис. \ref{График сдвига фазы для схемы 3})
+          импеданса от частоты $\nu$ для схемы 3.
+          \begin{figure}[h]
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75]
+                          \addplot coordinates{(314.1592653589793, 25606.73458211709)(628.3185307179587, 24566.707990443487)(1256.6370614359173, 21750.985638384744)(3141.592653589793, 16342.200335254005)(6283.185307179586, 14059.767722061302)(12566.370614359172, 13284.836204099835)(18849.55592153876, 13128.405209737311)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(314.1592653589793, 25161.290322580644)(628.3185307179587, 22941.176470588234)(1256.6370614359173, 20347.826086956524)(3141.592653589793, 15731.09243697479)(6283.185307179586, 13866.666666666666)(12566.370614359172, 13371.42857142857)(18849.55592153876, 13276.595744680852)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График модуля для схемы 3}
+                  \label{График модуля для схемы 3}
+              \end{subfigure}
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75, legend pos=south west]
+                          \addplot coordinates{(314.1592653589793, 0.09968495349845122)(628.3185307179587, 0.18629863261731205)(1256.6370614359173, 0.2971769243918533)(3141.592653589793, 0.3196192468498697)(6283.185307179586, 0.21525046396433065)(12566.370614359172, 0.11830864464743912)(18849.55592153876, 0.08037132082349423)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(314.1592653589793, 0.12939301750546905)(628.3185307179587, 0.20736529150978536)(1256.6370614359173, 0.2910482236747523)(3141.592653589793, 0.2792452903350099)(6283.185307179586, 0.16744807921968932)(12566.370614359172, 0.09729629484636994)(18849.55592153876, 0.06245193590284184)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для схемы 3}
+                  \label{График сдвига фазы для схемы 3}
+              \end{subfigure}
+              \caption{Графики для схемы 3}
+              \label{Графики для схемы 3}
+          \end{figure}
+    \item Схема 4 (рис. \ref{Схема 4})
+
+          Импеданс данной схемы будет считаться как импеданс
+          последовательного соединения резистора
+          с параллельным соединением другого резистора и катушки индуктивности:
+          \begin{gather*}
+              Z = Z_{R1} + \dfrac{Z_{R2} Z_L}{Z_{R2} + Z_L} = R_1 + \dfrac{R_2 \cdot (\omega L)^2}{R_2^2 + (\omega L)^2} + i \dfrac{\omega L R_2^2}{R_2^2 + (\omega L)^2}
+          \end{gather*}
+          Его модуль:
+          \begin{gather*}
+              \hat{Z} = \sqrt{\left(R_1 + \dfrac{R_2 \cdot (\omega L)^2}{R_2^2 + (\omega L)^2}\right)^2 + \left(\dfrac{\omega L R_2^2}{R_2^2 + (\omega L)^2}\right)^2}
+          \end{gather*}
+          И аргумент:
+          \begin{gather*}
+              \varphi = arc\ tg\left(\dfrac{\omega L R_2^2}{R_1 R_2^2 + (R_1 + R_2) (\omega L)^2}\right)
+          \end{gather*}
+          Построим на одном графике теоретическую и практическую зависимости
+          модуля $\hat{Z}$ (рис. \ref{График модуля для схемы 4})
+          и аргумента $\varphi$ (рис. \ref{График сдвига фазы для схемы 4})
+          импеданса от частоты $\nu$ для схемы 4.
+          \begin{figure}[h]
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75, legend pos=north west]
+                          \addplot coordinates{(6283.185307179586, 13346.097875023926)(12566.370614359172, 14269.062779801223)(31415.926535897932, 18117.093460032418)(62831.853071795864, 22292.11090409704)(78539.81633974482, 23338.965593671575)(94247.7796076938, 24020.62055567153)(125663.70614359173, 24801.294605353698)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(6283.185307179586, 13664.233576642337)(12566.370614359172, 14625.0)(31415.926535897932, 18352.94117647059)(62831.853071795864, 22285.714285714286)(78539.81633974482, 23168.31683168317)(94247.7796076938, 24123.711340206188)(125663.70614359173, 25161.290322580644)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График модуля для схемы 4}
+                  \label{График модуля для схемы 4}
+              \end{subfigure}
+              \begin{subfigure}{0.49\textwidth}
+                  \centering\noindent
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[scale=0.75, legend pos=south east]
+                          \addplot coordinates{(6283.185307179586, 0.1298142081385511)(12566.370614359172, 0.2318279786809357)(31415.926535897932, 0.33953254340648514)(62831.853071795864, 0.2824700810895604)(78539.81633974482, 0.24649363676833633)(94247.7796076938, 0.216224294256126)(125663.70614359173, 0.17123687949641075)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(6283.185307179586, 0.13471365852320707)(12566.370614359172, 0.22694303617851994)(31415.926535897932, 0.3273856388346866)(62831.853071795864, 0.28975170143604745)(78539.81633974482, 0.280907531551496)(94247.7796076938, 0.25001932187431203)(125663.70614359173, 0.22777078958669444)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для схемы 4}
+                  \label{График сдвига фазы для схемы 4}
+              \end{subfigure}
+              \caption{Графики для схемы 4}
+              \label{Графики для схемы 4}
+          \end{figure}
+\end{enumerate}
+
+\subsection*{Четырёхполюсники}
+
+Кроме того, в данной работе предлагается исследовать коэффициент проводимости
+напряжения $K$ для четырёхполюсников, представленных на рис. \ref{Четырёхполюсники}.
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (0, 0.5) to [short, o-] (0, 2.5) -- (3, 2.5) to [short, -*] (3, 2);
+            \draw (0, -0.5) to [short, o-] (0, -2.5) -- (3, -2.5) to [short, -*] (3, -2);
+            \draw (3, 2) to [R, l=$R_2$, -*] (5, 0) to [C, l=$C_2$] (3, -2);
+            \draw (3, -2) to [R, l=$R_1$, -*] (1, 0) to [C, l=$C_1$] (3, 2);
+            \draw (1, 0) to [short, -o] (2, 0);
+            \draw (5, 0) to [short, -o] (4, 0);
+            \draw (0, 0) node [open]{$U_\text{вх.}$};
+            \draw (3, 0) node [open]{$U_\text{вых.}$};
+        \end{circuitikz}
+        \vspace{0.5em}
+
+        Здесь $R = R_1 = R_2 = 130$ кОм, $C = 0,015$ мкФ.
+        \vspace{-0.5em}
+
+        \caption{Фазовращатель}
+        \label{Фазовращатель}
+    \end{subfigure}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (0, 0.5) to [short, o-] (0, 1) to [C, l=$C$, -*] (2, 1)
+            to [R, l=$R$, -*] (2, -1) -- (0, -1) to [short, -o] (0, -0.5);
+            \draw (2, 1) to [C, l=$C$, -*] (4, 1) to [R, l=$R$, -*] (4, -1) -- (2, -1);
+            \draw (4, 1) to [C, l=$C$, -*] (6, 1) to [R, l=$R$, -*] (6, -1) -- (4, -1);
+            \draw (6, 1) -- (7.5, 1) to [short, -o] (7.5, 0.5);
+            \draw (6, -1) -- (7.5, -1) to [short, -o] (7.5, -0.5);
+            \draw (0, 0) node [open]{$U_\text{вх.}$};
+            \draw (7.5, 0) node [open]{$U_\text{вых.}$};
+        \end{circuitikz}
+        \vspace{0.5em}
+
+        Здесь $R = R_1 = R_2 = 13$ кОм, $C = 0,05$ мкФ.
+        \vspace{-0.5em}
+
+        \caption{Экзотический четырёхполюсник}
+        \label{Экзотический четырёхполюсник}
+    \end{subfigure}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (-0.5, 0.5) to [short, o-] (-0.5, 1) to [short, -*] (0.5, 1) -- (0.5, 1.5)
+            to [R, l=$R$] (2.5, 1.5) to [L, l=$L$] (4.5, 1.5) to [short, -*] (4.5, 1)
+            to [short, -*] (5.5, 1) to [R, l=$R$, -*] (5.5, -1) -- (-0.5, -1) to [short, -o] (-0.5, -0.5);
+            \draw (0.5, 1) -- (0.5, 0.5) to [R, l=$R$] (2.5, 0.5) to [C, l=$C$] (4.5, 0.5) -- (4.5, 1);
+            \draw (5.5, 1) -- (7, 1) to [short, -o] (7, 0.5);
+            \draw (5.5, -1) -- (7, -1) to [short, -o] (7, -0.5);
+            \draw (-0.5, 0) node [open]{$U_\text{вх.}$};
+            \draw (7, 0) node [open]{$U_\text{вых.}$};
+            \draw[blue] (0, 2.25) rectangle (5, -0.25);
+        \end{circuitikz}
+        \caption{Четырёхполюсник}
+        \label{Четырёхполюсник}
+    \end{subfigure}
+    \begin{subfigure}{0.6\textwidth}
+        \centering
+        \begin{circuitikz}[european resistors, american inductors]
+            \draw (0, 0.5) to [short, o-] (0, 2) to [short, -*] (1, 2) to [C, l=$C$] (1, 0)
+            to [short, -*] (2, 0) to [R, l=$R$, -*] (2, -2) -- (0, -2) to [short, -o] (0, -0.5);
+            \draw (1, 2) to [R, l=$2R$, -*] (3, 2) to [C, l=$2C$] (3, 0) to [short, -*] (3, -2);
+            \draw (3, 2) to [R, l=$2R$, -*] (5, 2) to [C, l=$C$] (5, 0) -- (2, 0);
+            \draw (2, -2) -- (6, -2) to [short, -o] (6, -0.5);
+            \draw (5, 2) -- (6, 2) to [short, -o] (6, 0.5);
+            \draw (0, 0) node [open]{$U_\text{вх.}$};
+            \draw (6, 0) node [open]{$U_\text{вых.}$};
+        \end{circuitikz}
+        \caption{Двойной Т-мост}
+        \label{Двойной Т-мост}
+    \end{subfigure}
+    \caption{Четырёхполюсники}
+    \label{Четырёхполюсники}
+\end{figure}
+
+\begin{enumerate}
+    \item Для фазовращателя (рис. \ref{Фазовращатель}) построим теоретическую и
+          экспериментальную зависимости сдвига фазы $\varphi$ между входным
+          $U_\text{вх.}$ и выходным $U_\text{вых.}$ сигналами
+          от их частоты $\omega$ ($\omega = 2 \pi \nu$) и сопротивления $R$.
+          \begin{gather*}
+              \varphi(\omega) = 2 arc\ tg(\omega R C)
+          \end{gather*}
+          Получаем рис. \ref{Графики для фазовращателя}.
+          \begin{figure}[h]
+              \centering
+              \begin{subfigure}{0.49\textwidth}
+                  \centering
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[legend pos=south east, scale=0.75]
+                          \addplot coordinates{(157.07963267948966, 0.594462745897633)(314.1592653589793, 1.0992808262418037)(502.6548245743669, 1.550775459116913)(942.4777960769379, 2.144958262064077)(1570.7963267948965, 2.510467843063704)(3141.592653589793, 2.8179751953545598)(6283.185307179586, 2.978717837001548)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(157.07963267948966, 0.5841795188817983)(314.1592653589793, 1.1078415988545398)(502.6548245743669, 1.5707963267948966)(942.4777960769379, 2.139887045567174)(1570.7963267948965, 2.508801425042881)(3141.592653589793, 2.8391296130103654)(6283.185307179586, 2.9974772890472234)};
+                          \addlegendentry{Практика}
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для фазовращателя от частоты}
+                  \label{График сдвига фазы для фазовращателя от частоты}
+              \end{subfigure}
+              \begin{subfigure}{0.49\textwidth}
+                  \centering
+                  \begin{tikzpicture}
+                      \begin{axis}[legend pos=south east, scale=0.75]
+                          \addplot coordinates{(10, 0.15051166427386414)(20, 0.29933755618065916)(30, 0.4449025122356805)(40, 0.585835048726369)(50, 0.721030329210314)(60, 0.849678254730579)(70, 0.9712594976746528)(80, 1.0855174010687285)(90, 1.1924155162575276)(100, 1.2920897450999964)(110, 1.3848017870681435)(120, 1.4708979884317104)(130, 1.550775459116913)};
+                          \addlegendentry{Теория}
+                          \addplot coordinates{(10, 0.12598748248928474)(20, 0.28663123800429097)(30, 0.41961338356984407)(40, 0.554591115068703)(50, 0.7012343645830686)(60, 0.8122060105847123)(70, 0.9437815070198474)(80, 1.0206710148129436)(90, 1.1619558868146318)(100, 1.2550002841007293)(110, 1.3133093174014112)(120, 1.36075346097934)(130, 1.5707963267948966)};
+                          \addlegendentry{Практика}
+                      \end{axis}
+                  \end{tikzpicture}
+                  \caption{График сдвига фазы для фазовращателя от сопротивления}
+                  \label{График сдвига фазы для фазовращателя от сопротивления}
+              \end{subfigure}
+              \caption{Графики для фазовращателя}
+              \label{Графики для фазовращателя}
+          \end{figure}
+    \item Для экзотического четырёхполюсника (рис. \ref{Экзотический четырёхполюсник})
+          снимем экспериментальную зависимость сдвига фазы $\varphi$
+          от частоты $\omega$ ($\omega = 2 \pi \nu$).
+          Выражения для амплитудной и фазовой характеристик данного четырёхполюсника:
+          \begin{gather*}
+              \hat{K}(\omega) = \dfrac{\Omega^3}{\sqrt{(1 - 6\Omega^2)^2 + \Omega^2(5 - \Omega^2)^2}} \\
+              \varphi(\omega) = \dfrac{3\pi}{2} - arc\ tg\left(\dfrac{\Omega(5 - \Omega^2)}{1 - 6\Omega^2}\right)
+          \end{gather*}
+          Получим рис. \ref{График сдвига фазы для экзотического четырёхполюсника от частоты}.
+          \begin{figure}[h]
+              \centering
+              \begin{tikzpicture}
+                  \begin{loglogaxis}
+                      \addplot coordinates{(314.1592653589793, 6.252314996610247)(628.3185307179587, 6.282791224124915)(1256.6370614359173, 5.579532867383554)(3141.592653589793, 4.78284321592868)(6283.185307179586, 4.2636958124717355)(12566.370614359172, 3.8114897041489835)(31415.926535897932, 3.4305444141751877)(62831.853071795864, 3.2878793900186984)(314159.2653589793, 3.1709700566160475)};
+                      \addlegendentry{Теория}
+                      \addplot coordinates{(314.1592653589793, 6.283185307179586)(628.3185307179587, 5.824741442026988)(1256.6370614359173, 5.213500393143391)(3141.592653589793, 4.907569585987362)(6283.185307179586, 4.055670615635986)(12566.370614359172, 3.66426791483099)(31415.926535897932, 3.3653530268905802)(62831.853071795864, 3.2627521749274324)(314159.2653589793, 3.141592653589793)};
+                      \addlegendentry{Практика}
+                  \end{loglogaxis}
+              \end{tikzpicture}
+              \caption{График сдвига фазы для экзотического четырёхполюсника от частоты}
+              \label{График сдвига фазы для экзотического четырёхполюсника от частоты}
+          \end{figure}
+    \item Для четырёхполюсника (рис. \ref{Четырёхполюсник}) рассчитаем коэффициент передачи:
+
+          Рассчитаем импеданс внутреннего двухполюсника данного четырёхполюсника:
+          \begin{gather*}
+              Z_{RL} = Z_R + Z_L = R + i\omega L \hspace{2em} Z_{RC} = Z_R + Z_C = R - i\dfrac{1}{\omega C}\\
+              Z = \dfrac{Z_{RC}Z_{RL}}{Z_{RC} + Z_{RL}} = \dfrac{R^2 + \dfrac{L}{C} + iR\left(\omega L - \dfrac{1}{\omega C}\right)}{2R + i\left(\omega L - \dfrac{1}{\omega C}\right)} = (*)
+          \end{gather*}
+          Выделим отдельно действительную и мнимую часть (домножив на сопряжённое к знаменателю):
+          \begin{gather*}
+              (*) = R \dfrac{2\left(R^2 + \dfrac{L}{C}\right) + \left(\omega L - \dfrac{1}{\omega C}\right)}{4R^2 + \left(\omega L - \dfrac{1}{\omega C}\right)^{\hspace{-0.25em}2}} + i\dfrac{\left(R^2 - \dfrac{L}{C}\right)\left(\omega L - \dfrac{1}{\omega C}\right)}{4R^2 + \left(\omega L - \dfrac{1}{\omega C}\right)^{\hspace{-0.25em}2}} = (\#)
+          \end{gather*}
+          По условию $L = \chi R$ и $C = \dfrac{\chi}{R}$, тогда:
+          \begin{gather*}
+              \dfrac{L}{C} = R^2 \hspace{2em} 2\left(R^2 + \dfrac{L}{C}\right) = 4R^2 \hspace{2em} R^2 - \dfrac{L}{C} = 0\\
+              (\#) = R \cdot 1 + i \cdot 0 = R
+          \end{gather*}
+          Тогда коэффициент передачи всего четырёхполюсника:
+          \begin{gather*}
+              K = \dfrac{Z}{Z + R} = \dfrac{R}{R + R} = \dfrac{1}{2}
+          \end{gather*}
+
+    \item Для двойного Т-моста (рис. \ref{Двойной Т-мост}) рассчитаем коэффициент передачи и построим теоретическую зависимость.
+          \begin{gather*}
+              K = \dfrac{1}{1 + i\dfrac{8 \Omega}{1 - 4\Omega^2}} = \dfrac{1}{16\Omega^4 + 56\Omega^2 + 1} + i\dfrac{32\Omega^3 - 8\Omega}{16\Omega^4 + 56\Omega^2 + 1}
+          \end{gather*}
+          где $\Omega = \omega CR$.
+
+          Тогда модуль коэффициента передачи $\hat{K}$ будет иметь вид:
+          \begin{gather*}
+              \hat{K} = \sqrt{\dfrac{1 + \left(32\Omega^3 - 8\Omega\right)^2}{\left(16\Omega^4 + 56\Omega^2 + 1\right)^2}}
+          \end{gather*}
+          А теоретическая зависимость $\hat{K}(\Omega)$ будет иметь вид рис. \ref{Модуль коэффициента передачи двойного Т-моста}.
+          \begin{figure}[h]
+              \centering
+              \begin{tikzpicture}
+                  \begin{axis}[axis x line=middle, axis y line=middle, scale=1.5,
+                          grid=both, xmin=-3, xmax=3, ymin=-2, ymax=2, xlabel=$\Omega$, ylabel=$\hat{K}$]
+                      \addplot[color=red, domain=-3:3, samples=100]{((1 + (32*x^3 - 8*x)^2)/((16*x^4 + 56*x^2 + 1)^2))^0.5};
+                  \end{axis}
+              \end{tikzpicture}
+              \caption{Модуль коэффициента передачи двойного Т-моста}
+              \label{Модуль коэффициента передачи двойного Т-моста}
+          \end{figure}
+\end{enumerate}
+\end{document}
