@@ -15,7 +15,7 @@ It is an unofficial student repo of Advanced School of General and Applied Physi
 
 # Учебная программа бакалавриата
 
-## 1 курс
+## [1 курс](Курс1.md)
 
 ### 1 семестр
 
