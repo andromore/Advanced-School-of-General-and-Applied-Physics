@@ -1,0 +1,335 @@
+\documentclass[a4paper, usenames, dvipsnames]{article}
+
+\title{Измерение ёмкости конденсатора}
+\author{Бояринцева Н.А. \and Можаров А.Р.}
+\date{26 декабря 2023}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{indentfirst}
+\usepackage[hidelinks]{hyperref}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage[left=3.5cm, right=3.5cm, top=2.5cm, bottom=3cm]{geometry}
+
+\renewcommand{\thesubfigure}{.\arabic{subfigure}}
+\DeclareCaptionLabelFormat{My}{Рис. \thefigure #2: }
+\captionsetup[subfigure]{labelformat=My}
+\renewcommand{\theenumii}{\arabic{enumii}}
+
+\begin{document}
+
+\maketitle
+
+\section*{\centering Теоретическая часть}
+
+В данной лабораторной работе для измерения ёмкости конденсатора используется
+измерительный мост (рис. \ref{Измерительный мост}).
+
+\begin{figure}[h]
+    \centering
+    \begin{circuitikz}[european resistors, american inductors]
+        \draw (5.5, 0) node[spdt](Key){};
+        \draw (0, 0) to [short, *-] (0.5, 0) to [R, l=$R_1$, -*] (2.5, 2)
+        to [C, l=$C_1$, -*] (4.5, 0) to [C, l=$C_x$, -*] (2.5, -2)
+        to [R, l=$R_2$, -*] (0.5, 0);
+        \draw (4.5, 0) -- (Key.in);
+        \draw (0, 0) -- (0, 2.5) -- (6, 2.5) -| (Key.out 1);
+        \draw (0, 0) -- (0, -3) to [battery1, l={$\mathcal{E}, r$}] (6, -3) -| (Key.out 2);
+        \draw (2.5, 2) to [esource] (2.5, -2);
+        \draw (2.5, 0) node [open]{$G$};
+        \draw (Key.out 1) node [open, anchor=south east]{S};
+        \draw (Key.out 2) node [open, anchor=north east]{T};
+        \draw (Key.in) node [open, anchor=south]{K};
+        \draw (0, 0) node [open, anchor=south west]{D};
+        \draw (2.5, 2) node [open, anchor=south]{A};
+        \draw (2.5, -2) node [open, anchor=north]{B};
+    \end{circuitikz}
+    \caption{Измерительный мост}
+    \label{Измерительный мост}
+\end{figure}
+
+Здесь $R_1$ и $R_2$ представляют собой магазины сопротивлений.
+Конденсатор $C_1$ является эталонным
+(его ёмкость известна с достаточно высокой точностью).
+Конденсатор $C_x$, соответственно, является неизвестным,
+ёмкость которого предстоит измерить.
+В качестве измерительного прибора $G$ ({\it нуль-индикатора}) используются
+{\it нуль-гальванометр} (обычный гальванометр,
+применяемый для регистрации отсутствия тока) или осциллограф.
+
+В положении ключа $T$ происходит зарядка конденсаторов.
+В положении $S$, соответственно, разрядка.
+
+\subsection*{Условие баланса моста}
+
+Условием баланса моста называется условие,
+при котором напряжение на нуль-индикаторе $U_G$ равно нулю.
+Попробуем найти это условие.
+
+Выведем это условие из упрощающих нам жизнь предположений,
+что сопротивление измерительного прибора достаточно велико,
+чтобы через него тёк ток, и внутреннее сопротивление источника достаточно мало,
+чтобы создавать заметное падение напряжения.
+
+Запишем второй закон Кирхгофа для контура DAKTD:
+\begin{gather*}
+    I_1R_1 + \dfrac{q_1}{C_1} = \mathcal{E}
+\end{gather*}
+Ввиду наших предположений:
+\begin{gather*}
+    I_1 = \dfrac{dq_1}{dt}
+\end{gather*}
+Тогда поделив всё это безобразие на $R_1$ получаем
+несложное дифференциальное уравнение:
+\begin{gather*}
+    \dfrac{dq_1}{dt} + \dfrac{q_1}{R_1C_1} = \dfrac{\mathcal{E}}{R_1}
+\end{gather*}
+Разделяем переменные:
+\begin{gather*}
+    \dfrac{dq_1}{dt} = \dfrac{\mathcal{E}}{R_1} - \dfrac{q_1}{R_1C_1} = \dfrac{\mathcal{E}C_1 - q_1}{R_1C_1} \\
+    \dfrac{dq_1}{\mathcal{E}C_1 - q_1} = \dfrac{dt}{R_1C_1} \\
+    \dfrac{d(q_1 - \mathcal{E}C_1)}{q_1 - \mathcal{E}C_1} = - \dfrac{dt}{R_1C_1} \\
+    ln(q_1 - \mathcal{E}C_1) = - \dfrac{1}{R_1C_1}t + const \\
+    q_1(t) = \mathcal{E}C_1 + const \cdot exp\left(-\dfrac{t}{R_{1}C_{1}}\right)
+\end{gather*}
+И, ввиду начальных условий $q_1(0) = 0$, получаем зависимость заряда $q_1$
+на конденсаторе $C_1$ от времени:
+\begin{gather*}
+    q_1(t) = \mathcal{E}C_1\left(1 - exp\left(-\dfrac{t}{R_{1}C_{1}}\right)\right)
+\end{gather*}
+Тогда напряжение на том же конденсаторе:
+\begin{gather*}
+    U_1(t) = \mathcal{E}\left(1 - exp\left(-\dfrac{t}{R_{1}C_{1}}\right)\right)
+\end{gather*}
+Аналогичным образом найдём напряжение на измеряемом конденсаторе:
+\begin{gather*}
+    U_x(t) = \mathcal{E}\left(1 - exp\left(-\dfrac{t}{R_{2}C_x}\right)\right)
+\end{gather*}
+Пусть в точке $A$ потенциал $\varphi_A$, точке $B$ потенциал $\varphi_B$,
+в точке $K$ потенциал $\varphi_K$, тогда:
+\begin{eqnarray*}
+    \varphi_K - \varphi_A = U_1(t) & \varphi_K - \varphi_B = U_x(t)
+\end{eqnarray*}
+Тогда напряжение на нуль-индикаторе:
+\begin{gather*}
+    U_G(t) = \varphi_A - \varphi_B = (\varphi_K - \varphi_B) - (\varphi_K - \varphi_A) = U_x(t) - U_1(t) \\
+    U_G(t) = \mathcal{E}\left(exp\left(-\dfrac{t}{R_2C_x}\right) - exp\left(-\dfrac{t}{R_1C_1}\right)\right)
+\end{gather*}
+Чтобы выполнялось условие баланса моста:
+\begin{gather*}
+    U_G(t) = 0 \\
+    \mathcal{E}\left(exp\left(-\dfrac{t}{R_2C_x}\right) - exp\left(-\dfrac{t}{R_1C_1}\right)\right) = 0 \\
+    exp\left(-\dfrac{t}{R_2C_x}\right) - exp\left(-\dfrac{t}{R_1C_1}\right) = 0 \\
+    exp\left(-\dfrac{t}{R_2C_x}\right) = exp\left(-\dfrac{t}{R_1C_1}\right)
+\end{gather*}
+Прологарифмируем по основанию $e$:
+\begin{gather*}
+    -\dfrac{t}{R_2C_x} = -\dfrac{t}{R_1C_1}
+\end{gather*}
+Таким образом условием баланса моста будет:
+\begin{gather}
+    R_1C_1 = R_2C_x \label{Условие баланса}
+\end{gather}
+Неизвестную ёмкость можно же будет найти из формулы:
+\begin{gather}
+    C_x = C_1\dfrac{R_1}{R_2} \label{Ёмкость конденсатора}
+\end{gather}
+
+\subsection*{Режимы измерения}
+
+Заметим, что время зарядки конденсатора достаточно не велико
+и при использовании мостовой схемы имеет место не моментальный отклик прибора.
+В зависимости от включённого в цепь измерительного прибора,
+данная лабораторная работа предполагает два метода измерений
+с использованием мостовой схемы:
+\begin{enumerate}
+    \item {\it Безынерционный}.
+
+          Этот метод предполагает использование прибора с достаточным
+          быстродействием для регистрации импульсов $U_G(t)$.
+          В данной лабораторной работе этим прибором является осциллограф.
+    \item {\it Инерционный} (он же {\it баллистический}).
+
+          Этот метод, соответственно, предполагает использование прибора с недостаточным
+          быстродействием. В данной лабораторной работе этим прибором является
+          высокочувствительный нуль-гальванометр.
+\end{enumerate}
+
+\subsection*{Погрешности}
+
+{\it Погрешность измерения} --- отклонение измеряемого значения величины от истинного.
+Погрешности можно классифицировать по источнику возникновения:
+\begin{enumerate}
+    \item {\it Инструментальная}.
+    
+    Обусловлена несовершенством измерительных приборов.
+    \item {\it Методическая}.
+    
+    Обусловлена неточностью модели физического процесса.
+    \item {\it Субъективная}.
+    
+    Обусловлена личными особенностями экспериментатора (к примеру скорость реакции).
+\end{enumerate}
+И прочие. По характеру проявления погрешности могут быть:
+\begin{enumerate}
+    \item {\it Систематическая}.
+    
+    Остаётся постоянной или закономерно изменяющаяся при
+    повторных измерениях одной и той же величины.
+    \item {\it Случайная}.
+    
+    Возникает при некотором случайном событии во время эксперимента.
+
+    (К примеру хлопок дверью соседней лаборатории во время проведения акустического эксперимента)
+\end{enumerate}
+А по способу выражения:
+\begin{enumerate}
+    \item {\it Абсолютная}.
+    
+    Разность истинного значения величины и измеренного.
+    \begin{gather*}
+        \Delta X_i = X_i - X_0
+    \end{gather*}
+    Поскольку при проведении эксперимента не всегда бывает
+    точно известно истинное значение измеряемой величины,
+    то вместо него принимается некоторое среднее значение,
+    полученное в ходе эксперимента.
+    \begin{gather*}
+        \Delta X_i = X_i - \overline{X}
+    \end{gather*}
+    
+    \item {\it Относительная}.
+    
+    Отношение погрешности величины к самой величине.
+    \begin{gather*}
+        \delta X = \dfrac{\Delta X_i}{X_i}
+    \end{gather*}
+\end{enumerate}
+
+Все же измерения можно классифицировать на два класса:
+\begin{enumerate}
+    \item {\it Прямые измерения}.
+    
+    Непосредственное измерение значения величины соответствующим прибором.
+
+    (Измерение длины стола рулеткой)
+    \item {\it Косвенные измерения}.
+    
+    Вычисление значения величины по известной зависимости искомой
+    величины от известных.
+
+    (Измерение средней скорости: отдельно измеряется пройденное расстояние,
+    отдельно время движения)
+\end{enumerate}
+
+Погрешности при косвенных измерениях.
+Если требуется измерить некоторую величину $f(x_1, x_2, \ldots)$, то:
+\begin{enumerate}
+    \item При сумме складываются абсолютные погрешности.
+    
+    Т.е. если $f(x_1, x_2, \ldots) = x_1 + x_2 + \ldots$, то
+    \begin{gather*}
+        \Delta f = \Delta x_1 + \Delta x_2 + \ldots
+    \end{gather*}
+    \item При произведении (и частном) складываются относительные погрешности.
+    
+    Т.е. если $f(x_1, x_2, \ldots) = x_1 \cdot x_2 \cdot \ldots$, то
+    \begin{gather*}
+        \delta f = \delta x_1 + \delta x_2 + \ldots
+    \end{gather*}
+    \item При произвольной зависимости имеет место более общая формула:
+    \begin{gather*}
+        \Delta f = \sqrt{\left(\dfrac{\partial f}{\partial x_1}\Delta x_1\right)^2 +
+        \left(\dfrac{\partial f}{\partial x_1}\Delta x_1\right)^2 + \ldots}
+    \end{gather*}
+    Однако данная формула справедлива только при условии независимости параметров $x_1$, $x_2$, \ldots
+\end{enumerate}
+
+\newpage\section*{\centering Практическая часть}
+
+Класс точности магазинов сопротивлений $R_1$ и $R_2$: $0,2$,
+т.е. при максимально возможном сопротивлении $R_{max} = 100$ кОм
+абсолютная погрешность составляет $\Delta R = 200$ Ом.
+Ёмкость эталонного конденсатора $C_1 = 1 \pm 0,002$ мкФ.
+
+Ввиду формулы (\ref{Ёмкость конденсатора}),
+относительная формула для погрешности измерения
+ёмкости конденсатора будет иметь вид:
+\begin{gather*}
+  \delta C_x = \delta C_1 + \delta R_2 + \delta R_1
+\end{gather*}
+
+\begin{enumerate}
+    \item Измерить неизвестную ёмкость $C_x$ прямым измерением (рис. \ref{Прямое измерение}).
+          \begin{figure}[h]
+              \centering
+              \begin{tikzpicture}
+                  \begin{axis}[legend pos = north west, y post scale=1, grid=both, x post scale = 1.75, xlabel = {$R_1$, Ом}, ylabel = {$\tau$, с}]
+                      \addplot+[error bars/.cd, x explicit, y explicit, x dir=both, y dir=both] coordinates{(1000, 0.001)+-(200, 0.000204)(2000, 0.0019)+-(200, 0.000208)(5000, 0.0048)+-(200, 0.00022)(7500.0, 0.0076)+-(200, 0.00023)(10000, 0.0098)+-(200, 0.00024)(15000, 0.0112)+-(200, 0.00026)(20000, 0.0192)+-(200, 0.00028)};
+                      \addlegendentry{Практика}
+                      \addplot coordinates{(1000, 0.001)(2000, 0.002)(5000, 0.005)(7500.0, 0.0075)(10000, 0.01)(15000, 0.015)(20000, 0.02)};
+                      \addlegendentry{Теория}
+                  \end{axis}
+              \end{tikzpicture}
+              \caption{Прямое измерение}
+              \label{Прямое измерение}
+          \end{figure}
+
+          Как видно из графика, линейная зависимость $\tau$ от $R_1C_1$
+          соблюдается достаточно точно,
+          за исключением точки $R_1 = 15$ кОм, в которой, видимо,
+          имела место ошибка проведения эксперимента.
+    \item Измерить неизвестную ёмкость $C_x$ безынерционным методом (рис. \ref{Безынерционный метод}).
+
+          \begin{figure}[h]
+              \centering
+              \begin{tikzpicture}
+                  \begin{loglogaxis}[xlabel = {$R_1$, Ом}, y post scale=1, ylabel = {$R_2$, Ом}, x post scale=1.75, grid=both]
+                      \addplot coordinates{(10000, 2432.0)(1000, 244.66666666666666)(100, 24.566666666666663)(10, 2.4)};
+                  \end{loglogaxis}
+              \end{tikzpicture}
+              \caption{Безынерционный метод}
+              \label{Безынерционный метод}
+          \end{figure}
+
+          Результат измерения ёмкости данным способом: $C_x = 4,11$ мкФ.
+
+    \item Измерить неизвестную ёмкость $C_x$ инерционным методом (рис. \ref{Инерционный метод}).
+
+          \begin{figure}[h]
+              \centering
+              \begin{subfigure}{\textwidth}
+                  \centering
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[xlabel = {$R_1$, Ом}, ylabel = {$R_2$, Ом}, x post scale=1.75, grid=both, y post scale=1]
+                          \addplot coordinates{(10000, 2411.6666666666665)(1000, 240.66666666666666)(100, 24.666666666666668)(10, 4.066666666666666)};
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{12 В}
+                  \label{12 В}
+              \end{subfigure}
+              \begin{subfigure}{\textwidth}
+                  \centering
+                  \begin{tikzpicture}
+                      \begin{loglogaxis}[xlabel = {$R_1$, Ом}, ylabel = {$R_2$, Ом}, x post scale=1.75, grid=both, y post scale=1]
+                          \addplot coordinates{(1000, 241.0)(100, 24.0)(10, 3.466666666666667)};
+                      \end{loglogaxis}
+                  \end{tikzpicture}
+                  \caption{24 В}
+                  \label{24 В}
+              \end{subfigure}
+              \caption{Инерционный метод}
+              \label{Инерционный метод}
+          \end{figure}
+
+          Результат измерения ёмкости данным способом:
+          при $U = 12$ В $C_x = 3,70$ мкФ, а при $U = 24$ В $C_x = 3,73$ мкФ.
+\end{enumerate}
+
+\end{document}
