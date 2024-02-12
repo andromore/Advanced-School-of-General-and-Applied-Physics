@@ -21,7 +21,7 @@ GitHub:
 - Для ваших идей в разделе "Discussions" создан чат "Идеи".
 - Для уведомления об ошибке предназначен раздел "Issues".
 
-Ссылка на [сайт репозитория](https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/).
+Ссылка на [сайт репозитория](https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html).
 
 # Учебная программа и учебные материалы
 
