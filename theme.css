@@ -21,8 +21,6 @@ body {
     padding: 45px;
     margin: auto;
     border: 1px solid #ddd;
-    border-top-width: 0;
-    border-bottom-width: 0;
 }
 
 body a {
