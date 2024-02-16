@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="../theme.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Структура проекта</h1>
+
+    <h2>Структура сайта</h2>
+
+    <p>Ссылка на <a href="https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html">сайт
+            репозитория</a>.</p>
+
+    <p>Структура сайта:</p>
+
+    <ul>
+        <li>Главная страница:<ul>
+                <li>Ссылки на страницы из папки служебные (различные информационные статьи)</li>
+                <li>Ссылки на страницы курсов</li>
+            </ul>
+        </li>
+        <li>Страницы курсов<ul>
+                <li>Ссылки на страницы предметов, проходимых на данном курсе, по семестрам</li>
+                <li>Ссылки для загрузки материалов, относящихся ко всему курсу</li>
+            </ul>
+        </li>
+        <li>Страницы предметов<ul>
+                <li>Ссылки для загрузки материалов, относящихся к данному предмету</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Структура репозитория</h2>
+
+    <p>При использовании <a
+            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics">классического
+            интерфейса</a> GitHub:</p>
+
+    <ul>
+        <li>Если требуется что-то добавить, в разделе
+            "<a
+                href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions">Discussions</a>"
+            создан чат "<a
+                href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions/2">Добавить</a>".
+        </li>
+        <li>Для ваших идей в разделе
+            "<a
+                href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions">Discussions</a>"
+            создан чат
+            "<a
+                href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions/1">Идеи</a>".
+        </li>
+        <li>Для уведомления об ошибке предназначен раздел
+            "<a href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/issues">Issues</a>".
+        </li>
+    </ul>
+
+    <p>Структура репозитория имеет вид:</p>
+
+    <ul>
+        <li>В корне лежат:<ul>
+                <li>Папки курсов (Курс 1, Курс 2, ...)</li>
+                <li>Папки предметов, изучающихся на более чем одном курсе</li>
+                <li>Служебные ресурсы сайта:<ul>
+                        <li>index.html - Главная страница сайта</li>
+                        <li>theme.css - Тема сайта</li>
+                    </ul>
+                </li>
+                <li>Служебные ресурсы репозитория:<ul>
+                        <li>.gitignore - Файлы, игнорируемые git-ом при сохранении изменений</li>
+                        <li>README.md - Описание репозитория</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>В папках курсов лежат:<ul>
+                <li>Папки предметов, изучающихся только на этом курсе</li>
+                <li>Материалы, относящиеся к курсу в целом</li>
+                <li>Служебные ресурсы сайта:<ul>
+                        <li>index.html - Страница, отвечающая данному курсу (содержит ссылки на страницы предметов курса
+                            и прочую информацию)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>В папках предметов лежат:<ul>
+                <li>Материалы по данному предмету (GitHub ограничивает размер файлов: предел 25 MB)<ul>
+                        <li>Документы (pdf, djvu, tex)</li>
+                        <li>Картинки (png, jpg, svg)</li>
+                        <li>Ссылки на другие ресурсы</li>
+                    </ul>
+                </li>
+                <li>Служебные ресурсы сайта:<ul>
+                        <li>index.html - Страница загрузки материалов предмета</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
