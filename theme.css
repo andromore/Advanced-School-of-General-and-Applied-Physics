@@ -20,7 +20,7 @@ site-body {
     order: 1;
     width: 100%;
     flex: 1 0 auto;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 site-header {
@@ -239,11 +239,15 @@ site-nav section {
 }
 
 site-content,
-site-head,
-site-foot,
 site-nav {
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+site-head,
+site-foot {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 site-nav {
