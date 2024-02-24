@@ -193,10 +193,6 @@ site-right-bar {
 просто пока нечего туда добавить,
 но нужно будет отключить заполнение страницы элементом site-main*/
 
-site-header, site-footer {
-    display: none;
-}
-
 p+a img{
     margin-top: -10px;
 }
@@ -218,6 +214,28 @@ site-nav section {
     border-color: #000;
     border-style: solid;
     border-radius: 10px;
+}
+
+.red, .green, .blue {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.red {
+    border-color: #f00;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.green {
+    border-color: #0f0;
+    background-color: rgba(0, 255, 0, 0.15);
+}
+
+.blue {
+    border-color: #00f;
+    background-color: rgba(0, 0, 255, 0.1);
 }
 
 site-content,
@@ -297,10 +315,6 @@ body a:hover {
 
 body img {
     border-style: none;
-}
-
-body svg:not(:root) {
-    overflow: hidden;
 }
 
 body table {
