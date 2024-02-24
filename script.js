@@ -118,6 +118,8 @@ class Site {
     add_navigation(title, menu) {
         let nav = document.querySelector("site-nav");
         let details = document.createElement("details");
+        let attr = document.createAttribute("open");
+        details.setAttributeNode(attr);
         let summary = document.createElement("summary");
         summary.innerText = title;
         details.appendChild(summary);
