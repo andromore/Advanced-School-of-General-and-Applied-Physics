@@ -74,15 +74,6 @@ class Site {
         customElements.define("site-nav", SiteNavigation);
 
         this.head = document.head;
-        
-        let meta = document.createElement("meta");
-        meta.setAttribute("charset", "utf-8");
-        this.head.appendChild(meta);
-        meta = document.createElement("meta");
-        meta.setAttribute("name", "viewport");
-        meta.setAttribute("content", "width=device-width");
-        this.head.appendChild(meta);
-        this.add_style_sheet("theme.css");
     }
 
     add_style_sheet(href) {

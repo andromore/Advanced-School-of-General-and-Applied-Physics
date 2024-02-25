@@ -238,6 +238,13 @@ site-nav section {
     background-color: rgba(0, 0, 255, 0.1);
 }
 
+pre {
+    overflow: auto;
+    background: rgba(127, 127, 127, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
 site-content,
 site-nav {
     padding: 10px;
