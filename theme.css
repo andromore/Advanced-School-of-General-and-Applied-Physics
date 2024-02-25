@@ -189,10 +189,6 @@ site-right-bar {
     }
 }
 
-/* В будующем можно их включить,
-просто пока нечего туда добавить,
-но нужно будет отключить заполнение страницы элементом site-main*/
-
 p+a img{
     margin-top: -10px;
 }
@@ -242,7 +238,11 @@ pre {
     overflow: auto;
     background: rgba(127, 127, 127, 0.1);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+}
+
+img {
+    border-radius: 10px;
 }
 
 site-content,
