@@ -205,7 +205,8 @@ site-content,
 site-head,
 site-foot,
 site-nav,
-site-nav section {
+site-nav section,
+iframe {
     border-width: 1px;
     border-color: #000;
     border-style: solid;
@@ -241,7 +242,7 @@ pre {
     border-radius: 10px;
 }
 
-img, iframe {
+img {
     border-radius: 10px;
 }
 
