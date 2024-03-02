@@ -20,7 +20,7 @@ let menu = [{ innerText: "Главная", href: "./index.html" },
 { innerText: "Курс 2", href: "./Курс 2/index.html" },
 { innerText: "Курс 3", href: "./Курс 3/index.html" },
 { innerText: "Курс 4", href: "./Курс 4/index.html" }];
-site.add_navigation("Глобальное меню", menu);
+site.add_navigation("Глобальное меню", menu, true);
 
 // Генерация, соответственно, шапки и дна сайта
 document.querySelector("site-head").innerHTML = "<div style=\"border-bottom: 1px solid #000; font-size: 24px; font-weight: 600;\">Студенческий сайт ВШОПФ</div><div style=\"font-style: italic; text-align: right;\">Вот где-то здесь есть какая-то жизнь...</div>";

@@ -83,21 +83,21 @@ class Site {
         this.head.appendChild(style_sheet);
         return style_sheet;
     }
-    
+
     add_script(src) {
         let script = document.createElement("script");
         script.setAttribute("src", src);
         this.head.appendChild(script);
         return script;
     }
-    
+
     add_base(href) {
         let base = document.createElement("base");
         base.setAttribute("href", href);
         this.head.appendChild(base);
         return base;
     }
-    
+
     add_title(text) {
         let title = document.createElement("title");
         title.textContent = text;
@@ -106,11 +106,13 @@ class Site {
         return title;
     }
 
-    add_navigation(title, menu) {
+    add_navigation(title, menu, open = false) {
         let nav = document.querySelector("site-nav");
         let details = document.createElement("details");
-        let attr = document.createAttribute("open");
-        details.setAttributeNode(attr);
+        if (open) {
+            let attr = document.createAttribute("open");
+            details.setAttributeNode(attr);
+        }
         let summary = document.createElement("summary");
         summary.innerText = title;
         details.appendChild(summary);

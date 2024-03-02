@@ -242,8 +242,41 @@ pre.code {
     border-radius: 10px;
 }
 
+table.download {
+    border-radius: 10px;
+    border: 1px #000 solid;
+    width: 100%;
+    border-spacing: 0;
+}
+
+table.download :is(thead, tbody, tfoot, * tr) {
+    margin: 0;
+}
+
+table.download thead tr {
+    background-color: rgba(0, 0, 255, 0.1);
+}
+table.download thead tr th {
+    border-bottom: 1px #000 solid;
+}
+
+table.download :is(th, td) {
+    padding: 10px;
+}
+
+table.download :is(th, td):first-child {
+    text-align: left;
+    width: 100%;
+}
+
+table.download :is(th, td):not(:first-child) {
+    text-align: center;
+    width: min-content;
+}
+
 img {
     border-radius: 10px;
+    max-width: 100%;
 }
 
 site-content,
@@ -325,20 +358,6 @@ body a:hover {
     text-decoration: underline;
 }
 
-body img {
-    border-style: none;
-}
-
-body table {
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-body td,
-body th {
-    padding: 0;
-}
-
 body h1,
 body h2,
 body h3,
@@ -408,8 +427,7 @@ body p,
 body blockquote,
 body ul,
 body ol,
-body dl,
-body table {
+body dl {
     margin-top: 0;
     margin-bottom: 16px;
 }
@@ -448,35 +466,4 @@ body li>p {
 
 body li+li {
     margin-top: 0.25em;
-}
-
-body table {
-    display: block;
-    width: 100%;
-    overflow: auto;
-}
-
-body table th {
-    font-weight: bold;
-}
-
-body table th,
-body table td {
-    padding: 6px 13px;
-    border: 1px solid #ddd;
-}
-
-body table tr {
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-}
-
-body table tr:nth-child(2n) {
-    background-color: #f8f8f8;
-}
-
-body img {
-    max-width: 100%;
-    box-sizing: content-box;
-    background-color: #fff;
 }
