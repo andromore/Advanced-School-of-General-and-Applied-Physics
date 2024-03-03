@@ -193,6 +193,11 @@ p+a img{
     margin-top: -10px;
 }
 
+a:not([href]) {
+    color: #333;
+    text-decoration: none;
+}
+
 site-content :first-child {
     margin-top: 10px;
 }
