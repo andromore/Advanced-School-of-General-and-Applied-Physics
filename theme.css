@@ -252,6 +252,8 @@ table.download {
     border: 1px #000 solid;
     width: 100%;
     border-spacing: 0;
+    overflow: auto;
+    display: block;
 }
 
 table.download :is(thead, tbody, tfoot, * tr) {
