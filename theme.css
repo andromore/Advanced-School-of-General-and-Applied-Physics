@@ -1,6 +1,10 @@
+/* Global options */
+
 * {
     box-sizing: border-box;
 }
+
+/* Options of layout */
 
 html {
     margin: 0;
@@ -30,8 +34,6 @@ site-header {
     display: flex;
     border-bottom: 1px solid #000;
 }
-
-/* Нужен на случай надобности добавить что-либо дополнительно вертикально внутри site-body */
 
 site-main {
     display: flex;
@@ -65,6 +67,8 @@ site-left-bar {
 site-right-bar {
     margin-right: 10px;
 }
+
+/* Adaptive design */
 
 @media (min-width: 1200px) {
 
@@ -189,22 +193,17 @@ site-right-bar {
     }
 }
 
-p+a img{
-    margin-top: -10px;
-}
+/* Unnecessary margins */
 
-a:not([href]) {
-    color: #333;
-    text-decoration: none;
-}
-
-site-content :first-child {
+site-content > :first-child {
     margin-top: 10px;
 }
 
-site-content :last-child {
+site-content > :last-child {
     margin-bottom: 10px;
 }
+
+/* Borders */
 
 site-content,
 site-head,
@@ -218,7 +217,25 @@ iframe {
     border-radius: 10px;
 }
 
-.red, .green, .blue {
+/* Backgrounds */
+
+site-content,
+site-nav {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+site-head,
+site-foot {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Colored paragraphs - important messages */
+
+.red,
+.green,
+.blue {
     border-width: 1px;
     border-style: solid;
     border-radius: 10px;
@@ -240,12 +257,16 @@ iframe {
     background-color: rgba(0, 0, 255, 0.1);
 }
 
+/* Code */
+
 pre.code {
     overflow: auto;
     background: rgba(127, 127, 127, 0.1);
     padding: 10px;
     border-radius: 10px;
 }
+
+/* Tables with files download links */
 
 div.table {
     border-radius: 10px;
@@ -265,16 +286,16 @@ table.download :is(details, summary) {
     margin: 0;
 }
 
-table.download summary+div.table{
+table.download summary+div.table {
     margin: 0;
     margin-top: 10px;
 }
 
-table.download thead tr {
+table.download > thead > tr {
     background-color: rgba(0, 0, 255, 0.1);
 }
 
-table.download thead tr th {
+table.download > thead > tr > th {
     border-bottom: 1px #000 solid;
 }
 
@@ -292,22 +313,29 @@ table.download :is(th, td):not(:first-child) {
     width: min-content;
 }
 
+table.download > tbody > tr:not(:first-child) > td {
+    padding-top: 0;
+}
+
+/* Images */
+
 img {
     border-radius: 10px;
     max-width: 100%;
 }
 
-site-content,
-site-nav {
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+p+a > img {
+    margin-top: -10px;
 }
 
-site-head,
-site-foot {
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
+/* Links */
+
+a:not([href]) {
+    color: #333;
+    text-decoration: none;
 }
+
+/* Site navigation menus */
 
 site-nav {
     display: block;
@@ -315,33 +343,33 @@ site-nav {
     height: fit-content;
 }
 
-site-nav section {
+site-nav > details > section {
     margin: 0;
     margin-top: 10px;
     padding-inline-start: 0;
     list-style-type: none;
 }
 
-site-nav section:not(site-nav section:last-child) {
+site-nav > details > section:not(site-nav > details > section:last-child) {
     margin-bottom: 10px;
 }
 
-site-nav section a {
+site-nav > details > section > a {
     padding: 10px;
     display: block;
 }
 
-site-nav section a:not(site-nav section a:last-child) {
+site-nav > details > section > a:not(site-nav > details > section > a:last-child) {
     border-bottom: 1px solid #000;
 }
 
-site-nav details summary {
+site-nav > details > summary {
     margin: 0px;
     padding-bottom: 5px;
     border-bottom: 1px solid #000;
 }
 
-site-nav details:not(site-nav details:last-child) {
+site-nav > details:not(site-nav > details:last-child) {
     margin-bottom: 10px;
 }
 
