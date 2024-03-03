@@ -247,22 +247,33 @@ pre.code {
     border-radius: 10px;
 }
 
-table.download {
+div.table {
     border-radius: 10px;
     border: 1px #000 solid;
     width: 100%;
-    border-spacing: 0;
-    overflow: auto;
     display: block;
+    overflow: auto;
 }
 
-table.download :is(thead, tbody, tfoot, * tr) {
+table.download {
+    border-spacing: 0;
+    width: 100%;
     margin: 0;
+}
+
+table.download :is(details, summary) {
+    margin: 0;
+}
+
+table.download summary+div.table{
+    margin: 0;
+    margin-top: 10px;
 }
 
 table.download thead tr {
     background-color: rgba(0, 0, 255, 0.1);
 }
+
 table.download thead tr th {
     border-bottom: 1px #000 solid;
 }
