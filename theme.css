@@ -313,8 +313,8 @@ table.download :is(th, td):not(:first-child) {
     width: min-content;
 }
 
-table.download > tbody > tr:not(:first-child) > td {
-    padding-top: 0;
+table.download > tbody > tr:not(:last-child) > td {
+    border-bottom: 1px #000 solid;
 }
 
 /* Images */

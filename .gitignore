@@ -1,6 +1,7 @@
-Билеты.aux
-Билеты.fdb_latexmk
-Билеты.fls
-Билеты.log
-Билеты.synctex.gz
-Билеты.toc
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
