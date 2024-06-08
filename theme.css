@@ -282,15 +282,6 @@ table.download {
     margin: 0;
 }
 
-table.download :is(details, summary) {
-    margin: 0;
-}
-
-table.download summary+div.table {
-    margin: 0;
-    margin-top: 10px;
-}
-
 table.download > thead > tr {
     background-color: rgba(0, 0, 255, 0.1);
 }
@@ -301,6 +292,11 @@ table.download > thead > tr > th {
 
 table.download :is(th, td) {
     padding: 10px;
+}
+
+table.download tr.after :is(th, td) {
+    text-align: center;
+    width: min-content;
 }
 
 table.download :is(th, td):first-child {
@@ -315,6 +311,10 @@ table.download :is(th, td):not(:first-child) {
 
 table.download > tbody > tr:not(:last-child) > td {
     border-bottom: 1px #000 solid;
+}
+
+table.download > tbody > tr > td.multiline {
+    border-bottom: none;
 }
 
 /* Images */
