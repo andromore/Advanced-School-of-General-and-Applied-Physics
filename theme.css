@@ -275,6 +275,10 @@ div.table {
     overflow: auto;
 }
 
+div.table:not(:last-child) {
+    margin-bottom: 10px;
+}
+
 table.download {
     border-spacing: 0;
     width: 100%;
