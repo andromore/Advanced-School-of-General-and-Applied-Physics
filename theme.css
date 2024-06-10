@@ -298,7 +298,7 @@ table.links td > a {
 }
 
 table.links td > a:is(:hover, :active) {
-    background-color: rgba(255, 255, 0, 0.1);
+    background-color: rgba(0, 255, 127, 0.2);
 }
 
 /* Tables with files download links */
