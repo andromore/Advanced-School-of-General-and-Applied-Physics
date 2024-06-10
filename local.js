@@ -1,8 +1,8 @@
-menu = [{innerText: "Об университете", href: "./Служебная/Университет.html"},
-{ innerText: "О факультете", href: "./Служебная/Факультет.html" },
-{ innerText: "Структура проекта", href: "./Служебная/Структура.html" }]
-site.add_navigation("Статьи о нас", menu);
-menu = [{innerText: "Официальное сообщество", href: "./Служебная/Официальное сообщество.html"},
-{ innerText: "Секретные материалы", href: "./Служебная/Секретные материалы.html" },
-{ innerText: "Цитатник ВШОПФ", href: "./Служебная/Цитатник.html" }]
-site.add_navigation("Где нас искать", menu);
+menu = [{innerText: "Об университете", href: "./Статьи/Университет.html"},
+{ innerText: "О факультете", href: "./Статьи/Факультет.html" }]
+site.add_navigation("О ВШОПФ", menu);
+menu = [{innerText: "Официальное сообщество", href: "./Статьи/Официальное сообщество.html"},
+{ innerText: "Секретные материалы", href: "./Статьи/Секретные материалы.html" },
+{ innerText: "Цитатник ВШОПФ", href: "./Статьи/Цитатник.html" }]
+site.add_navigation("Сообщество", menu);
+site.add_navigation_link("Структура проекта", "./Служебная/Структура.html");

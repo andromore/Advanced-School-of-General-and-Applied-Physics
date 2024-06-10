@@ -209,8 +209,7 @@ site-content,
 site-head,
 site-foot,
 site-nav,
-site-nav section,
-iframe {
+site-nav section {
     border-width: 1px;
     border-color: #000;
     border-style: solid;
@@ -341,6 +340,10 @@ site-nav {
     display: block;
     width: 200px;
     height: fit-content;
+}
+
+site-nav > a:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 site-nav > details > section {

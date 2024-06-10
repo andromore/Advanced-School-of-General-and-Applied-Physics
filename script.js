@@ -127,4 +127,11 @@ class Site {
             section.appendChild(a);
         }
     }
+
+    add_navigation_link(text, href) {
+        let a = document.createElement('a');
+        a.setAttribute('href', href);
+        a.innerText = text;
+        document.querySelector("site-nav").appendChild(a);
+    }
 }
