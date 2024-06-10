@@ -265,15 +265,43 @@ pre.code {
     border-radius: 10px;
 }
 
-/* Tables with files download links */
+/* Special blocks */
 
-div.table {
-    border-radius: 10px;
+div.frame {
     border: 1px #000 solid;
-    width: 100%;
-    display: block;
+    border-radius: 10px;
+}
+
+div.scroll {
     overflow: auto;
 }
+
+/* Links table */
+
+table.links {
+    width: 100%;
+    border-spacing: 10px;
+    overflow: auto;
+}
+
+table.links td {
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+table.links td > a {
+    display: block;
+    padding: 20px;
+    background-color: rgba(0, 95, 255, 0.15);
+}
+
+table.links td > a:is(:hover, :active) {
+    background-color: rgba(255, 255, 0, 0.1);
+}
+
+/* Tables with files download links */
 
 div.table:not(:last-child) {
     margin-bottom: 10px;
