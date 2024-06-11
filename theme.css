@@ -272,29 +272,47 @@ div.frame {
     border-radius: 10px;
 }
 
+div.frame:not(:last-child) {
+    margin-bottom: 10px;
+}
+
 div.scroll {
     overflow: auto;
+}
+
+div.padding {
+    padding: 10px;
+}
+
+div.padding > h3 {
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Links table */
 
 table.links {
     width: 100%;
-    border-spacing: 10px;
     overflow: auto;
+    padding: 0px;
+    border-collapse: collapse;
 }
 
 table.links td {
     text-align: center;
-    border: 1px solid #000;
-    border-radius: 10px;
     padding: 0px;
 }
 
 table.links td > a {
+    border: 1px solid #000;
+    border-radius: 10px;
     display: block;
     padding: 20px;
     background-color: rgba(0, 95, 255, 0.15);
+}
+
+table.links td:not(:last-child) > a {
+    margin-right: 10px;
 }
 
 table.links td > a:is(:hover, :active) {
@@ -302,10 +320,6 @@ table.links td > a:is(:hover, :active) {
 }
 
 /* Tables with files download links */
-
-div.table:not(:last-child) {
-    margin-bottom: 10px;
-}
 
 table.download {
     border-spacing: 0;
