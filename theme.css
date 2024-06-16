@@ -232,26 +232,26 @@ site-foot {
 
 /* Colored paragraphs - important messages */
 
-.red,
-.green,
-.blue {
+p.red,
+p.green,
+p.blue {
     border-width: 1px;
     border-style: solid;
     border-radius: 10px;
     padding: 10px;
 }
 
-.red {
+p.red {
     border-color: #f00;
     background-color: rgba(255, 0, 0, 0.1);
 }
 
-.green {
+p.green {
     border-color: #0f0;
     background-color: rgba(0, 255, 0, 0.15);
 }
 
-.blue {
+p.blue {
     border-color: #00f;
     background-color: rgba(0, 0, 255, 0.1);
 }
@@ -291,31 +291,40 @@ div.padding > h3 {
 
 /* Links table */
 
-table.links {
-    width: 100%;
-    overflow: auto;
-    padding: 0px;
-    border-collapse: collapse;
+div.links {
+    display: flex;
 }
 
-table.links td {
-    text-align: center;
-    padding: 0px;
+div.links.column {
+    flex-direction: column;
 }
 
-table.links td > a {
-    border: 1px solid #000;
-    border-radius: 10px;
-    display: block;
-    padding: 20px;
-    background-color: rgba(0, 95, 255, 0.15);
+div.links.row {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-table.links td:not(:last-child) > a {
+div.links.column > a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+div.links.row > a:not(:last-child) {
     margin-right: 10px;
 }
 
-table.links td > a:is(:hover, :active) {
+div.links > a {
+    align-self: stretch;
+    flex-grow: 1;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 95, 255, 0.15);
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+div.links > a:is(:hover, :active) {
     background-color: rgba(0, 255, 127, 0.2);
 }
 
