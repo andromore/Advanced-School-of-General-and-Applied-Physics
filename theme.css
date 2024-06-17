@@ -265,6 +265,27 @@ pre.code {
     border-radius: 10px;
 }
 
+/* Details */
+
+details.article {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+details.article summary {
+    padding: 10px;
+}
+
+details.article[open] {
+    padding: 10px;
+}
+
+details.article[open] summary {
+    border-bottom: 1px #000 solid;
+    margin: -10px;
+    margin-bottom: 10px;
+}
+
 /* Special blocks */
 
 div.frame {
