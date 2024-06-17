@@ -303,14 +303,9 @@ div.links.row {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-div.links.column > a:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-div.links.row > a:not(:last-child) {
-    margin-right: 10px;
+    margin-top: -10px;
+    margin-left: -5px;
+    margin-right: -5px;
 }
 
 div.links > a {
@@ -322,10 +317,16 @@ div.links > a {
     background-color: rgba(0, 95, 255, 0.15);
     border: 1px solid #000;
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 div.links > a:is(:hover, :active) {
     background-color: rgba(0, 255, 127, 0.2);
+}
+
+div.links.row > a {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 /* Tables with files download links */
