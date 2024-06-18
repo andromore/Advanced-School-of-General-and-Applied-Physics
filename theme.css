@@ -2,6 +2,12 @@
 
 * {
     box-sizing: border-box;
+
+    /* Global colors */
+
+    --link-focus-color: rgba(0, 255, 127, 0.3);
+    --link-color: rgba(0, 95, 255, 0.15);
+    --link-animation-time: 0.25s;
 }
 
 /* Options of layout */
@@ -18,6 +24,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-attachment: fixed;
 }
 
 site-body {
@@ -338,14 +345,30 @@ div.links > a {
     display: block;
     text-align: center;
     padding: 10px;
-    background-color: rgba(0, 95, 255, 0.15);
+    background-color: var(--link-color);
     border: 1px solid #000;
     border-radius: 10px;
     margin-top: 10px;
 }
 
+@keyframes animation-links {
+    from {
+        background-color: var(--link-color);
+    }
+    to {
+        background-color: var(--link-focus-color);
+        transform: scaleY(1.2);
+        transform-origin: center;
+    }
+}
+
 div.links > a:is(:hover, :active) {
-    background-color: rgba(0, 255, 127, 0.2);
+    animation-name: animation-links;
+    animation-duration: var(--link-animation-time);
+    animation-iteration-count: initial;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    transform-origin: center;
 }
 
 div.links.row > a {
