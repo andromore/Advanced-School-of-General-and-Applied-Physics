@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+sassc theme.scss theme.css
