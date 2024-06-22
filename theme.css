@@ -4,12 +4,252 @@ body, html {
   padding: 0;
   border: none; }
 
+/* Mixins */
+/* Animation of loading */
+@keyframes animation-loading {
+  0% {
+    opacity: 0;
+    transform: scaleY(0); }
+  100% {
+    opacity: 1;
+    transform: scalY(1); } }
+
+div#head {
+  animation-delay: 0s;
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+main {
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  animation-duration: 0.3s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+site-nav {
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(1) {
+  animation-delay: calc(0.4s + (1 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(2) {
+  animation-delay: calc(0.4s + (2 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(3) {
+  animation-delay: calc(0.4s + (3 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(4) {
+  animation-delay: calc(0.4s + (4 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(5) {
+  animation-delay: calc(0.4s + (5 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(6) {
+  animation-delay: calc(0.4s + (6 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(7) {
+  animation-delay: calc(0.4s + (7 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(8) {
+  animation-delay: calc(0.4s + (8 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(9) {
+  animation-delay: calc(0.4s + (9 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(10) {
+  animation-delay: calc(0.4s + (10 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(11) {
+  animation-delay: calc(0.4s + (11 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(12) {
+  animation-delay: calc(0.4s + (12 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(13) {
+  animation-delay: calc(0.4s + (13 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(14) {
+  animation-delay: calc(0.4s + (14 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(15) {
+  animation-delay: calc(0.4s + (15 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(16) {
+  animation-delay: calc(0.4s + (16 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(17) {
+  animation-delay: calc(0.4s + (17 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(18) {
+  animation-delay: calc(0.4s + (18 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(19) {
+  animation-delay: calc(0.4s + (19 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+:is(main, div#head, div#foot, site-nav) > *:nth-child(20) {
+  animation-delay: calc(0.4s + (20 - 1) * 0.1s);
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
+div#foot {
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+  animation-duration: 0.1s;
+  animation-name: animation-loading;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-in-out; }
+
 * {
   box-sizing: border-box; }
 
 /* Options of layout */
+/* Backgrounds
+
+0.jpg
+1.jpg
+2.jpg
+18.jpg
+24.png
+*/
+@keyframes animation-background {
+  0% {
+    background-image: url(./0.jpg); }
+  15% {
+    background-image: url(./0.jpg); }
+  20% {
+    background-image: url(./1.jpg); }
+  35% {
+    background-image: url(./1.jpg); }
+  40% {
+    background-image: url(./2.jpg); }
+  55% {
+    background-image: url(./2.jpg); }
+  60% {
+    background-image: url(./18.jpg); }
+  75% {
+    background-image: url(./18.jpg); }
+  80% {
+    background-image: url(./24.jpg); }
+  95% {
+    background-image: url(./24.jpg); }
+  100% {
+    background-image: url(./0.jpg); } }
+
 body {
-  background-image: url(./background.jpg);
+  background-image: url(./0.jpg), url(./1.jpg), url(./2.jpg), url(./18.jpg), url(./24.jpg);
+  animation-name: animation-background;
+  animation-duration: 100s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -59,28 +299,37 @@ div#right-bar {
     justify-content: right;
     order: 0;
     width: calc(50% - 500px - 20px); }
-  main, div#head, div#foot {
+  main,
+  div#head,
+  div#foot {
     width: 1000px; }
   main {
     order: 1; }
   div#right-bar {
     order: 2;
     width: calc(50% - 500px - 20px); }
-  header, footer {
+  header,
+  footer {
     justify-content: center; } }
 
 @media (min-width: calc(1000px + 40px)) and (max-width: 1499px) {
-  div#left-bar, div#right-bar {
+  div#left-bar,
+  div#right-bar {
     display: none; }
-  main, div#head, div#foot {
+  main,
+  div#head,
+  div#foot {
     width: 1000px;
     margin-left: auto;
     margin-right: auto; } }
 
 @media (max-width: calc(1000px + 39px)) {
-  div#left-bar, div#right-bar {
+  div#left-bar,
+  div#right-bar {
     display: none; }
-  main, div#foot, div#head {
+  main,
+  div#foot,
+  div#head {
     margin: 10px;
     width: 100%; } }
 
@@ -194,7 +443,7 @@ div.links {
       margin-right: 5px; }
   div.links > a {
     flex-grow: 1;
-    display: block;
+    display: table;
     margin-top: 10px;
     text-align: center;
     align-self: stretch;
@@ -202,6 +451,9 @@ div.links {
     border-radius: 10px;
     border: 1px solid #000;
     padding: 10px; }
+    div.links > a > span {
+      display: table-cell;
+      vertical-align: middle; }
     div.links > a:is(:hover, :active) {
       animation-name: animation-links;
       animation-duration: 0.25s;
@@ -245,7 +497,9 @@ table.download {
 img {
   border-radius: 10px;
   border: 1px solid #000;
-  max-width: 100%; }
+  max-width: 100%;
+  display: block;
+  margin: auto; }
 
 p + a > img {
   margin-top: -10px; }

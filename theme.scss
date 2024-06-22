@@ -10,6 +10,8 @@ $link-animation-time: 0.25s;
     border: none;
 }
 
+/* Mixins */
+
 @mixin padding($padding: padding, $padding-width: 10px) {
     #{$padding}: $padding-width;
 }
@@ -23,16 +25,55 @@ $link-animation-time: 0.25s;
     @include border($border: border, $border-color: $border-color);
 }
 
-@mixin container($border-color: #000) {
-    @include borders($border-color: $border-color);
-    @include padding();
-    @include padding(padding-bottom, 0);
-}
-
 @mixin block($background-color: rgba(255, 255, 255, 0), $border-color: #000, $border-radius: 10px) {
     background-color: $background-color;
     @include borders($border-color);
     @include padding();
+}
+
+/* Animation of loading */
+
+@keyframes animation-loading {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scalY(1);
+    }
+}
+
+@mixin animated-loading($delay: 0s, $duration: 0.1s) {
+    animation-delay: $delay;
+    animation-fill-mode: both;
+    animation-duration: $duration;
+    animation-name: animation-loading;
+    animation-iteration-count: initial;
+    animation-timing-function: ease-in-out
+}
+
+div#head {
+    @include animated-loading();
+}
+
+main {
+    @include animated-loading(0.1s, 0.3s);
+}
+
+site-nav {
+    @include animated-loading(0.1s);
+}
+
+@for $i from 1 through 20 {
+    :is(main, div#head, div#foot, site-nav) > *:nth-child(#{$i}) {
+        @include animated-loading(calc(0.4s + (#{$i} - 1) * 0.1s));
+    }
+}
+
+div#foot {
+    @include animated-loading(0.4s);
 }
 
 * {
@@ -45,9 +86,60 @@ html {
     @extend %ghost;
 }
 
+/* Backgrounds
+
+0.jpg
+1.jpg
+2.jpg
+18.jpg
+24.png
+*/
+
+@keyframes animation-background {
+    0% {
+        background-image: url(./0.jpg);
+    }
+    15% {
+        background-image: url(./0.jpg);
+    }
+    20% {
+        background-image: url(./1.jpg);
+    }
+    35% {
+        background-image: url(./1.jpg);
+    }
+    40% {
+        background-image: url(./2.jpg);
+    }
+    55% {
+        background-image: url(./2.jpg);
+    }
+    60% {
+        background-image: url(./18.jpg);
+    }
+    75% {
+        background-image: url(./18.jpg);
+    }
+    80% {
+        background-image: url(./24.jpg);
+    }
+    95% {
+        background-image: url(./24.jpg);
+    }
+    100% {
+        background-image: url(./0.jpg);
+    }
+}
+
 body {
     @extend %ghost;
-    background-image: url(./background.jpg);
+    background-image: url(./0.jpg), url(./1.jpg), url(./2.jpg), url(./18.jpg), url(./24.jpg);
+    animation-name: animation-background;
+    animation-duration: 100s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -110,9 +202,11 @@ $content-width: 1000px;
         width: calc(50% - #{$content-width / 2} - 20px);
     }
 
-    main, div#head, div#foot {
+    main,
+    div#head,
+    div#foot {
         width: $content-width;
-    } 
+    }
 
     main {
         order: 1;
@@ -123,17 +217,21 @@ $content-width: 1000px;
         width: calc(50% - #{$content-width / 2} - 20px);
     }
 
-    header, footer {
+    header,
+    footer {
         justify-content: center;
     }
 }
 
 @media (min-width: calc(#{$content-width} + 40px)) and (max-width: 1499px) {
-    div#left-bar, div#right-bar {
+    div#left-bar,
+    div#right-bar {
         display: none;
     }
 
-    main, div#head, div#foot {
+    main,
+    div#head,
+    div#foot {
         width: $content-width;
         margin-left: auto;
         margin-right: auto;
@@ -141,11 +239,14 @@ $content-width: 1000px;
 }
 
 @media (max-width: calc(#{$content-width} + 39px)) {
-    div#left-bar, div#right-bar {
+    div#left-bar,
+    div#right-bar {
         display: none;
     }
 
-    main, div#foot, div#head {
+    main,
+    div#foot,
+    div#head {
         margin: 10px;
         width: 100%;
     }
@@ -295,11 +396,16 @@ div.links {
 
     > a {
         flex-grow: 1;
-        display: block;
+        display: table;
         margin-top: 10px;
         text-align: center;
         align-self: stretch;
         @include block($background-color: $link-color);
+
+        > span {
+            display: table-cell;
+            vertical-align: middle;
+        }
 
         &:is(:hover, :active) {
             animation-name: animation-links;
@@ -374,6 +480,8 @@ table.download {
 img {
     @include borders();
     max-width: 100%;
+    display: block;
+    margin: auto;
 }
 
 p + a > img {
