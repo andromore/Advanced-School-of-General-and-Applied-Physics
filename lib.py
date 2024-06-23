@@ -95,45 +95,9 @@ def replacer(filename, old, new):
     file.close()
 
 """ XML\HTML parsing """
-    
-class MetaTag:
-    """Base class of XML\HTML tags"""
-        
-    def __getitem__(self, key):
-        assert type(key) == str, ValueError("\n--- Type of [key] must be <str> ---\n")
-        for i in self._attributes.kes():
-            assert " " in i, KeyError("\n--- Key mustn't contain spaces ---\n")
-        if key not in self._attributes.keys():
-            return None
-        return self._attributes[key]
-    
-    def __setitem__(self, key, value):
-        assert type(key) == str or type(value) != str, ValueError("\n--- Type of [key] and [value] must be <str> ---\n")
-        for i in self._attributes.kes():
-            assert " " in i, KeyError("\n--- Key mustn't contain spaces ---\n")
-        self._attributes[key] = value
-        
-    def __delitem__(self, key):
-        assert type(key) == str, ValueError("\n--- Type of [key] must be <str> ---\n")
-        for i in self._attributes.kes():
-            assert " " in i, KeyError("\n--- Key mustn't contain spaces ---\n")
-        assert key in self._attributes.keys(), KeyError("\n--- It is very difficult to kill a dead ---\n")
-        del self._attributes[key]
-    
-    @property
-    def tag(self) -> str:
-        return self._tag
-    
-    @tag.setter
-    def tag(self, value: str):
-        assert type(value) == str, ValueError("\n--- Tag must be <str> ---\n")
-        self._tag = value
-    
-class Declaration:
-    """XML\HTML Declarations"""
 
 class Comment:
-    """Comment tag"""
+    """XML\HTML Comment"""
     
     def __init__(self, text: str):
         assert type(text) == str, ValueError("\n--- Comment contains text ---\n")
@@ -150,32 +114,21 @@ class Comment:
     def text(self, value: str):
         assert type(value) == str, ValueError("\n--- Comment contains text ---\n")
         self._text = value
-    
-class ClosedTag(MetaTag):
-    """XML\HTML closed tag <tag />"""
-    
-    def __init__(self, tag, **kwargs):
-        assert type(tag) == str, ValueError("\n--- Tag must be <str> ---\n")
-        for i in kwargs.keys():
-            assert " " not in i, KeyError(f"\n--- Key mustn't contain spaces ---\n")
-        self._tag = tag
-        self._attributes = kwargs
-    
-    def __str__(self):
-        result = self._tag
-        for key in self._attributes.keys():
-            result += f" {key}=\"{self._attributes[key]}\""
-        return f"<{result} />"
 
-class Tag(MetaTag):
-    """XML\HTML tag <tag></tag>"""
+class Tag:
+    """XML\HTML tag"""
     
-    def __init__(self, tag, *args, **kwargs):
+    def __init__(self, tag, *args, **kwargs: str | list[str]):
+        """kwargs key "_class" will be turned to "class" """
         assert type(tag) == str, ValueError("\n--- Tag must be <str> ---\n")
         for i in args:
-            assert issubclass(type(i), (Comment, MetaTag)), ValueError("\n--- Children must be XML\HTML tags ---\n")
+            assert issubclass(type(i), (Comment, Tag)), ValueError("\n--- Children must be XML\HTML tags ---\n")
         for i in kwargs.keys():
-            assert " " not in i, KeyError(f"\n--- Key mustn't contain spaces ---\n")
+            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
+            assert type(kwargs[i]) in (list, str), ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
+            if type(kwargs[i]) == list:
+                for i in kwargs[i]:
+                    assert type(kwargs[i]) == str, ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
         self._tag = tag
         self._children = args
         self._attributes = kwargs
@@ -183,47 +136,44 @@ class Tag(MetaTag):
     def __str__(self):
         result = self._tag
         for key in self._attributes.keys():
-            result += f" {key}=\"{self._attributes[key]}\""
-        children = ""
-        for i in self._children:
-            children += str(i)
-        return f"<{result}>{children}</{self._tag}>"
-
-class Element(MetaTag):
-    """HTML Element"""
+            result += f" {key}=\"{self._attributes[key] if type(self._attributes[key]) == str else ' '.join(self._attributes[key])}\""
+        if self._children:
+            children = ""
+            for i in self._children:
+                children += str(i)
+            return f"<{result}>{children}</{self._tag}>"
+        return f"<{result} />"
+        
+    def __getitem__(self, key):
+        assert type(key) == str, ValueError("\n--- Type of [key] must be <str> ---\n")
+        for i in self._attributes.keys():
+            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
+        if key not in self._attributes.keys():
+            return None
+        return self._attributes[key]
     
-    def __init__(self, tag, *args, _id: list[str] = [], _classes: list[str] = [], **kwargs):
-        if _id:
-            for i in _id:
-                assert i in (str, type(None)), ValueError("\n--- Id must be <str> ---\n")
-            kwargs.update({"id": " ".join(_id)})
-        if _classes:
-            for i in _classes:
-                assert i in (str, type(None)), ValueError("\n--- Class must be <str> ---\n")
-            kwargs.update({"class": " ".join(_classes)})
-        if args:
-            cls = Tag
-        else:
-            cls = ClosedTag
-        self.__tag = cls(tag, *args, **kwargs)
-    
-    def __str__(self):
-        return str(self.__tag)
+    def __setitem__(self, key, value):
+        assert type(key) == str or type(value) in (str, list), ValueError("\n--- Type of [key] and [value] must be <str> or <list[str]> ---\n")
+        if type(value) == list:
+            for i in value:
+                assert type(i) == str, ValueError("\n--- Type of [key] and [value] must be <str> or <list[str]> ---\n")
+        for i in self._attributes.keys():
+            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
+        self._attributes[key] = value
+        
+    def __delitem__(self, key):
+        assert type(key) == str, ValueError("\n--- Type of [key] must be <str> ---\n")
+        for i in self._attributes.keys():
+            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
+        assert key in self._attributes.keys(), KeyError("\n--- It is very difficult to kill a dead ---\n")
+        del self._attributes[key]
     
     @property
-    def tag(self):
-        return self.__tag.tag
+    def tag(self) -> str:
+        return self._tag
     
     @tag.setter
     def tag(self, value: str):
-        self.__tag.tag = value
-    
-    @property    
-    def selector(self):
-        result = self.__tag.tag
-        result += f"#{self.id}" if self._id else ''
-        result += (f".{i}" for i in self._classes) if self._classes else ''
-        return result
-        
+        assert type(value) == str, ValueError("\n--- Tag must be <str> ---\n")
+        self._tag = value
 
-print(Element("a", Element("br"), href="https://yandex.ru/"))
