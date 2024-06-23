@@ -100,7 +100,7 @@ class Comment:
     """XML\HTML Comment"""
     
     def __init__(self, text: str):
-        assert type(text) == str, ValueError("\n--- Comment contains text ---\n")
+        assert type(text) == str, ValueError("\n--- Comment contains <str> ---\n")
         self._text = text
     
     def __str__(self):
@@ -112,7 +112,7 @@ class Comment:
     
     @text.setter
     def text(self, value: str):
-        assert type(value) == str, ValueError("\n--- Comment contains text ---\n")
+        assert type(value) == str, ValueError("\n--- Comment contains <str> ---\n")
         self._text = value
 
 class Tag:
@@ -122,7 +122,7 @@ class Tag:
         """kwargs key "_class" will be turned to "class" """
         assert type(tag) == str, ValueError("\n--- Tag must be <str> ---\n")
         for i in args:
-            assert issubclass(type(i), (Comment, Tag)), ValueError("\n--- Children must be XML\HTML tags ---\n")
+            assert type(i) in (str, Comment, Tag), ValueError("\n--- Children must be XML\HTML tags ---\n")
         for i in kwargs.keys():
             assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
             assert type(kwargs[i]) in (list, str), ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
@@ -130,7 +130,7 @@ class Tag:
                 for i in kwargs[i]:
                     assert type(kwargs[i]) == str, ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
         self._tag = tag
-        self._children = args
+        self._children = list(args)
         self._attributes = kwargs
     
     def __str__(self):
@@ -172,8 +172,15 @@ class Tag:
     def tag(self) -> str:
         return self._tag
     
-    @tag.setter
-    def tag(self, value: str):
+    @property
+    def children(self) -> list:
+        return self._children
+    
+    @property
+    def attributes(self) -> list[str]:
+        return self._attributes.keys()
+    
+    def configure(self, value: str):
+        """Configure tag"""
         assert type(value) == str, ValueError("\n--- Tag must be <str> ---\n")
         self._tag = value
-
