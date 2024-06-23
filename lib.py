@@ -16,20 +16,23 @@ def filepath(filename: str, dirs: list):
     """Get full path to file [filename] in place dirs[0]/dirs[1]/dirs[2]/..."""
     return "/".join(dirs) + "/" + filename
 
-def extension(filename: str):
-    """Get extension of file with name [filename]"""
-    if "." not in filename:
-        return None
-    tmp = filename.split(".")
-    if tmp[-1][0] == '/':
-        return None
-    return tmp[-1]
-
 class File:
     """Class of file"""
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filepath: str):
+        assert type(filepath) == str, ValueError("\n--- Path of file must be <str> ---\n")
+        self.filename = filepath
         self.text = None
+
+    def extension(self):
+        """Get file extension"""
+        if "." not in self.filename:
+            return None
+        tmp = self.filename.split(".")
+        if tmp[-1][0] == '/':
+            return None
+        if '.' in tmp[-1]:
+            raise Exception("\n--- Bad filepath ---\n")
+        return tmp[-1]
     
     def open(self):
         if self.text:
@@ -61,6 +64,10 @@ class File:
             raise Exception(f"\n--- There is no file to replace ---\n")
         else:
             self.text = self.text.replace(old, new)
+            
+    def write(self, text: str):
+        assert type(text) == str
+        self.text = text
 
 """Function handle() for recursive deals with files"""
 
@@ -71,7 +78,7 @@ def handle(handler: callable = __passing, root: list[str] = ["."], extensions: l
         for entry in it:
             if entry.is_file():
                 if extensions:
-                    if extension(entry.name) not in extensions:
+                    if File(entry.name).extension() not in extensions:
                         continue
                 handler(filepath(entry.name, root))
             else:
