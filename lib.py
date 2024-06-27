@@ -331,7 +331,7 @@ class Tag(AttributesTag, ParentTag, TaggedTag, BaseTag):
 class Document(ParentTag, BaseTag):
     """Class of XML\HTML document"""
     
-    type = DOCUMENT
+    _type = DOCUMENT
     
     def __init__(self, *args, children: list = None):
         self._init_children(*args, children=children)
@@ -384,6 +384,17 @@ def parse(text: str):
                 cursor += 1
                 attributes.update({key: value})
                 continue
+            elif text[cursor] == "'":
+                cursor += 1
+                while cursor < eof and text[cursor] != "'":
+                    value += text[cursor]
+                    cursor += 1
+                if cursor >= eof:
+                    raise Exception(message("Exception while parsing tag: there are not enough closing quotes"))
+                # text[cursor] == '"' -> true
+                cursor += 1
+                attributes.update({key: value})
+                continue
             while cursor < eof and text[cursor] != ' ':
                 value += text[cursor]
                 cursor += 1
@@ -419,10 +430,16 @@ def parse(text: str):
             continue
         # Tag parsing
         while text[cursor] != '>' and cursor + 1 < eof:
-            if text[cursor] == '\"':
+            if text[cursor] == '"':
                 result[results - 1] += text[cursor]
                 cursor += 1
-                while text[cursor] != "\"" and cursor + 1 < eof:
+                while text[cursor] != '"' and cursor + 1 < eof:
+                    result[results - 1] += text[cursor]
+                    cursor += 1
+            elif text[cursor] == "'":
+                result[results - 1] += text[cursor]
+                cursor += 1
+                while text[cursor] != "'" and cursor + 1 < eof:
                     result[results - 1] += text[cursor]
                     cursor += 1
             result[results - 1] += text[cursor]
@@ -433,7 +450,7 @@ def parse(text: str):
         while "  " in result[results - 1]:
             result[results - 1] = result[results - 1].replace("  ", ' ')
 
-    root = Tag('document')
+    root = Document()
     now = [root]
     
     for i in range(len(result)):
