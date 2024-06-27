@@ -131,17 +131,95 @@ def replacer(filename, old, new):
     file.replace(old, new)
     file.close()
 
-""" XML\HTML parsing """
-
+""" XML\HTML parsing 
+    API: document object model (read/write) """
+    
+""" Base classes """
+    
+TAG = "tag"
+COMMENT = "comment"
+DOCUMENT = "document"
+DECLARATION = "declaration"
+INSTRUCTION = "instruction"
+    
+class BaseTag:
+    """Based class for XML\HTML tag"""
+    
+    @property
+    def type(self) -> str:
+        return self._type
+    
+    @type.setter
+    def type(self, value: str) -> None:
+        assert value in (TAG, COMMENT, DOCUMENT, DECLARATION, INSTRUCTION)
+        self._type = value
+        
+class TaggedTag:
+    """Based class for XML\HTML tags with tags"""
+    
+    def _init_tag(self, tag: str):
+        """Fast initialization"""
+        assert type(tag) == str
+        self._tag = tag
+    
+    @property
+    def tag(self) -> str:
+        return self._tag
+    
+    def _str_tag(self) -> str:
+        return self._tag
+    
 class ParentTag:
     """Based class for XML\HTML tags with children"""
+    
+    def _init_children(self, *args, children: list = None):
+        """Fast initialization"""
+        for i in args:
+            assert type(i) in (str, Declaration, Comment, Tag), ValueError("\n--- Children must be XML\HTML tags ---\n")
+        if children:
+            assert type(children) == list, ValueError(message("[children] must be <list> of XML\HTML tags"))
+            for i in children:
+                assert type(i) in (str, Declaration, Comment, Tag), ValueError(message("[children] must be <list> of XML\HTML tags"))
+            args = list(args) + children
+        self._children = list(args)
+        
+    def _str_children(self) -> str:
+        children = ""
+        for i in self._children:
+            children += str(i)
+        return children
     
     @property
     def children(self) -> list:
         return self._children
-
+    
 class AttributesTag:
     """Based class for XML\HTML tags with attributes"""
+    
+    def _init_attributes(self, attributes: dict[str, str] = None, **kwargs: str | list[str]):
+        """Fast initialization"""
+        for i in kwargs.keys():
+            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
+            assert type(kwargs[i]) in (list, str), ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
+            if type(kwargs[i]) == list:
+                for i in kwargs[i]:
+                    assert type(kwargs[i]) == str, ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
+        if attributes:
+            assert type(attributes) == dict, ValueError(message("[attributes] must be dict of <str>: <str>"))
+            for i in attributes.keys():
+                assert type(i) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
+                assert type(attributes[i]) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
+            kwargs.update(attributes)
+        self._attributes = kwargs
+        
+    def _str_attributes(self) -> str:
+        result = ""
+        for key in self._attributes.keys():
+            if not self._attributes[key]:
+                result += f" {key}"
+                continue
+            result += f" {key}=\"{self._attributes[key] if type(self._attributes[key]) == str else ' '.join(self._attributes[key])}\""
+        return result
     
     @property
     def attributes(self) -> list[str]:
@@ -170,52 +248,41 @@ class AttributesTag:
             assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
         assert key in self._attributes.keys(), KeyError("\n--- It is very difficult to kill a dead ---\n")
         del self._attributes[key]
+        
+""" XML\HTML classes """
 
-class Declaration(AttributesTag):
+class Declaration(AttributesTag, BaseTag):
     """XML\HTML Declaration"""
     
-    def __init__(self, begin, end, attributes: dict[str: str] = None, **kwargs: str | list[str]):
+    _type = DECLARATION
+    
+    def __init__(self, attributes: dict[str: str] = None, **kwargs: str | list[str]):
         """kwargs key "_class" will be turned to "class" """
-        assert type(begin) == str and type(end) == str, ValueError(message("Beginning and ending must be <str>"))
-        for i in kwargs.keys():
-            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
-            assert type(kwargs[i]) in (list, str), ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
-            if type(kwargs[i]) == list:
-                for i in kwargs[i]:
-                    assert type(kwargs[i]) == str, ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
-        if attributes:
-            assert type(attributes) == dict, ValueError(message("[attributes] must be dict of <str>: <str>"))
-            for i in attributes.keys():
-                assert type(i) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
-                assert type(attributes[i]) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
-            kwargs.update(attributes)
-        self._attributes = kwargs
-        self._begin = begin
-        self._end = end
+        self._init_attributes(attributes=attributes, **kwargs)
     
     def __str__(self):
-        result = self._begin
-        for key in self._attributes.keys():
-            if not self._attributes[key]:
-                result += f" {key}"
-                continue
-            result += f" {key}=\"{self._attributes[key] if type(self._attributes[key]) == str else ' '.join(self._attributes[key])}\""
-        result += f" {self._end}"
-        return f"<{result}>"
-    
-    @property
-    def beginning(self) -> str:
-        return self._begin
-    
-    @property
-    def ending(self) -> str:
-        return self._end
+        return f"<?xml{self._str_attributes()}?>"
 
-class Comment:
+class Instruction(AttributesTag, TaggedTag, BaseTag):
+    """XML\HTML Instruction"""
+    
+    _type = INSTRUCTION
+    
+    def __init__(self, tag, attributes: dict[str: str] = None, **kwargs: str | list[str]):
+        """kwargs key "_class" will be turned to "class" """
+        self._init_attributes(attributes=attributes, **kwargs)
+        self._init_tag(tag)
+    
+    def __str__(self):
+        return f"<{self._str_tag()}{self._str_attributes()}>"
+
+class Comment(BaseTag):
     """XML\HTML Comment"""
     
+    _type = COMMENT
+    
     def __init__(self, text: str):
-        assert type(text) == str, ValueError("\n--- Comment contains <str> ---\n")
+        assert type(text) == str, ValueError(message("Comment contains <str>"))
         self._text = text
     
     def __str__(self):
@@ -227,96 +294,50 @@ class Comment:
     
     @text.setter
     def text(self, value: str):
-        assert type(value) == str, ValueError("\n--- Comment contains <str> ---\n")
+        assert type(value) == str, ValueError(message("Comment contains <str>"))
         self._text = value
 
-class Tag(AttributesTag, ParentTag):
+class Tag(AttributesTag, ParentTag, TaggedTag, BaseTag):
     """XML\HTML tag"""
     
+    _type = TAG
+    
     def __init__(self, tag, *args, children: list = None, attributes: dict[str: str] = None, **kwargs: str | list[str]):
-        assert type(tag) == str, ValueError("\n--- Tag must be <str> ---\n")
-        for i in args:
-            assert type(i) in (str, Declaration, Comment, Tag), ValueError("\n--- Children must be XML\HTML tags ---\n")
-        for i in kwargs.keys():
-            assert " " not in i, KeyError("\n--- Key mustn't contain spaces ---\n")
-            assert type(kwargs[i]) in (list, str), ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
-            if type(kwargs[i]) == list:
-                for i in kwargs[i]:
-                    assert type(kwargs[i]) == str, ValueError("\n--- Values must be <str> or <list> of <str> ---\n")
-        if children:
-            assert type(children) == list, ValueError(message("[children] must be <list> of XML\HTML tags"))
-            for i in children:
-                assert type(i) in (str, Declaration, Comment, Tag), ValueError(message("[children] must be <list> of XML\HTML tags"))
-            args = list(args) + children
-        if attributes:
-            assert type(attributes) == dict, ValueError(message("[attributes] must be dict of <str>: <str>"))
-            for i in attributes.keys():
-                assert type(i) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
-                assert type(attributes[i]) == str, ValueError(message("[attributes] must be dict of <str>: <str>"))
-            kwargs.update(attributes)
-        self._tag = tag
-        self._children = list(args)
-        self._attributes = kwargs
+        self._init_tag(tag)
+        self._init_children(*args, children=children)
+        self._init_attributes(attributes=attributes, **kwargs)
         
     @property
     def inner(self) -> str:
-        if self._children:
-            children = ""
-            for i in self._children:
-                children += str(i)
-            return children
-        return ''
+        return self._str_children()
     
     @property
     def opening(self) -> str:
-        result = self._tag
-        for key in self._attributes.keys():
-            if not self._attributes[key]:
-                result += f" {key}"
-                continue
-            result += f" {key}=\"{self._attributes[key] if type(self._attributes[key]) == str else ' '.join(self._attributes[key])}\""
-        if self._children:
-            return f"<{result}>"
-        return f"<{result} />"
+        if not self._children:
+            return f"<{self._str_tag() + self._str_attributes()} />"
+        return f"<{self._str_tag() + self._str_attributes()}>"
     
     @property
     def closing(self) -> str | None:
         if self._children:
-            return f"</{self._tag}>"
+            return f"</{self._str_tag()}>"
         return None
     
     def __str__(self):
         if self._children:
             return f"{self.opening}{self.inner}{self.closing}"
         return self.opening
-    
-    @property
-    def tag(self) -> str:
-        return self._tag
-    
-    def configure(self, value: str):
-        """Configure tag"""
-        assert type(value) == str, ValueError("\n--- Tag must be <str> ---\n")
-        self._tag = value
 
-class Document(ParentTag):
+class Document(ParentTag, BaseTag):
     """Class of XML\HTML document"""
     
+    type = DOCUMENT
+    
     def __init__(self, *args, children: list = None):
-        for i in args:
-            assert type(i) in (str, Declaration, Comment, Tag), ValueError("\n--- Children must be XML\HTML tags ---\n")
-        if children:
-            assert type(children) == list, ValueError(message("[children] must be <list> of XML\HTML tags"))
-            for i in children:
-                assert type(i) in (str, Declaration, Comment, Tag), ValueError(message("[children] must be <list> of XML\HTML tags"))
-            args = list(args) + children
-        self._children = list(args)
+        self._init_children(*args, children=children)
         
     def __str__(self) -> str:
-        result = ""
-        for i in self._children:
-            result += f" {str(i)}"
-        return result
+        return self._str_children()
         
 def parse(text: str):
     """Parse XML\HTML structure from [text]"""
@@ -418,11 +439,12 @@ def parse(text: str):
     for i in range(len(result)):
         if len(result[i]) >= 7 and '<!--' == result[i][:4] and '-->' == result[i][-3:]: # Comment
             now[-1].children.append(Comment(result[i][4:-3]))
-        elif len(result[i]) >= 3 and '<' == result[i][0] and '>' == result[i][-1] and result[i][1] not in (alphabet + '/'): # Declaration
-            tmp = result[i][1:-1].split(' ')
-            ending = tmp[-1]
-            beginning, attributes = kwargs(' '.join(tmp[:-1]))
-            now[-1].children.append(Declaration(beginning, ending, attributes=attributes))
+        elif len(result[i]) >= 7 and '<?xml' == result[i][:5] and '?>' == result[i][-2:] and result[i][1] not in (alphabet + '/'): # Declaration # There is problems with parsing XML declarations, but HTML doctype declaration is parsed perfectly
+            _, attributes = kwargs(result[i][1:-2])
+            now[-1].children.append(Declaration(attributes=attributes))
+        elif len(result[i]) >= 4 and '<!' == result[i][:2] and '>' == result[i][-1]: # Instruction
+            tag, attributes = kwargs(result[i][1:-1])
+            now[-1].children.append(Instruction(tag, attributes=attributes))
         elif len(result[i]) >= 3 and '<' == result[i][0] and '>' == result[i][-1]: # Tag
             if result[i][-2] == '/': # Self-closed tag
                 tmp = result[i][1:-1]
