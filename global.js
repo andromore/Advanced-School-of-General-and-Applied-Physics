@@ -59,7 +59,7 @@ class Site {
         let global = menu;
         for (let i of global) {
             let a = document.createElement("a");
-            a.setAttribute("href", i.href);
+            a.setAttribute("onclick", 'load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/' + i.href + '")');
             a.innerText = i.innerText;
             section.appendChild(a);
         }
@@ -67,7 +67,7 @@ class Site {
 
     add_navigation_link(text, href) {
         let a = document.createElement('a');
-        a.setAttribute('href', href);
+        a.setAttribute('onclick', 'load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/' + href + '")');
         a.innerText = text;
         document.querySelector("site-nav").appendChild(a);
     }
@@ -109,7 +109,9 @@ function load(filename) {
         if(xhr.status === 200) {
             main = document.getElementsByTagName("main")[0];
             main.innerHTML = xhr.response;
-            main.removeChild(main.getElementsByTagName('base')[0]);
+            if(main.getElementsByTagName('base')[0]) {
+                main.removeChild(main.getElementsByTagName('base')[0]);
+            }
         } else {
             console.error('Сетевая ошибка, сообщим голубям!');
         }
