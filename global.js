@@ -107,7 +107,8 @@ function load(filename) {
     xhr.open('GET', filename, true);
     xhr.onload = function() {
         if(xhr.status === 200) {
-            document.getElementsByTagName("main")[0].innerHTML = xhr.response;
+            main = document.getElementsByTagName("main")[0];
+            main.innerHTML = xhr.response;
         } else {
             console.error('Сетевая ошибка, сообщим голубям!');
         }
