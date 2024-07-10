@@ -109,9 +109,7 @@ function load(filename) {
         if(xhr.status === 200) {
             main = document.getElementsByTagName("main")[0];
             main.innerHTML = xhr.response;
-            console.log(main.getElementsByTagName('base')[0]);
             main.removeChild(main.getElementsByTagName('base')[0]);
-            console.log(main.innerHTML);
         } else {
             console.error('Сетевая ошибка, сообщим голубям!');
         }
