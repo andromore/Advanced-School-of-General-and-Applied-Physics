@@ -144,6 +144,24 @@ body {
     flex-direction: column;
     height: 100vh;
     background-attachment: fixed;
+
+    main {
+        header, footer, div#left-bar, div#right-bar {
+            display: none;
+        }
+
+        div#body {
+            padding: 0;
+            background: none;
+
+            main {
+                padding: 0;
+                margin: 0;
+                border: none;
+                background: none;
+            }
+        }
+    }
 }
 
 div#body {
@@ -492,7 +510,7 @@ p + a > img {
 
 /* Links */
 
-a:not([href]) {
+a:not([href], [onclick]) {
     color: #333;
     text-decoration: none;
 }
