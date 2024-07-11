@@ -220,30 +220,26 @@ div#foot {
 */
 @keyframes animation-background {
   0% {
-    background-image: url(./0.jpg); }
-  15% {
-    background-image: url(./0.jpg); }
+    background-image: url(./1.jpg); }
   20% {
     background-image: url(./1.jpg); }
-  35% {
-    background-image: url(./1.jpg); }
-  40% {
+  25% {
     background-image: url(./2.jpg); }
-  55% {
+  45% {
     background-image: url(./2.jpg); }
-  60% {
+  50% {
+    background-image: url(./18.jpg); }
+  70% {
     background-image: url(./18.jpg); }
   75% {
-    background-image: url(./18.jpg); }
-  80% {
     background-image: url(./24.jpg); }
   95% {
     background-image: url(./24.jpg); }
   100% {
-    background-image: url(./0.jpg); } }
+    background-image: url(./1.jpg); } }
 
 body {
-  background-image: url(./0.jpg), url(./1.jpg), url(./2.jpg), url(./18.jpg), url(./24.jpg);
+  background-image: url(./1.jpg), url(./2.jpg), url(./18.jpg), url(./24.jpg);
   animation-name: animation-background;
   animation-duration: 100s;
   animation-timing-function: ease;
