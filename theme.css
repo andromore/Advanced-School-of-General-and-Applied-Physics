@@ -211,8 +211,6 @@ div#foot {
 
 /* Options of layout */
 /* Backgrounds
-
-0.jpg
 1.jpg
 2.jpg
 18.jpg
@@ -284,7 +282,8 @@ footer {
 
 div#head,
 div#foot,
-main {
+main,
+.structure {
   margin: 10px; }
 
 div#left-bar,
@@ -307,7 +306,8 @@ div#right-bar {
     width: calc(50% - 500px - 20px); }
   main,
   div#head,
-  div#foot {
+  div#foot,
+  .structure {
     width: 1000px; }
   main {
     order: 1; }
@@ -324,7 +324,8 @@ div#right-bar {
     display: none; }
   main,
   div#head,
-  div#foot {
+  div#foot,
+  .structure {
     width: 1000px;
     margin-left: auto;
     margin-right: auto; } }
@@ -335,7 +336,8 @@ div#right-bar {
     display: none; }
   main,
   div#foot,
-  div#head {
+  div#head,
+  .structure {
     margin: 10px;
     width: 100%; } }
 
@@ -353,7 +355,8 @@ div#head,
 div#foot,
 site-nav,
 site-nav section,
-iframe {
+iframe,
+.structure {
   border-radius: 10px;
   border: 1px solid #000; }
 
@@ -365,8 +368,36 @@ site-nav {
 
 div#head,
 div#foot {
-  padding: 10px;
+  padding: 10px; }
+
+.structure,
+div#head,
+div#foot {
   background-color: rgba(255, 255, 255, 0.9); }
+
+/* Global navigation */
+nav#main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  border: 1px solid #000;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px; }
+  nav#main > a {
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 255, 0.1);
+    background-color: rgba(0, 0, 255, 0.05); }
+    nav#main > a:hover {
+      background-color: rgba(0, 0, 255, 0.1); }
+    nav#main > a:active {
+      background-color: rgba(0, 255, 0, 0.3); }
 
 /* Colored paragraphs - important messages */
 p.red {

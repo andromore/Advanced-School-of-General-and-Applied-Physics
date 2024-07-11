@@ -1,15 +1,7 @@
-class SiteNavigation extends HTMLElement {
-    constructor() {
-        super();
-    }
-}
-
 class Site {
     head;
 
     constructor() {
-        customElements.define("site-nav", SiteNavigation);
-
         this.head = document.head;
     }
 
@@ -42,35 +34,6 @@ class Site {
         this.title = text;
         return title;
     }
-
-    add_navigation(title, menu, open = false) {
-        let nav = document.querySelector("site-nav");
-        let details = document.createElement("details");
-        if (open) {
-            let attr = document.createAttribute("open");
-            details.setAttributeNode(attr);
-        }
-        let summary = document.createElement("summary");
-        summary.innerText = title;
-        details.appendChild(summary);
-        nav.appendChild(details);
-        let section = document.createElement("section");
-        details.appendChild(section);
-        let global = menu;
-        for (let i of global) {
-            let a = document.createElement("a");
-            a.setAttribute("onclick", 'load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/' + i.href + '")');
-            a.innerText = i.innerText;
-            section.appendChild(a);
-        }
-    }
-
-    add_navigation_link(text, href) {
-        let a = document.createElement('a');
-        a.setAttribute('onclick', 'load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/' + href + '")');
-        a.innerText = text;
-        document.querySelector("site-nav").appendChild(a);
-    }
 }
 
 var site = new Site();
@@ -90,12 +53,25 @@ site.head.appendChild(meta);
 site.add_style_sheet("theme.css");
 
 // Глобальное меню
-let menu = [{ innerText: "Главная", href: "./index.html" },
-{ innerText: "Курс 1", href: "./Курс 1/index.html" },
-{ innerText: "Курс 2", href: "./Курс 2/index.html" },
-{ innerText: "Курс 3", href: "./Курс 3/index.html" },
-{ innerText: "Курс 4", href: "./Курс 4/index.html" }];
-site.add_navigation("Глобальное меню", menu, true);
+let menu = [{ innerText: "Главная", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html" },
+{ innerText: "Курс 1", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 1/index.html" },
+{ innerText: "Курс 2", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 2/index.html" },
+{ innerText: "Курс 3", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 3/index.html" },
+{ innerText: "Курс 4", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 4/index.html" }];
+
+let header = document.createElement("header");
+let navGlobal = document.createElement("nav");
+header.appendChild(navGlobal);
+navGlobal.setAttribute("class", "structure");
+navGlobal.setAttribute("id", "main");
+for(i of menu) {
+    let a = document.createElement("a");
+    a.innerText = i.innerText;
+    a.setAttribute("onclick", 'load("' + i.href + '")');
+    navGlobal.appendChild(a);
+}
+let divBody = document.getElementsByTagName("header")[0].nextSibling.nextSibling;
+document.body.insertBefore(header, divBody);
 
 // Генерация, соответственно, шапки и дна сайта
 document.querySelector("div#head").innerHTML = "<div style=\"border-bottom: 1px solid #000; font-size: 24px; font-weight: 600;\">Студенческий сайт ВШОПФ</div><div style=\"font-style: italic; text-align: right;\" id='quote'></div>";

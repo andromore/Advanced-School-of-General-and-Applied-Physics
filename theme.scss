@@ -87,8 +87,6 @@ html {
 }
 
 /* Backgrounds
-
-0.jpg
 1.jpg
 2.jpg
 18.jpg
@@ -184,7 +182,8 @@ footer {
 
 div#head,
 div#foot,
-main {
+main,
+.structure {
     margin: 10px;
 }
 
@@ -216,7 +215,8 @@ $content-width: 1000px;
 
     main,
     div#head,
-    div#foot {
+    div#foot,
+    .structure {
         width: $content-width;
     }
 
@@ -243,7 +243,8 @@ $content-width: 1000px;
 
     main,
     div#head,
-    div#foot {
+    div#foot,
+    .structure {
         width: $content-width;
         margin-left: auto;
         margin-right: auto;
@@ -258,7 +259,8 @@ $content-width: 1000px;
 
     main,
     div#foot,
-    div#head {
+    div#head,
+    .structure {
         margin: 10px;
         width: 100%;
     }
@@ -285,7 +287,8 @@ div#head,
 div#foot,
 site-nav,
 site-nav section,
-iframe {
+iframe,
+.structure {
     @include borders();
 }
 
@@ -300,7 +303,42 @@ site-nav {
 div#head,
 div#foot {
     padding: 10px;
+}
+
+.structure,
+div#head,
+div#foot {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Global navigation */
+
+nav#main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    @include borders();
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+
+    > a {
+        @include padding($padding-width: 5px);
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        @include borders(rgba(0, 0, 255, 0.1));
+        background-color: rgba(0, 0, 255, 0.05);
+        
+        &:hover {
+            background-color: rgba(0, 0, 255, 0.1);
+        }
+
+        &:active {
+            background-color: rgba(0, 255, 0, 0.3);
+        }
+    }
 }
 
 /* Colored paragraphs - important messages */
