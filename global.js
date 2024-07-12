@@ -97,7 +97,6 @@ function load(filename) {
 
 function quote(text) {
     document.getElementById('quote').innerText = text;
-    console.log("quote: " + text );
 }
 
 quote("Вот где-то здесь есть какая-то жизнь...");
