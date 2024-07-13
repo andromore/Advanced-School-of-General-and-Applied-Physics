@@ -62,10 +62,6 @@ main {
     @include animated-loading(0.1s, 0.3s);
 }
 
-site-nav {
-    @include animated-loading(0.1s);
-}
-
 @for $i from 1 through 20 {
     :is(main, div#head, div#foot, site-nav) > *:nth-child(#{$i}) {
         @include animated-loading(calc(0.4s + (#{$i} - 1) * 0.1s));
@@ -264,6 +260,19 @@ $content-width: 1000px;
         margin: 10px;
         width: 100%;
     }
+}
+
+/* Head of site */
+
+div#head div#name {
+    border-bottom: 1px solid #000;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+div#head div#quote {
+    font-style: italic;
+    text-align: right;
 }
 
 /* Unnecessary margins */

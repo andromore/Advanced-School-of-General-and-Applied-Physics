@@ -31,14 +31,6 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-site-nav {
-  animation-delay: 0.1s;
-  animation-fill-mode: both;
-  animation-duration: 0.1s;
-  animation-name: animation-loading;
-  animation-iteration-count: initial;
-  animation-timing-function: ease-in-out; }
-
 :is(main, div#head, div#foot, site-nav) > *:nth-child(1) {
   animation-delay: calc(0.4s + (1 - 1) * 0.1s);
   animation-fill-mode: both;
@@ -341,6 +333,16 @@ div#right-bar {
   .structure {
     margin: 10px;
     width: 100%; } }
+
+/* Head of site */
+div#head div#name {
+  border-bottom: 1px solid #000;
+  font-size: 24px;
+  font-weight: 600; }
+
+div#head div#quote {
+  font-style: italic;
+  text-align: right; }
 
 /* Unnecessary margins */
 main {

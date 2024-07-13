@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <base href="..">
 </head>
 
 <body>
@@ -11,11 +12,36 @@
     <div id='body'>
 
         <div id='left-bar'>
-            
+
         </div>
         <main>
-            <h1>Заголовок</h1>
-            <p class="red">Здесь пока ничего нет. Это грустно...</p>
+            <h1>Шаблон</h1>
+
+            <pre class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        Шапка страницы
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;div id='head'&gt;&lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div id='body'&gt;
+            &lt;div id='left-bar'&gt;&lt;/div&gt;
+            &lt;main&gt;
+                &lt;h1>Название страницы&lt;/h1&gt;
+                Содержимое страницы
+            &lt;/main&gt;
+            &lt;div id='right-bar'>&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;footer&gt;
+            &lt;div id='foot'&gt;&lt;/div&gt;
+        &lt;/footer&gt;
+        &lt;script src="./global.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+            </pre>
         </main>
         <div id='right-bar'></div>
 
@@ -23,9 +49,9 @@
     <footer>
         <div id='foot'></div>
     </footer>
-    
+
     <script src="./global.js"></script>
-    
+
 </body>
 
 </html>
