@@ -275,6 +275,18 @@ div#head div#quote {
     text-align: right;
 }
 
+/* Foot of site */
+
+div#foot {
+    display: flex;
+    flex-direction: row;
+}
+
+div#foot div#message {
+    margin-bottom: 0;
+    order: 0;
+}
+
 /* Unnecessary margins */
 
 main {

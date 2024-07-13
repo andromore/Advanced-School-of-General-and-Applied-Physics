@@ -344,6 +344,15 @@ div#head div#quote {
   font-style: italic;
   text-align: right; }
 
+/* Foot of site */
+div#foot {
+  display: flex;
+  flex-direction: row; }
+
+div#foot div#message {
+  margin-bottom: 0;
+  order: 0; }
+
 /* Unnecessary margins */
 main {
   padding-bottom: 0; }
