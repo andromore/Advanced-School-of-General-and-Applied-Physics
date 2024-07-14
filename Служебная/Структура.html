@@ -17,48 +17,7 @@
             <main>
                 <h1>Структура проекта</h1>
 
-                <h2 id="Материалы">Добавление материалов</h2>
-
-                <p class="green">Будущие поколения ВШОПФа будут благодарны за твой вклад в общее дело. Узнавай как
-                    добавлять свои материалы в этом разделе и присылай их нам. Оставь свой след в истории ВШОПФ!!!</p>
-
-                <p>Самый простой и донельзя банальный способ - написать администратору сайта.
-                    Контакты текущего админа:
-                </p>
-
-                <ul>
-                    <li><a href="https://vk.com/andromore">Вконтакте</a></li>
-                    <li><a href="https://t.me/andromore_mo">Телеграм</a></li>
-                </ul>
-
-                <p>Также можно добавить материалы в <a href="https://vk.com/club192725342">Секретные материалы</a>.
-                    Для этого можно <a href="https://vk.com/im?media=&sel=-192725342">написать сообществу</a>.</p>
-
-                <p>При использовании <a
-                        href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics">классического
-                        интерфейса</a> GitHub:</p>
-
-                <ul>
-                    <li>Если требуется что-то добавить, в разделе
-                        "<a
-                            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions">Discussions</a>"
-                        создан чат "<a
-                            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions/2">Добавить</a>".
-                    </li>
-                    <li>Для ваших идей в разделе
-                        "<a
-                            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions">Discussions</a>"
-                        создан чат
-                        "<a
-                            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/discussions/1">Идеи</a>".
-                    </li>
-                    <li>Для уведомления об ошибке предназначен раздел
-                        "<a
-                            href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics/issues">Issues</a>".
-                    </li>
-                </ul>
-
-                <h2 id="Сайт">Структура сайта</h2>
+                <h2>Структура сайта</h2>
 
                 <p>Ссылка на <a
                         href="https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html">сайт
@@ -68,7 +27,7 @@
 
                 <ul>
                     <li>Главная страница:<ul>
-                            <li>Ссылки на страницы из папки служебные (различные информационные статьи)</li>
+                            <li>Ссылки на информационные статьи и статьи для разработчиков</li>
                             <li>Ссылки на страницы курсов</li>
                         </ul>
                     </li>
@@ -87,7 +46,7 @@
                     </li>
                 </ul>
 
-                <h2 id="Репозиторий">Структура репозитория</h2>
+                <h2>Структура репозитория</h2>
 
                 <p>Ссылка на <a href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics">сам
                         репозиторий</a>.</p>
@@ -148,87 +107,6 @@
                         </ul>
                     </li>
                 </ul>
-
-                <p>Материалами считаются:</p>
-
-                <ul>
-                    <li>Документы (pdf, djvu, tex)</li>
-                    <li>Картинки (png, jpg, svg)</li>
-                    <li>Ссылки на другие ресурсы</li>
-                </ul>
-
-                <p class="red">(GitHub ограничивает размер файлов: предел 25 MB)</p>
-
-                <h2 id="Разработка">Разработка сайта</h2>
-
-                <p class="green">Раздел создан для желающих помочь проекту не словами, а делами.
-                    Читайте и присоединяйтесь к команде.
-                </p>
-
-                <p>Сайт разрабатывается на голом <a href="https://metanit.com/web/html5/">HTML5/CSS3</a> с применением
-                    <a href="https://metanit.com/web/javascript/">JavaScript</a> во избежание
-                    старого-доброго копирования, располагается непосредственно в <a
-                        href="https://github.com/andromore/Advanced-School-of-General-and-Applied-Physics">репозитории
-                        GitHub</a>,
-                    поверх которого и был написан, который выступает в качестве хранилища материалов,
-                    и хостится с использованием технологии <a href="https://pages.github.com/">GitHub Pages</a>.
-                </p>
-
-                <p>В файле script.js создаются элементы <code>&lt;site-header&gt;,
-                    &lt;site-head&gt;, &lt;site-body&gt;, &lt;site-main&gt;, &lt;site-left-bar&gt;, &lt;site-nav&gt;,
-                    &lt;site-content&gt;, &lt;site-right-bar&gt;, &lt;site-footer&gt;, &lt;site-foot&gt;</code>.
-                    Они выполняют функцию упрощения вёрстки сайта.
-                    Здесь же создаётся класс Site, который упрощает управление сайтом.</p>
-
-                <p>Таким образом тело сайта принимает вид:</p>
-                <pre class="code">
-&lt;site-header&gt;
-    &lt;site-head&gt;
-        Здесь находится шапка сайта
-    &lt;/site-head&gt;
-&lt;/site-header&gt;
-&lt;site-body&gt;
-    &lt;site-main&gt;
-        &lt;site-left-bar&gt;
-            &lt;site-nav&gt;
-                Здесь находятся навигационные меню
-            &lt;/site-nav&gt;
-            На данный момент блок используется
-            только для навигационных меню
-        &lt;/site-left-bar&gt;
-        &lt;site-content&gt;
-            Здесь находится основной код страницы
-        &lt;/site-content&gt;
-        &lt;site-right-bar&gt;
-            На данный момент блок не используется
-        &lt;/site-right-bar&gt;
-    &lt;/site-main&gt;
-&lt;/site-body&gt;
-&lt;site-footer&gt;
-    &lt;site-foot&gt;
-        Здесь находится дно сайта
-    &lt;/site-foot&gt;
-&lt;/site-footer&gt;
-&lt;script src="./script.js"&gt;&lt;/script&gt; - Загружает функционал блоков
-&lt;script src="./global.js"&gt;&lt;/script&gt; - Инициализация страницы
-&lt;script src="./local.js"&gt;&lt;/script&gt; - Локальные навигационные меню
-</pre>
-
-                <p>Скрипт script.js производит загрузку функциональности блоков и класса Site и сам по себе ничего не
-                    делает.</p>
-
-                <p>Скрипт global.js производит действия, относящиеся к сайту в целом.
-                    Конкретно:
-                </p>
-                <ul>
-                    <li>Инициализация класса Site</li>
-                    <li>Загрузка темы сайта theme.css</li>
-                    <li>Генерация глобального навигационного меню</li>
-                    <li>Генерация содержимого <code>&lt;site-head&gt;</code> - шапки сайта</li>
-                    <li>Генерация содержимого <code>&lt;site-foot&gt;</code> - дна сайта</li>
-                </ul>
-                <p>Последние два пункта выполняются (т.к. не было придумано ничего лучше) путём загрузки содержимого
-                    соответствующих блоков, банально прописанного непосредственно внутри скрипта.</p>
             </main>
             <div id='right-bar'></div>
         
