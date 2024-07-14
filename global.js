@@ -66,10 +66,13 @@ function load(filename) {
     xhr.open('GET', filename, true);
     xhr.onload = function() {
         if(xhr.status === 200) {
-            main = document.getElementsByTagName("main")[0];
-            for(i of xhr.response)
+            let main = document.getElementsByTagName("main")[0];
+            let tmp = document.createElement("div");
+            tmp.innerHTML = xhr.response;
+            for(i of tmp.childNodes)
             {
-                main.innerHTML += i;
+                tmp.removeChild(i);
+                main.appendChild(i);
             }
             if(main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
