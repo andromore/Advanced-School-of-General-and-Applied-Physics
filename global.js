@@ -67,14 +67,7 @@ function load(filename) {
     xhr.onload = function() {
         if(xhr.status === 200) {
             let main = document.getElementsByTagName("main")[0];
-            main.innerHTML = "";
-            let tmp = document.createElement("div");
-            tmp.innerHTML = xhr.response;
-            for(i of tmp.childNodes)
-            {
-                tmp.removeChild(i);
-                main.appendChild(i);
-            }
+            main.innerHTML = xhr.response;
             if(main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
