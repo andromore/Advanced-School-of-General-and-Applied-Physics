@@ -31,7 +31,7 @@ let navGlobal = document.createElement("nav");
 header.appendChild(navGlobal);
 navGlobal.setAttribute("class", "structure");
 navGlobal.setAttribute("id", "main");
-for(i of menu) {
+for (i of menu) {
     let a = document.createElement("a");
     a.innerText = i.innerText;
     a.setAttribute("onclick", 'load("' + i.href + '")');
@@ -64,10 +64,26 @@ function load(filename) {
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
     xhr.open('GET', filename, true);
-    xhr.onload = function() {
-        if(xhr.status === 200) {
-            document.getElementsByTagName("main")[0].innerHTML = xhr.response;
-            if(main.getElementsByTagName('base')[0]) {
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            let main = document.getElementsByTagName("main")[0];
+            main.innerHTML = "";
+            let tmp = document.createElement("div");
+            tmp.innerHTML = xhr.response;
+            container = tmp.getElementsByTagName("main")[0];
+            for (i of container.childNodes) {
+                if (i.nodeType == 1) {
+                    tmp = document.createElement(i.nodeName);
+                    for (j in i) {
+                        if (i.getAttribute(j)) {
+                            tmp.setAttribute(j, i.getAttribute(j));
+                        }
+                    }
+                    tmp.innerHTML = i.innerHTML;
+                    main.appendChild(tmp);
+                }
+            }
+            if (main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
         } else {
