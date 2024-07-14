@@ -481,21 +481,15 @@ div.padding {
     transform-origin: center; } }
 
 div.links {
-  display: flex; }
-  div.links.column {
-    flex-direction: column; }
-  div.links.row {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-left: -5px;
-    margin-right: -5px; }
-    div.links.row:not(div.links > div.links.row) {
-      margin-top: -10px; }
-    div.links.row > a {
-      margin-left: 5px;
-      margin-right: 5px; }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: -5px;
+  margin-right: -5px; }
   div.links > a {
+    margin-left: 5px;
+    margin-right: 5px;
     flex-grow: 1;
     display: table;
     margin-top: 10px;

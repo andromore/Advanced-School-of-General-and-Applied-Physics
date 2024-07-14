@@ -445,29 +445,15 @@ div {
 
 div.links {
     display: flex;
-
-    &.column {
-        flex-direction: column;
-    }
-
-    &.row {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-left: -5px;
-        margin-right: -5px;
-
-        &:not(div.links > div.links.row) {
-            margin-top: -10px;
-        }
-
-        > a {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-    }
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
 
     > a {
+        margin-left: 5px;
+        margin-right: 5px;
         flex-grow: 1;
         display: table;
         margin-top: 10px;
