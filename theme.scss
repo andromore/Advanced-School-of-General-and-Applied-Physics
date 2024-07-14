@@ -306,11 +306,15 @@ main {
 main,
 div#head,
 div#foot,
-site-nav,
-site-nav section,
-iframe,
 .structure {
     @include borders();
+}
+
+/* Iframes */
+
+iframe {
+    @include borders();
+    margin-bottom: 10px;
 }
 
 /* Backgrounds */

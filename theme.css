@@ -365,12 +365,15 @@ main {
 main,
 div#head,
 div#foot,
-site-nav,
-site-nav section,
-iframe,
 .structure {
   border-radius: 10px;
   border: 1px solid #000; }
+
+/* Iframes */
+iframe {
+  border-radius: 10px;
+  border: 1px solid #000;
+  margin-bottom: 10px; }
 
 /* Backgrounds */
 main {
