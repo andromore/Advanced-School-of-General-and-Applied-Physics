@@ -66,8 +66,7 @@ function load(filename) {
     xhr.open('GET', filename, true);
     xhr.onload = function() {
         if(xhr.status === 200) {
-            let main = document.getElementsByTagName("main")[0];
-            main.innerHTML = xhr.response;
+            document.getElementsByTagName("main")[0].innerHTML = xhr.response;
             if(main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
