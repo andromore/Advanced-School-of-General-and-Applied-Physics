@@ -80,6 +80,7 @@ function load(filename) {
                         }
                     }
                     tmp.innerHTML = i.innerHTML;
+                    tmp.className = i.className;
                     main.appendChild(tmp);
                 }
             }
