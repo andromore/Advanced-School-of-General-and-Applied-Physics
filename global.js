@@ -22,7 +22,7 @@ document.head.appendChild(stylesheet);
 
 // Глобальное меню
 let menu = [{ innerText: "Главная", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html" },
-    {innerText: "Статьи", href: "https://andromore.github.io/Advanced-School-of-General-and-Apploed-Physics/Статьи/index.html"},
+    {innerText: "Статьи", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Статьи/index.html"},
 { innerText: "Курс 1", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 1/index.html" },
 { innerText: "Курс 2", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 2/index.html" },
 { innerText: "Курс 3", href: "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Курс 3/index.html" },
