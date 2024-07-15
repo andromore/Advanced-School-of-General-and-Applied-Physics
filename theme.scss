@@ -349,6 +349,8 @@ nav#main {
 
     > a {
         @include padding();
+        flex: 1 1 0px;
+        text-align: center;
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 5px;
