@@ -495,7 +495,7 @@ div.links {
     margin-right: 5px;
     flex: 1 1 0px;
     display: table;
-    margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
     align-self: stretch;
     background-color: rgba(0, 95, 255, 0.15);
@@ -512,6 +512,9 @@ div.links {
       animation-timing-function: linear;
       animation-fill-mode: forwards;
       transform-origin: center; }
+
+*:has(> div.links:last-child) {
+  padding-bottom: 0px; }
 
 /* Tables with files download links */
 table.download {

@@ -460,7 +460,7 @@ div.links {
         margin-right: 5px;
         flex: 1 1 0px;
         display: table;
-        margin-top: 10px;
+        margin-bottom: 10px;
         text-align: center;
         align-self: stretch;
         @include block($background-color: $link-color);
@@ -479,6 +479,10 @@ div.links {
             transform-origin: center;
         }
     }
+}
+
+*:has(> div.links:last-child) {
+    padding-bottom: 0px;
 }
 
 /* Tables with files download links */
