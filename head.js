@@ -28,6 +28,7 @@ function load(filename) {
                     main.appendChild(tmp);
                 }
             }
+            quote("Вот где-то здесь есть какая-то жизнь...");
             scripts = tmp.querySelectorAll("body script:not(main script)");
             for (i of scripts) {
                 script = document.createElement("script");
