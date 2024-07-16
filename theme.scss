@@ -62,7 +62,7 @@ main {
     @include animated-loading(0.1s, 0.3s);
 }
 
-@for $i from 1 through 30 {
+@for $i from 1 through 20 {
     :is(main, div#head, div#foot, site-nav) > *:nth-child(#{$i}) {
         @include animated-loading(calc(0.4s + (#{$i} - 1) * 0.1s));
     }

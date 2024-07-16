@@ -28,18 +28,6 @@ function load(filename) {
                     main.appendChild(tmp);
                 }
             }
-            scripts = tmp.querySelectorAll("body script:not(main script)");
-            for (i of scripts) {
-                script = document.createElement("script");
-                if (i.hasAttribute("src")) {
-                    if (i.getAttribute("src").indexOf("global.js") == -1) {
-                        script.setAttribute("src", i.getAttribute("src"));
-                    }
-                    else continue;
-                }
-                script.innerHTML = i.innerHTML;
-                document.body.appendChild(script);
-            }
             if (main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }

@@ -27,8 +27,8 @@ divName.innerText = "Студенческий сайт ВШОПФ";
 head.appendChild(divName);
 let divQuote = document.createElement("div");
 divQuote.setAttribute("id", "quote");
-divQuote.innerText = "Вот где-то здесь есть какая-то жизнь...";
 head.appendChild(divQuote);
+quote("Вот где-то здесь есть какая-то жизнь...");
 
 // Генерация подножья сайта
 let foot = document.querySelector("footer > div#foot");
