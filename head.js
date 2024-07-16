@@ -32,7 +32,7 @@ function load(filename) {
             for (i of scripts) {
                 script = document.createElement("script");
                 if (i.hasAttribute("src")) {
-                    if (i.getAttribute("src").indexOf("global.js") == -1) {
+                    if (i.getAttribute("src").indexOf("body.js") == -1 && i.getAttribute("src").indexOf("head.js") == -1) {
                         script.setAttribute("src", i.getAttribute("src"));
                     }
                     else continue;
