@@ -8,7 +8,6 @@ let menu = [{ innerText: "Главная", href: "https://andromore.github.io/Ad
 let header = document.createElement("header");
 let navGlobal = document.createElement("nav");
 header.appendChild(navGlobal);
-navGlobal.setAttribute("class", "structure");
 navGlobal.setAttribute("id", "main");
 for (i of menu) {
     let a = document.createElement("a");

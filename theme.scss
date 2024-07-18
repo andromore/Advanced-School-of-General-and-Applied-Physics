@@ -51,7 +51,7 @@ $link-animation-time: 0.25s;
     animation-duration: $duration;
     animation-name: animation-loading;
     animation-iteration-count: initial;
-    animation-timing-function: ease-in-out
+    animation-timing-function: ease-in-out;
 }
 
 div#head {
@@ -72,22 +72,13 @@ div#foot {
     @include animated-loading(0.4s);
 }
 
+/* Global options */
+
 * {
     box-sizing: border-box;
 }
 
-/* Options of layout */
-
-html {
-    @extend %ghost;
-}
-
-/* Backgrounds
-0.jpg
-1.jpg
-2.jpg
-3.jpg
-*/
+/* Backgrounds */
 
 @keyframes animation-background {
     0% {
@@ -120,7 +111,6 @@ html {
 }
 
 body {
-    @extend %ghost;
     background-image: url(./Фоны/0.jpg), url(./Фоны/1.jpg), url(./Фоны/2.jpg), url(./Фоны/3.jpg);
     animation-name: animation-background;
     animation-duration: 100s;
@@ -128,119 +118,107 @@ body {
     animation-iteration-count: infinite;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+}
+
+div#body {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+nav#main,
+div#head,
+div#foot {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+main {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Options of loaded pages */
+
+main {
+    header,
+    footer,
+    div#left-bar,
+    div#right-bar {
+        display: none;
+    }
+
+    div#body {
+        padding: 0;
+        background: none;
+        margin: 0;
+
+        main {
+            padding: 0;
+            border: none;
+            margin: 0;
+
+            background: none;
+        }
+    }
+}
+
+/* Options of layout */
+
+html {
+    @extend %ghost;
+}
+
+body {
+    @extend %ghost;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-attachment: fixed;
+    width: 100%;
+}
 
-    main {
-        header, footer, div#left-bar, div#right-bar {
-            display: none;
-        }
+/* Column layout */
 
-        div#body {
-            padding: 0;
-            background: none;
-
-            main {
-                padding: 0;
-                margin: 0;
-                border: none;
-                background: none;
-            }
-        }
-    }
+header {
+    order: 0;
+    width: 100%;
+    flex: 0 0 auto;
+    border-bottom: 1px solid #000;
 }
 
 div#body {
     order: 1;
     width: 100%;
     flex: 1 0 auto;
-    background-color: rgba(255, 255, 255, 0.4);
-    display: flex;
-}
 
-header {
-    order: 0;
-    width: 100%;
-    flex: 0 0 auto;
     display: flex;
-    border-bottom: 1px solid #000;
+    flex-direction: row;
 }
 
 footer {
     order: 2;
     width: 100%;
     flex: 0 0 auto;
-    display: flex;
     @include border($border: border-top);
 }
 
-div#head,
-div#foot,
-main,
-.structure {
-    margin: 10px;
-}
+/* Row layout */
 
 div#left-bar,
 div#right-bar {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    display: none;
 }
-
-div#left-bar {
-    margin-left: 10px;
-}
-
-div#right-bar {
-    margin-right: 10px;
-}
-
-/* Adaptive design */
 
 $content-width: 1000px;
 
-@media (min-width: 1500px) {
-    div#left-bar {
-        display: flex;
-        justify-content: right;
-        order: 0;
-        width: calc(50% - #{$content-width / 2} - 20px);
-    }
-
-    main,
-    div#head,
-    div#foot,
-    .structure {
-        width: $content-width;
-    }
-
-    main {
-        order: 1;
-    }
-
-    div#right-bar {
-        order: 2;
-        width: calc(50% - #{$content-width / 2} - 20px);
-    }
-
+@media (min-width: calc(#{$content-width} + 40px)) {
     header,
+    div#body,
     footer {
         justify-content: center;
     }
-}
-
-@media (min-width: calc(#{$content-width} + 40px)) and (max-width: 1499px) {
-    div#left-bar,
-    div#right-bar {
-        display: none;
-    }
 
     main,
     div#head,
     div#foot,
-    .structure {
+    nav#main {
         width: $content-width;
         margin-left: auto;
         margin-right: auto;
@@ -256,36 +234,46 @@ $content-width: 1000px;
     main,
     div#foot,
     div#head,
-    .structure {
-        margin: 10px;
-        width: 100%;
+    nav#main {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
     }
+}
+
+/* Layout blocks margins and paddings */
+
+main,
+div#head,
+div#foot,
+nav#main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+main {
+    padding: 10px;
+}
+
+div#head,
+div#foot {
+    padding: 10px;
 }
 
 /* Head of site */
 
-div#head div#name {
+div#head > div#name {
     border-bottom: 1px solid #000;
     font-size: 24px;
     font-weight: 600;
 }
 
-div#head div#quote {
+div#head > div#quote {
     font-style: italic;
     text-align: right;
 }
 
 /* Foot of site */
-
-div#foot {
-    display: flex;
-    flex-direction: row;
-}
-
-div#foot div#message {
-    margin-bottom: 0;
-    order: 0;
-}
 
 /* Unnecessary margins */
 
@@ -306,7 +294,7 @@ main {
 main,
 div#head,
 div#foot,
-.structure {
+nav#main {
     @include borders();
 }
 
@@ -315,24 +303,6 @@ div#foot,
 iframe {
     @include borders();
     margin-bottom: 10px;
-}
-
-/* Backgrounds */
-
-main{
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-div#head,
-div#foot {
-    padding: 10px;
-}
-
-.structure,
-div#head,
-div#foot {
-    background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Global navigation */
@@ -351,12 +321,13 @@ nav#main {
         @include padding();
         flex: 1 1 0px;
         text-align: center;
+        white-space: nowrap;
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 5px;
         @include borders(rgba(0, 0, 255, 0.1));
         background-color: rgba(0, 0, 255, 0.05);
-        
+
         &:hover {
             background-color: rgba(0, 0, 255, 0.1);
         }
@@ -395,7 +366,7 @@ pre.code {
 
 details.article {
     border: 1px solid #000;
-    border-radius: 5px;
+    border-radius: 10px;
 
     summary {
         padding: 10px;
@@ -564,50 +535,6 @@ p + a > img {
 a:not([href], [onclick]) {
     color: #333;
     text-decoration: none;
-}
-
-/* Site navigation menus */
-
-site-nav {
-    display: block;
-    width: 200px;
-    height: fit-content;
-
-    > a:not(:last-child) {
-        margin-bottom: 10px;
-    }
-
-    > details {
-        &:not(site-nav > details:last-child) {
-            margin-bottom: 10px;
-        }
-
-        > section {
-            margin: 0;
-            margin-top: 10px;
-            padding-inline-start: 0;
-            list-style-type: none;
-
-            &:not(site-nav > details > section:last-child) {
-                margin-bottom: 10px;
-            }
-
-            > a {
-                padding: 10px;
-                display: block;
-
-                &:not(site-nav > details > section > a:last-child) {
-                    border-bottom: 1px solid #000;
-                }
-            }
-        }
-
-        > summary {
-            margin: 0px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #000;
-        }
-    }
 }
 
 /* Old theme (part of GitHub markdown theme) */
