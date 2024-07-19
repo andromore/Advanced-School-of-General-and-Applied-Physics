@@ -17,15 +17,7 @@ function load(filename) {
             container = tmp.getElementsByTagName("main")[0];
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
-                    tmp = document.createElement(i.nodeName);
-                    for (j in i) {
-                        if (i.getAttribute(j)) {
-                            tmp.setAttribute(j, i.getAttribute(j));
-                        }
-                    }
-                    tmp.innerHTML = i.innerHTML;
-                    tmp.className = i.className;
-                    main.appendChild(tmp);
+                    main.appendChild(i.cloneNode(true));
                 }
             }
             if (main.getElementsByTagName('base')[0]) {

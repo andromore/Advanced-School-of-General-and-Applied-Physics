@@ -4,6 +4,16 @@ $link-focus-color: rgba(0, 255, 127, 0.3);
 $link-color: rgba(0, 95, 255, 0.15);
 $link-animation-time: 0.25s;
 
+$color-red-border: rgba(255, 0, 0, 1);
+$color-red-background: rgba(255, 0, 0, 0.1);
+$color-green-border: rgba(0, 127, 0, 1);
+$color-green-background: rgba(0, 255, 0, 0.15);
+$color-blue-border: rgba(0, 0, 255, 1);
+$color-blue-background: rgba(0, 0, 255, 0.1);
+$color-yellow-border: rgba(255, 255, 0, 1);
+$color-yellow-background: rgba(255, 255, 0, 0.1);
+$color-gray-background: rgba(127, 127, 127, 0.1);
+
 %ghost {
     margin: 0;
     padding: 0;
@@ -342,16 +352,16 @@ nav#main {
 
 p {
     &.red {
-        @include block(rgba(255, 0, 0, 0.1), #f00);
+        @include block($color-red-background, $color-red-border);
     }
     &.green {
-        @include block(rgba(0, 255, 0, 0.15), #070);
+        @include block($color-green-background, $color-green-border);
     }
     &.blue {
-        @include block(rgba(0, 0, 255, 0.1), #00f);
+        @include block($color-blue-background, $color-blue-border);
     }
     &.yellow {
-        @include block(rgba(255, 255, 0, 0.1), #ff0);
+        @include block($color-yellow-background, $color-yellow-border);
     }
 }
 
@@ -359,7 +369,7 @@ p {
 
 pre.code {
     overflow: auto;
-    @include block($background-color: rgba(127, 127, 127, 0.1));
+    @include block($background-color: $color-gray-background);
 }
 
 /* Details */

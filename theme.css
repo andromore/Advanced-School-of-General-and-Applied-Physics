@@ -319,13 +319,20 @@ div#right-bar {
     margin-left: 10px;
     margin-right: 10px; } }
 
-/* Layout blocks margins and padding */
+/* Layout blocks margins and paddings */
 main,
 div#head,
 div#foot,
 nav#main {
   margin-top: 10px;
   margin-bottom: 10px; }
+
+main {
+  padding: 10px; }
+
+div#head,
+div#foot {
+  padding: 10px; }
 
 /* Head of site */
 div#head > div#name {
@@ -360,13 +367,6 @@ iframe {
   border: 1px solid #000;
   margin-bottom: 10px; }
 
-main {
-  padding: 10px; }
-
-div#head,
-div#foot {
-  padding: 10px; }
-
 /* Global navigation */
 nav#main {
   display: flex;
@@ -398,25 +398,25 @@ nav#main {
 p.red {
   background-color: rgba(255, 0, 0, 0.1);
   border-radius: 10px;
-  border: 1px solid #f00;
+  border: 1px solid red;
   padding: 10px; }
 
 p.green {
   background-color: rgba(0, 255, 0, 0.15);
   border-radius: 10px;
-  border: 1px solid #070;
+  border: 1px solid #007f00;
   padding: 10px; }
 
 p.blue {
   background-color: rgba(0, 0, 255, 0.1);
   border-radius: 10px;
-  border: 1px solid #00f;
+  border: 1px solid blue;
   padding: 10px; }
 
 p.yellow {
   background-color: rgba(255, 255, 0, 0.1);
   border-radius: 10px;
-  border: 1px solid #ff0;
+  border: 1px solid yellow;
   padding: 10px; }
 
 /* Code */
