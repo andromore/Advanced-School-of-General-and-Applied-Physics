@@ -324,11 +324,15 @@ div#right-bar {
     margin-right: 10px; } }
 
 /* Layout blocks margins and paddings */
-main,
-div#head,
-div#foot,
-nav#main {
+main {
   margin-top: 10px;
+  margin-bottom: 10px; }
+
+div#head,
+nav#main {
+  margin-top: 10px; }
+
+div#foot {
   margin-bottom: 10px; }
 
 main {

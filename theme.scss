@@ -264,11 +264,17 @@ $content-width: 1000px;
 
 /* Layout blocks margins and paddings */
 
-main,
+main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 div#head,
-div#foot,
 nav#main {
     margin-top: 10px;
+}
+
+div#foot {
     margin-bottom: 10px;
 }
 
