@@ -1,3 +1,5 @@
+const BaseURL = "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html";
+
 // Цитата на странице
 function quote(text) {
     document.getElementById('quote').innerText = text;
@@ -28,12 +30,20 @@ function load(filename, push = true) {
         }
     }
     xhr.send(null);
-    if (push) window.history.pushState(null, null, filename);
+    if (push) window.history.pushState({ url: filename }, null, filename);
 }
 
+// Обработчик событий
 window.addEventListener("popstate", (event) => {
-    load(event.url, false);
+    if (event.state.url)
+        load(event.state.url, false);
+    else {
+        load(BaseURL, false);
+    }
 });
+
+// Изменение state начальной страницы
+window.history.replaceState({url: BaseURL}, null, BaseURL);
 
 // Заголовок сайта
 let title = document.createElement("title");
