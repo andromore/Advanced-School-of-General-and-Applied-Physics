@@ -28,8 +28,12 @@ function load(filename) {
         }
     }
     xhr.send(null);
-    window.history.pushState(null, null, filename);
+    window.history.pushState({url: filename}, null, filename);
 }
+
+window.addEventListener("popstate", (event) => {  
+    load(event.state.url);
+});
 
 // Заголовок сайта
 let title = document.createElement("title");
