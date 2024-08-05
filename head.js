@@ -4,7 +4,7 @@ function quote(text) {
 }
 
 // Новый загрузчик страниц
-function load(filename) {
+function load(filename, push = true) {
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
     xhr.open('GET', filename, true);
@@ -28,11 +28,11 @@ function load(filename) {
         }
     }
     xhr.send(null);
-    window.history.pushState({url: filename}, null, filename);
+    if (push) window.history.pushState({ url: filename }, null, filename);
 }
 
-window.addEventListener("popstate", (event) => {  
-    load(event.state.url);
+window.addEventListener("popstate", (event) => {
+    load(event.state.url, false);
 });
 
 // Заголовок сайта
