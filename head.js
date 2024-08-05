@@ -28,6 +28,7 @@ function load(filename) {
         }
     }
     xhr.send(null);
+    window.history.pushState(null, null, filename);
 }
 
 // Заголовок сайта
