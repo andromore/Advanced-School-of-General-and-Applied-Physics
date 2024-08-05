@@ -234,16 +234,22 @@ body {
   background-position: center;
   background-attachment: fixed; }
 
+header:has(> nav#main) {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.4)); }
+
+footer {
+  background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0)); }
+
 div#body {
   background-color: rgba(255, 255, 255, 0.4); }
 
 nav#main,
 div#head,
 div#foot {
-  background-color: rgba(255, 255, 255, 0.9); }
+  background-color: rgba(255, 255, 255, 0.8); }
 
 main {
-  background-color: rgba(255, 255, 255, 0.8); }
+  background-color: rgba(255, 255, 255, 0.7); }
 
 /* Options of loaded pages */
 main header,
@@ -273,8 +279,7 @@ body {
 header {
   order: 0;
   width: 100%;
-  flex: 0 0 auto;
-  border-bottom: 1px solid #000; }
+  flex: 0 0 auto; }
 
 div#body {
   order: 1;
@@ -286,8 +291,7 @@ div#body {
 footer {
   order: 2;
   width: 100%;
-  flex: 0 0 auto;
-  border-top: 1px solid #000; }
+  flex: 0 0 auto; }
 
 /* Row layout */
 div#left-bar,
@@ -358,8 +362,7 @@ main,
 div#head,
 div#foot,
 nav#main {
-  border-radius: 10px;
-  border: 1px solid #000; }
+  border-radius: 10px; }
 
 /* Iframes */
 iframe {
@@ -373,8 +376,6 @@ nav#main {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 10px;
-  border: 1px solid #000;
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 5px; }
@@ -387,7 +388,6 @@ nav#main {
     margin-right: 5px;
     margin-bottom: 5px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 255, 0.1);
     background-color: rgba(0, 0, 255, 0.05); }
     nav#main > a:hover {
       background-color: rgba(0, 0, 255, 0.1); }
@@ -398,25 +398,21 @@ nav#main {
 p.red {
   background-color: rgba(255, 0, 0, 0.1);
   border-radius: 10px;
-  border: 1px solid red;
   padding: 10px; }
 
 p.green {
   background-color: rgba(0, 255, 0, 0.15);
   border-radius: 10px;
-  border: 1px solid #007f00;
   padding: 10px; }
 
 p.blue {
   background-color: rgba(0, 0, 255, 0.1);
   border-radius: 10px;
-  border: 1px solid blue;
   padding: 10px; }
 
 p.yellow {
-  background-color: rgba(255, 255, 0, 0.1);
+  background-color: rgba(255, 255, 0, 0.2);
   border-radius: 10px;
-  border: 1px solid yellow;
   padding: 10px; }
 
 /* Code */
@@ -424,12 +420,10 @@ pre.code {
   overflow: auto;
   background-color: rgba(127, 127, 127, 0.1);
   border-radius: 10px;
-  border: 1px solid #000;
   padding: 10px; }
 
 /* Details */
 details.article {
-  border: 1px solid #000;
   border-radius: 10px; }
   details.article summary {
     padding: 10px; }
@@ -441,20 +435,24 @@ details.article {
       margin-bottom: 10px; }
 
 /* Special blocks */
-div.frame {
+section {
   border-radius: 10px;
-  border: 1px solid #000; }
-  div.frame:not(:last-child) {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  padding: 10px;
+  padding-top: 0; }
+  section:not(:last-child) {
     margin-bottom: 10px; }
-
-div.scroll {
-  overflow: auto; }
-
-div.padding {
-  padding: 10px; }
-  div.padding > h3 {
+  section > h3 {
     margin-top: 10px;
     text-align: center; }
+
+div.scroll {
+  border-radius: 10px;
+  overflow: auto; }
+
+div.scroll:has(> table.download) + p {
+  margin-top: 10px; }
 
 /* Links tables */
 @keyframes animation-links {
@@ -481,7 +479,6 @@ div.links {
     align-self: stretch;
     background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
-    border: 1px solid #000;
     padding: 10px; }
     div.links > a > span {
       display: table-cell;
@@ -517,6 +514,8 @@ table.download {
   table.download tr.after :is(th, td) {
     text-align: center;
     width: min-content; }
+  table.download > tbody > tr > td {
+    background: rgba(255, 255, 255, 0.7); }
   table.download > tbody > tr:not(:last-child) > td {
     border-bottom: 1px #000 solid; }
   table.download > tbody > tr > td.multiline {
