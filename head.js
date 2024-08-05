@@ -28,11 +28,11 @@ function load(filename, push = true) {
         }
     }
     xhr.send(null);
-    if (push) window.history.pushState({ url: filename }, null, filename);
+    if (push) window.history.pushState(null, null, filename);
 }
 
 window.addEventListener("popstate", (event) => {
-    load(event.state.url, false);
+    load(event.url, false);
 });
 
 // Заголовок сайта
