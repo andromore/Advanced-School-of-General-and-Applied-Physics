@@ -420,20 +420,21 @@ pre.code {
   padding: 10px; }
 
 /* Details */
-details {
+details:not(table details) {
   margin-bottom: 10px; }
-  details > summary {
-    background-color: rgba(0, 0, 255, 0.1);
+  details:not(table details) > summary {
+    background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
     padding: 10px; }
-  details[open] {
+  details:not(table details)[open] {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     padding: 10px; }
-    details[open] > summary {
+    details:not(table details)[open] > summary {
+      background-color: rgba(0, 0, 255, 0.1);
       margin: -10px;
       margin-bottom: 10px; }
-    details[open] > :last-child {
+    details:not(table details)[open] > :last-child {
       margin-bottom: 0; }
 
 /* Special blocks */
