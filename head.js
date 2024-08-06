@@ -43,7 +43,17 @@ window.addEventListener("popstate", (event) => {
 });
 
 // Изменение state начальной страницы
-window.history.replaceState({url: BaseURL}, null, BaseURL);
+try {
+    window.history.replaceState({ url: BaseURL }, null, BaseURL);
+}
+catch {
+    // Делать было нечего - делать было нечего
+    /*
+    Инструкция сломается только при выполнении локальных скриптов
+    (при отладке локальной версии в браузере - в рабочей версии всё будет нормально)
+    И на рабочую версию не повлияет
+    */
+}
 
 // Заголовок сайта
 let title = document.createElement("title");
