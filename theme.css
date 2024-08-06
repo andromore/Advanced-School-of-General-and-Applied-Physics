@@ -335,9 +335,7 @@ nav#main {
 div#foot {
   margin-bottom: 10px; }
 
-main {
-  padding: 10px; }
-
+main,
 div#head,
 div#foot {
   padding: 10px; }
@@ -352,7 +350,6 @@ div#head > div#quote {
   font-style: italic;
   text-align: right; }
 
-/* Foot of site */
 /* Unnecessary margins */
 main {
   padding-bottom: 0; }
@@ -391,8 +388,9 @@ nav#main {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
+    background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
-    background-color: rgba(0, 0, 255, 0.05); }
+    padding: 10px; }
     nav#main > a:hover {
       background-color: rgba(0, 0, 255, 0.1); }
     nav#main > a:active {

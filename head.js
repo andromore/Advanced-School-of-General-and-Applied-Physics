@@ -30,7 +30,12 @@ function load(filename, push = true) {
         }
     }
     xhr.send(null);
-    if (push) window.history.pushState({ url: filename }, null, filename);
+    try {
+        if (push) window.history.pushState({ url: filename }, null, filename);
+    }
+    catch {
+        // Сыпется в локальной версии
+    }
 }
 
 // Обработчик событий
