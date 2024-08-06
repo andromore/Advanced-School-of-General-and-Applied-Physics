@@ -377,17 +377,13 @@ nav#main {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 5px; }
+  padding: 5px; }
   nav#main > a {
     padding: 10px;
     flex: 1 1 0px;
     text-align: center;
     white-space: nowrap;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
     background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
     padding: 10px; }
