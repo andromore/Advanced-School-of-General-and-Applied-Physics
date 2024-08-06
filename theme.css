@@ -351,12 +351,11 @@ div#head > div#quote {
   text-align: right; }
 
 /* Unnecessary margins */
-main {
-  padding-bottom: 0; }
-  main > :first-child {
-    margin-top: 10px; }
-  main > :last-child {
-    margin-bottom: 10px; }
+main > :first-child {
+  margin-top: 10px; }
+
+main > :last-child {
+  margin-bottom: 0; }
 
 /* Borders */
 main,
@@ -421,16 +420,21 @@ pre.code {
   padding: 10px; }
 
 /* Details */
-details.article {
-  border-radius: 10px; }
-  details.article summary {
+details {
+  margin-bottom: 10px; }
+  details > summary {
+    background-color: rgba(0, 0, 255, 0.1);
+    border-radius: 10px;
     padding: 10px; }
-  details.article[open] {
+  details[open] {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
     padding: 10px; }
-    details.article[open] summary {
-      border-bottom: 1px #000 solid;
+    details[open] > summary {
       margin: -10px;
       margin-bottom: 10px; }
+    details[open] > :last-child {
+      margin-bottom: 0; }
 
 /* Special blocks */
 section {

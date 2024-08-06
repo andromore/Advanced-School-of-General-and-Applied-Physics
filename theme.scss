@@ -299,16 +299,12 @@ div#head > div#quote {
 
 /* Unnecessary margins */
 
-main {
-    padding-bottom: 0;
+main > :first-child {
+    margin-top: 10px;
+}
 
-    > :first-child {
-        margin-top: 10px;
-    }
-
-    > :last-child {
-        margin-bottom: 10px;
-    }
+main > :last-child {
+    margin-bottom: 0;
 }
 
 /* Borders */
@@ -382,20 +378,27 @@ pre.code {
 
 /* Details */
 
-details.article {
-    border-radius: 10px;
+details {
+    margin-bottom: 10px;
 
-    summary {
+    & > summary {
+        background-color: $color-table-head;
+        border-radius: 10px;
         padding: 10px;
     }
 
     &[open] {
+        background-color: $color-table-body;
+        border-radius: 10px;
         padding: 10px;
 
-        summary {
-            border-bottom: 1px #000 solid;
+        & > summary {
             margin: -10px;
             margin-bottom: 10px;
+        }
+
+        & > :last-child {
+            margin-bottom: 0;
         }
     }
 }
