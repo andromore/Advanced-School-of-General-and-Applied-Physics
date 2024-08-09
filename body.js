@@ -20,18 +20,18 @@ document.body.insertBefore(header, divBody);
 
 // Генерация шапки сайта
 let head = document.querySelector("header > div#head");
-let divName = document.createElement("div");
+let divName = document.createElement("p");
 divName.setAttribute("id", "name");
 divName.innerText = "Студенческий сайт ВШОПФ";
 head.appendChild(divName);
-let divQuote = document.createElement("div");
+let divQuote = document.createElement("p");
 divQuote.setAttribute("id", "quote");
 head.appendChild(divQuote);
 quote("Вот где-то здесь есть какая-то жизнь...");
 
 // Генерация подножья сайта
 let foot = document.querySelector("footer > div#foot");
-let footText = document.createElement("div");
+let footText = document.createElement("p");
 footText.setAttribute("id", "message");
 footText.innerHTML = "Будущие поколения ВШОПФа будут благодарны за твой вклад в <a onclick=\"load('https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Служебная/Общее дело.html')\">общее дело</a>. ";
 footText.innerHTML += "Узнай <a onclick=\"load('https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Служебная/Общее дело.html')\">как помочь другим студентам</a> или присылай свои материалы в <a onclick=\"load('https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Статьи/Секретные материалы.html')\">секретные материалы</a>.";

@@ -287,23 +287,29 @@ div#foot {
     padding: 10px;
 }
 
-/* Head of site */
+/* Head and foot of site */
 
-div#head > div#name {
+div#head > p#name {
     border-bottom: 1px solid #000;
     font-size: 24px;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
-div#head > div#quote {
+div#head > p#quote {
     font-style: italic;
     text-align: right;
+    margin-bottom: 0;
+}
+
+div#foot > p#message {
+    margin-bottom: 0;
 }
 
 /* Unnecessary margins */
 
-main > :first-child {
-    margin-top: 10px;
+main > h1:first-child {
+    margin-top: 5px;
 }
 
 main > :last-child {
@@ -409,7 +415,7 @@ details:not(table details) {
 
 /* Special blocks */
 
-section {
+article {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     border-top: 1px solid rgba(0, 0, 0, 0);
@@ -427,15 +433,6 @@ section {
     }
 }
 
-div.scroll {
-    border-radius: 10px;
-    overflow: auto;
-}
-
-div.scroll:has(> table.download) + p {
-    margin-top: 10px;
-}
-
 /* Links tables */
 
 @keyframes animation-links {
@@ -448,7 +445,7 @@ div.scroll:has(> table.download) + p {
     }
 }
 
-div.links {
+div:has(> a) {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -482,67 +479,75 @@ div.links {
     }
 }
 
-*:has(> div.links:last-child) {
+*:has(> div:is(:has(> a), :last-child)) {
     padding-bottom: 0px;
 }
 
 /* Tables with files download links */
 
-table.download {
-    border-spacing: 0;
-    width: 100%;
-    margin: 0;
+div:has(> table.download) {
+    overflow: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
 
-    > thead > tr {
-        background-color: $color-table-head;
+    > table.download {
+        border-spacing: 0;
+        width: 100%;
+        margin: 0;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 10px;
 
-        > th {
-            border-bottom: 1px #000 solid;
+        > thead > tr {
+            background-color: $color-table-head;
+
+            > th {
+                border-bottom: 1px #000 solid;
+            }
         }
-    }
 
-    :is(th, td) {
-        padding: 10px;
+        :is(th, td) {
+            padding: 10px;
 
-        &:first-child {
-            text-align: left;
-            width: 100%;
+            &:first-child {
+                text-align: left;
+                width: 100%;
+            }
+
+            &:not(:first-child) {
+                text-align: center;
+                width: min-content;
+            }
         }
 
-        &:not(:first-child) {
+        tr.after :is(th, td) {
             text-align: center;
             width: min-content;
         }
-    }
 
-    tr.after :is(th, td) {
-        text-align: center;
-        width: min-content;
-    }
+        > tbody > tr {
+            > td {
+                background: $color-table-body;
+            }
 
-    > tbody > tr {
-        > td {
-            background: $color-table-body;
-        }
+            &:not(:last-child) > td {
+                border-bottom: 1px #000 solid;
+            }
 
-        &:not(:last-child) > td {
-            border-bottom: 1px #000 solid;
-        }
+            > td.multiline {
+                border-bottom: none;
+            }
 
-        > td.multiline {
-            border-bottom: none;
-        }
+            &:has(> td > details:not([open])) + tr {
+                display: none;
+            }
 
-        &:has(> td > details:not([open])) + tr {
-            display: none;
-        }
+            &:has(> td > details[open]) + tr {
+                display: table-row;
+            }
 
-        &:has(> td > details[open]) + tr {
-            display: table-row;
-        }
-
-        &:has(> td > details:not([open])):has(+ tr:last-child) > td {
-            border-bottom: none;
+            &:has(> td > details:not([open])):has(+ tr:last-child) > td {
+                border-bottom: none;
+            }
         }
     }
 }
