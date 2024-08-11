@@ -19,7 +19,14 @@ function load(filename, push = true) {
             container = tmp.getElementsByTagName("main")[0];
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
-                    main.appendChild(i.cloneNode(true));
+                    clone = i.cloneNode(true);
+                    if (clone.hasAttribute("href")) {
+                        clone.setAttribute("href", clone.getAttribute("href").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                    }
+                    if (clone.hasAttribute("src")) {
+                        clone.setAttribute("src", clone.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                    }
+                    main.appendChild();
                 }
             }
             if (main.getElementsByTagName('base')[0]) {
