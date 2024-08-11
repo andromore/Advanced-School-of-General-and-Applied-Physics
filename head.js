@@ -26,7 +26,7 @@ function load(filename, push = true) {
                     if (clone.hasAttribute("src")) {
                         clone.setAttribute("src", clone.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
                     }
-                    main.appendChild();
+                    main.appendChild(clone);
                 }
             }
             if (main.getElementsByTagName('base')[0]) {
