@@ -17,16 +17,14 @@ function load(filename, push = true) {
             let tmp = document.createElement("div");
             tmp.innerHTML = xhr.response;
             container = tmp.getElementsByTagName("main")[0];
+            for (a of container.getElementsByTagName("a")) {
+                if (a.hasAttribute("href")) {
+                    a.setAttribute("href", a.getAttribute("href").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                }
+            }
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
-                    clone = i.cloneNode(true);
-                    if (clone.hasAttribute("href")) {
-                        clone.setAttribute("href", clone.getAttribute("href").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
-                    }
-                    if (clone.hasAttribute("src")) {
-                        clone.setAttribute("src", clone.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
-                    }
-                    main.appendChild(clone);
+                    main.appendChild(i.cloneNode(true));
                 }
             }
             if (main.getElementsByTagName('base')[0]) {
