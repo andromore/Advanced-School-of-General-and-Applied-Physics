@@ -431,6 +431,10 @@ article {
         margin-top: 10px;
         text-align: center;
     }
+
+    & > :last-child:not(div:has(> a)) {
+        margin-bottom: 0px;
+    }
 }
 
 /* Links tables */

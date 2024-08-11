@@ -454,6 +454,8 @@ article {
   article > h3 {
     margin-top: 10px;
     text-align: center; }
+  article > :last-child:not(div:has(> a)) {
+    margin-bottom: 0px; }
 
 /* Links tables */
 @keyframes animation-links {
