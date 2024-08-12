@@ -22,6 +22,11 @@ function load(filename, push = true) {
                     a.setAttribute("href", a.getAttribute("href").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
                 }
             }
+            for (img of container.getElementsByTagName("img")) {
+                if (img.hasAttribute("src")) {
+                    img.setAttribute("src", a.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                }
+            }
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
                     main.appendChild(i.cloneNode(true));
