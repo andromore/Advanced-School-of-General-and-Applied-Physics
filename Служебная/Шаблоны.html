@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="..">
+    <script src="./head.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id='head'></div>
+    </header>
+    <div id='body'>
+
+        <div id='left-bar'>
+
+        </div>
+        <main>
+            <h1>Шаблоны</h1>
+
+            <p>Ниже представлены макет страницы и различные блоки,
+                из которых можно собрать любую страницу в стиле данного сайта.
+            </p>
+
+            <h2>Макет страницы</h2>
+
+            <p>Ниже представлен макет страницы. При создании страницы страницы,
+                он копируется и заполняется.
+            </p>
+
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;base href="."&gt;
+        &lt;script src="./head.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;div id='head'&gt;&lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div id='body'&gt;
+            &lt;div id='left-bar'&gt;&lt;/div&gt;
+            &lt;main&gt;
+                &lt;h1&gt;&lt;/h1&gt;
+            &lt;/main&gt;
+            &lt;div id='right-bar'&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;footer&gt;
+            &lt;div id='foot'&gt;&lt;/div&gt;
+        &lt;/footer&gt;
+        &lt;script src="./body.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+            <p>К словосочетанию "макет страницы" добавить особо нечего.
+                Как пользоваться:
+            </p>
+
+            <ul>
+                <li>В атрибуте <code>href</code> тега <code>base</code> указать путь к корню репозитория относительно страницы</li>
+                <li>В теге <code>h1</code> указать название страницы</li>
+                <li>В теге <code>main</code> после тега <code>h1</code> размещается содержимое страницы</li>
+            </ul>
+
+            <p>Пользуясь этими правилами и блоками, представленными ниже, вёрстка страниц превращается в конструктор...</p>
+
+            <h2>Цветастые блоки</h2>
+
+            <p>Сайт располагает следующими цветастыми блоками:</p>
+
+            <p class="red">Красный - негатив</p>
+            <p class="yellow">Жёлтый - золотая середина</p>
+            <p class="green">Зелёный - позитив</p>
+            <p class="blue">И просто синий</p>
+
+            <p>Которые создаются, соответственно:</p>
+
+            <pre>
+&lt;p class="red"&gt;Красный - негатив&lt;/p&gt;
+&lt;p class="yellow"&gt;Жёлтый - золотая середина&lt;/p&gt;
+&lt;p class="green"&gt;Зелёный - позитив&lt;/p&gt;
+&lt;p class="blue"&gt;И просто синий&lt;/p&gt;</pre>
+
+            <h2>Группа элементов</h2>
+
+            <pre>
+&lt;article&gt;
+    &lt;h3&gt;&lt;/h3&gt;
+&lt;/article&gt;</pre>
+
+            <p>В тег <code>h3</code> вписывается заголовок группы,
+                а после этого тега идёт её содержимое.
+            </p>
+
+            <p>Жалкая пародия:</p>
+
+            <article>
+                <h3>Заголовок какой-то группы</h3>
+                <p>Какой-то текст</p>
+            </article>
+
+            <p>Неповторимый оригинал:</p>
+
+            <pre>
+&lt;article&gt;
+    &lt;h3&gt;Заголовок какой-то группы&lt;/h3&gt;
+    &lt;p&gt;Какой-то текст&lt;/p&gt;
+&lt;/article&gt;</pre>
+
+            <h2>Выпадающая группа (Аккордеон)</h2>
+
+            <p>Аккордеон - это, конечно, не баян...</p>
+
+            <details>
+                <summary>Привет. Я аккордеон.</summary>
+                <p>Я не знаю, почему меня называют именно так,
+                    но так вот повелось.
+                </p>
+            </details>
+
+            <p>На него можно нажимать, кстати.</p>
+
+            <details open>
+                <summary>Вы хотите узнать как выглядит открытый аккордеон?</summary>
+                <p>Ну как-то так... Ожидали большего?</p>
+            </details>
+
+            <p>Создаётся этот тёзка музыкального инструмента вот так:</p>
+
+            <pre>
+&lt;details&gt;
+    &lt;summary&gt;&lt;/summary&gt;
+&lt;/details&gt;</pre>
+
+            <p>Внутри тега <code>summary</code> пишется его заголовок
+                (например: "Привет. Я аккордеон" - ничего же остроумнее в голову не приходит, да),
+            а после этого тега уже его содержимое.</p>
+
+            <h2>Группа ссылок</h2>
+
+            <p>Сайт располагает вот такими вот внетекстовыми группами ссылочек:</p>
+
+            <div>
+                <a>Ссылка</a>
+            </div>
+
+            <p>Или несколько:</p>
+
+            <div>
+                <a>А вот ещё одна ссылка</a>
+                <a>Ну ещё эта и всё</a>
+            </div>
+
+            <p>Ссылки настроены таким образом,
+                что если какой-то ссылке в этом конкретном ряду нехватает места,
+                то она переезжает в следующий ряд,
+                но это всё происходит строго внутри одного тега <code>div</code>.
+            </p>
+
+            <div>
+                <a>Вот</a>
+                <a>столько</a>
+                <a>ссылок</a>
+                <a>не</a>
+                <a>должно</a>
+                <a>умещаться</a>
+                <a>в</a>
+                <a>один</a>
+                <a>ряд</a>
+                <a>(надеюсь).</a>
+                <a>Хотя,</a>
+                <a>что</a>
+                <a>мне</a>
+                <a>мешает</a>
+                <a>сделать</a>
+                <a>их</a>
+                <a>ещё</a>
+                <a>больше?</a>
+            </div>
+
+            <p>Такие группы создаются следующим образом:</p>
+
+            <pre>
+&lt;div&gt;
+    &lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;</pre>
+
+            <p>Тегов <code>a</code> может быть несколько - внутрь вписывается текст ссылки.</p>
+
+            <h2>Таблица загрузки файлов</h2>
+
+            <p>Ниже представлен шаблон таблицы для скачивания файлов.</p>
+
+            <pre>
+&lt;div&gt;
+    &lt;table class="download"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Название&lt;/th&gt;
+                &lt;th&gt;Автор&lt;/th&gt;
+                &lt;th&gt;Год&lt;/th&gt;
+                &lt;th&gt;Часть&lt;/th&gt;
+                &lt;th&gt;PDF&lt;/th&gt;
+                &lt;th&gt;DJVU&lt;/th&gt;
+                &lt;th&gt;DOCX&lt;/th&gt;
+                &lt;th&gt;TEX&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;a href="" target="_blank" download&gt;Скачать&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;
+                    &lt;details&gt;&lt;summary&gt;&lt;/summary&gt;&lt;/details&gt;
+                &lt;/td&gt;
+                &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan=""&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</pre>
+
+            <p>Содержимое тега <code>thead</code> представляет собой шапку таблицы, ячейки <code>th</code> - заголовки столбцов таблицы.
+                Соответственно, ненужные столбцы таблицы можно удалить.
+            </p>
+
+            <p>Содержимое тега <code>tbody</code> представляет собой тело таблицы, в котором находится содержимое.
+                Тег <code>tr</code> представляет собой одну строку таблицы, тег <code>td</code> - одну ячейку.
+            </p>
+
+            <p>Первая ячейка первого ряда, соответственно, будет содержать текст.
+                Вторая ячейка является ссылкой для скачивания файлов.
+                В атрибут <code>href</code> необходимо вписать путь к файлу,
+                который будет загружен при нажатии на надпись <a onclick>Скачать</a>.
+            </p>
+
+            <p>Вторая и третья строки представляют собой реализацию системы выпадающих рядов (создано,
+                чтобы сделать внутренние таблицы).
+                Во второй строке в тег <code>summary</code> впечатывается текст, при нажатии на который,
+                будет появляться третья строка с её содержимым, при повторном нажатии - скрываться.
+            </p>
+
+            <p>Атрибут <code>colspan</code> в единственной ячейке третей строки нужен для растягивания
+                этой самой ячейки на несколько столбцов таблицы. Между кавычек нужно,
+                соответственно, вписать число столбцов таблицы.
+            </p>
+
+            <p>Пример с ссылкой для скачивания:</p>
+
+            <div>
+                <table class="download">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>JPG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>МирТрудМай.jpg</td>
+                            <td><a href="./Служебная/МирТрудМай.jpg" target="_blank" download>Скачать</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Код примера:</p>
+
+            <pre>
+&lt;div&gt;
+    &lt;table class="download"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Название&lt;/th&gt;
+                &lt;th&gt;JPG&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;МирТрудМай.jpg&lt;/td&gt;
+                &lt;td&gt;&lt;a href="./Служебная/МирТрудМай.jpg" target="_blank" download&gt;Скачать&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</pre>
+
+            <p>Жалкая пародия на пример с выпадающими рядами:</p>
+
+            <div>
+                <table class="download">
+                    <thead>
+                        <tr>
+                            <th>Кнопка</th>
+                            <th>Текст</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><details><summary>Нажми на меня</summary></details></td>
+                            <td>Пустота</td>
+                        </tr>
+                        <tr>
+                            <td>Ты меня видишь? На моём месте может быть таблица...</td>
+                            <td>А меня?</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Неповторимый оригинал:</p>
+
+            <pre>
+&lt;div&gt;
+    &lt;table class="download"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Кнопка&lt;/th&gt;
+                &lt;th&gt;Текст&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;details&gt;&lt;summary&gt;Нажми на меня&lt;/summary&gt;&lt;/details&gt;&lt;/td&gt;
+                &lt;td&gt;Пустота&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Ты меня видишь? На моём месте может быть таблица...&lt;/td&gt;
+                &lt;td&gt;А меня?&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</pre>
+
+        </main>
+        <div id='right-bar'></div>
+    </div>
+    <footer>
+        <div id='foot'></div>
+    </footer>
+
+    <script src="./body.js"></script>
+
+</body>
+
+</html>

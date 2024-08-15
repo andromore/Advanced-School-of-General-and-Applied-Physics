@@ -418,11 +418,14 @@ p.yellow {
   padding: 10px; }
 
 /* Code */
-pre.code {
+code {
+  background-color: rgba(127, 127, 127, 0.2); }
+
+pre {
   overflow: auto;
-  background-color: rgba(127, 127, 127, 0.1);
   border-radius: 10px;
-  padding: 10px; }
+  padding: 10px;
+  background-color: rgba(127, 127, 127, 0.2); }
 
 /* Details */
 details:not(table details) {

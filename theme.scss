@@ -10,7 +10,7 @@ $color-blue-border: rgba(0, 0, 255, 1);
 $color-blue-background: rgba(0, 0, 255, 0.1);
 $color-yellow-border: rgba(255, 255, 0, 1);
 $color-yellow-background: rgba(255, 255, 0, 0.2);
-$color-gray-background: rgba(127, 127, 127, 0.1);
+$color-gray-background: rgba(127, 127, 127, 0.2);
 
 $color-link-focus: rgba(0, 255, 127, 0.3);
 $color-link: rgba(0, 95, 255, 0.15);
@@ -380,9 +380,15 @@ p {
 
 /* Code */
 
-pre.code {
+code {
+    background-color: $color-gray-background;
+}
+
+pre {
     overflow: auto;
-    @include block($background-color: $color-gray-background);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: $color-gray-background;
 }
 
 /* Details */
