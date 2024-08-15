@@ -24,7 +24,7 @@ function load(filename, push = true) {
             }
             for (img of container.getElementsByTagName("img")) {
                 if (img.hasAttribute("src")) {
-                    img.setAttribute("src", a.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                    img.setAttribute("src", img.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
                 }
             }
             for (i of container.childNodes) {
