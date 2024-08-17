@@ -31,7 +31,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(1) {
+:is(main, div#head, div#foot) > *:nth-child(1) {
   animation-delay: calc(0.4s + (1 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -39,7 +39,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(2) {
+:is(main, div#head, div#foot) > *:nth-child(2) {
   animation-delay: calc(0.4s + (2 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -47,7 +47,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(3) {
+:is(main, div#head, div#foot) > *:nth-child(3) {
   animation-delay: calc(0.4s + (3 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -55,7 +55,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(4) {
+:is(main, div#head, div#foot) > *:nth-child(4) {
   animation-delay: calc(0.4s + (4 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -63,7 +63,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(5) {
+:is(main, div#head, div#foot) > *:nth-child(5) {
   animation-delay: calc(0.4s + (5 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -71,7 +71,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(6) {
+:is(main, div#head, div#foot) > *:nth-child(6) {
   animation-delay: calc(0.4s + (6 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -79,7 +79,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(7) {
+:is(main, div#head, div#foot) > *:nth-child(7) {
   animation-delay: calc(0.4s + (7 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -87,7 +87,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(8) {
+:is(main, div#head, div#foot) > *:nth-child(8) {
   animation-delay: calc(0.4s + (8 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -95,7 +95,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(9) {
+:is(main, div#head, div#foot) > *:nth-child(9) {
   animation-delay: calc(0.4s + (9 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -103,7 +103,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(10) {
+:is(main, div#head, div#foot) > *:nth-child(10) {
   animation-delay: calc(0.4s + (10 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -111,7 +111,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(11) {
+:is(main, div#head, div#foot) > *:nth-child(11) {
   animation-delay: calc(0.4s + (11 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -119,7 +119,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(12) {
+:is(main, div#head, div#foot) > *:nth-child(12) {
   animation-delay: calc(0.4s + (12 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -127,7 +127,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(13) {
+:is(main, div#head, div#foot) > *:nth-child(13) {
   animation-delay: calc(0.4s + (13 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -135,7 +135,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(14) {
+:is(main, div#head, div#foot) > *:nth-child(14) {
   animation-delay: calc(0.4s + (14 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -143,7 +143,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(15) {
+:is(main, div#head, div#foot) > *:nth-child(15) {
   animation-delay: calc(0.4s + (15 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -151,7 +151,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(16) {
+:is(main, div#head, div#foot) > *:nth-child(16) {
   animation-delay: calc(0.4s + (16 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -159,7 +159,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(17) {
+:is(main, div#head, div#foot) > *:nth-child(17) {
   animation-delay: calc(0.4s + (17 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -167,7 +167,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(18) {
+:is(main, div#head, div#foot) > *:nth-child(18) {
   animation-delay: calc(0.4s + (18 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -175,7 +175,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(19) {
+:is(main, div#head, div#foot) > *:nth-child(19) {
   animation-delay: calc(0.4s + (19 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -183,7 +183,7 @@ main {
   animation-iteration-count: initial;
   animation-timing-function: ease-in-out; }
 
-:is(main, div#head, div#foot, site-nav) > *:nth-child(20) {
+:is(main, div#head, div#foot) > *:nth-child(20) {
   animation-delay: calc(0.4s + (20 - 1) * 0.1s);
   animation-fill-mode: both;
   animation-duration: 0.1s;
@@ -347,11 +347,6 @@ div#head > p#name {
   font-weight: 600;
   margin-bottom: 0; }
 
-div#head > p#quote {
-  font-style: italic;
-  text-align: right;
-  margin-bottom: 0; }
-
 div#foot > p#message {
   margin-bottom: 0; }
 
@@ -369,32 +364,87 @@ div#foot,
 nav#main {
   border-radius: 10px; }
 
+/* Quotes */
+div#head > blockquote#quote {
+  font-style: italic;
+  text-align: right;
+  margin: 0; }
+
+h1:has(+ blockquote) {
+  margin-bottom: 0; }
+
+blockquote:not(#quote) {
+  display: inline-block;
+  margin: 10px;
+  border-left: 3px solid #000;
+  padding-left: 10px;
+  font-style: italic; }
+  blockquote:not(#quote):not(h1 + blockquote) {
+    margin-top: 0; }
+  blockquote:not(#quote) > cite {
+    display: block;
+    margin-top: 10px;
+    border-top: 1px solid #000;
+    text-align: right;
+    font-style: normal; }
+    blockquote:not(#quote) > cite::before {
+      content: "(c) "; }
+
 /* Iframes */
 iframe {
   border-radius: 10px;
   border: 1px solid #000;
   margin-bottom: 10px; }
 
-/* Global navigation */
+/* Links tables */
+@keyframes animation-links {
+  from {
+    background-color: rgba(0, 95, 255, 0.15); }
+  to {
+    background-color: rgba(0, 255, 127, 0.3);
+    transform-origin: center; } }
+
+nav#main {
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px; }
+  nav#main > a {
+    text-wrap: nowrap; }
+
+div:has(> a) {
+  margin-left: -5px;
+  margin-right: -5px; }
+
+div:has(> a),
 nav#main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 5px; }
+  flex-wrap: wrap; }
+  div:has(> a) > a,
   nav#main > a {
-    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     flex: 1 1 0px;
+    display: table;
+    margin-bottom: 10px;
     text-align: center;
-    white-space: nowrap;
-    margin: 5px;
+    align-self: stretch;
     background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
     padding: 10px; }
-    nav#main > a:hover {
-      background-color: rgba(0, 0, 255, 0.1); }
-    nav#main > a:active {
-      background-color: rgba(0, 255, 0, 0.3); }
+    div:has(> a) > a > span,
+    nav#main > a > span {
+      display: table-cell;
+      vertical-align: middle; }
+    div:has(> a) > a:is(:hover, :active),
+    nav#main > a:is(:hover, :active) {
+      animation-name: animation-links;
+      animation-duration: 0.25s;
+      animation-iteration-count: initial;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      transform-origin: center; }
 
 /* Colored paragraphs - important messages */
 p.red {
@@ -459,43 +509,6 @@ article {
     text-align: center; }
   article > :last-child:not(div:has(> a)) {
     margin-bottom: 0px; }
-
-/* Links tables */
-@keyframes animation-links {
-  from {
-    background-color: rgba(0, 95, 255, 0.15); }
-  to {
-    background-color: rgba(0, 255, 127, 0.3);
-    transform-origin: center; } }
-
-div:has(> a) {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-left: -5px;
-  margin-right: -5px; }
-  div:has(> a) > a {
-    margin-left: 5px;
-    margin-right: 5px;
-    flex: 1 1 0px;
-    display: table;
-    margin-bottom: 10px;
-    text-align: center;
-    align-self: stretch;
-    background-color: rgba(0, 95, 255, 0.15);
-    border-radius: 10px;
-    padding: 10px; }
-    div:has(> a) > a > span {
-      display: table-cell;
-      vertical-align: middle; }
-    div:has(> a) > a:is(:hover, :active) {
-      animation-name: animation-links;
-      animation-duration: 0.25s;
-      animation-iteration-count: initial;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-      transform-origin: center; }
 
 *:has(> div:is(:has(> a), :last-child)) {
   padding-bottom: 0px; }
@@ -581,37 +594,37 @@ a {
     outline-width: 0;
     text-decoration: underline; }
 
-body h1,
-body h2,
-body h3,
-body h4,
-body h5,
-body h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 24px;
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25; }
 
-body h1 {
+h1 {
   padding-bottom: 0.3em;
   font-size: 2em;
   border-bottom: 1px solid #000; }
 
-body h2 {
+h2 {
   padding-bottom: 0.3em;
   font-size: 1.5em;
   border-bottom: 1px solid #000; }
 
-body h3 {
+h3 {
   font-size: 1.25em; }
 
-body h4 {
+h4 {
   font-size: 1em; }
 
-body h5 {
+h5 {
   font-size: 0.875em; }
 
-body h6 {
+h6 {
   font-size: 0.85em;
   color: #777; }
 
@@ -636,24 +649,11 @@ body ol ol ol {
   list-style-type: lower-alpha; }
 
 body p,
-body blockquote,
 body ul,
 body ol,
 body dl {
   margin-top: 0;
   margin-bottom: 16px; }
-
-body blockquote {
-  padding: 0 1em;
-  color: #777;
-  border-left: 0.25em solid #ddd;
-  margin: 0; }
-
-body blockquote > :first-child {
-  margin-top: 0; }
-
-body blockquote > :last-child {
-  margin-bottom: 0; }
 
 body ul,
 body ol {

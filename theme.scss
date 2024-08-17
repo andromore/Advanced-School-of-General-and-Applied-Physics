@@ -20,7 +20,6 @@ $color-main: rgba(255, 255, 255, 0.7);
 $color-details-summary: $color-link;
 $color-details-open-summary: rgba(0, 0, 255, 0.2);
 
-
 %ghost {
     margin: 0;
     padding: 0;
@@ -81,7 +80,7 @@ main {
 }
 
 @for $i from 1 through 20 {
-    :is(main, div#head, div#foot, site-nav) > *:nth-child(#{$i}) {
+    :is(main, div#head, div#foot) > *:nth-child(#{$i}) {
         @include animated-loading(calc(0.4s + (#{$i} - 1) * 0.1s));
     }
 }
@@ -296,12 +295,6 @@ div#head > p#name {
     margin-bottom: 0;
 }
 
-div#head > p#quote {
-    font-style: italic;
-    text-align: right;
-    margin-bottom: 0;
-}
-
 div#foot > p#message {
     margin-bottom: 0;
 }
@@ -325,6 +318,42 @@ nav#main {
     border-radius: 10px;
 }
 
+/* Quotes */
+
+div#head > blockquote#quote {
+    font-style: italic;
+    text-align: right;
+    margin: 0;
+}
+
+h1:has(+ blockquote) {
+    margin-bottom: 0;
+}
+
+blockquote:not(#quote) {
+    display: inline-block;
+    margin: 10px;
+    border-left: 3px solid #000;
+    padding-left: 10px;
+    font-style: italic;
+
+    &:not(h1 + blockquote) {
+        margin-top: 0;
+    }
+
+    & > cite {
+        display: block;
+        margin-top: 10px;
+        border-top: 1px solid #000;
+        text-align: right;
+        font-style: normal;
+
+        &::before {
+            content: "(c) ";
+        }
+    }
+}
+
 /* Iframes */
 
 iframe {
@@ -332,31 +361,62 @@ iframe {
     margin-bottom: 10px;
 }
 
-/* Global navigation */
+/* Links tables */
 
+@keyframes animation-links {
+    from {
+        background-color: $color-link;
+    }
+    to {
+        background-color: $color-link-focus;
+        transform-origin: center;
+    }
+}
+
+nav#main {
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    > a {
+        text-wrap: nowrap;
+    }
+}
+
+div:has(> a) {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+div:has(> a),
 nav#main {
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 5px;
 
     > a {
-        @include padding();
+        margin-left: 5px;
+        margin-right: 5px;
         flex: 1 1 0px;
+        display: table;
+        margin-bottom: 10px;
         text-align: center;
-        white-space: nowrap;
-        margin: 5px;
-        // border-radius: 10px;
-        // background-color: rgba(0, 0, 255, 0.05);
+        align-self: stretch;
         @include block($background-color: $color-link);
 
-        &:hover {
-            background-color: rgba(0, 0, 255, 0.1);
+        > span {
+            display: table-cell;
+            vertical-align: middle;
         }
 
-        &:active {
-            background-color: rgba(0, 255, 0, 0.3);
+        &:is(:hover, :active) {
+            animation-name: animation-links;
+            animation-duration: $time-link;
+            animation-iteration-count: initial;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            transform-origin: center;
         }
     }
 }
@@ -440,52 +500,6 @@ article {
 
     & > :last-child:not(div:has(> a)) {
         margin-bottom: 0px;
-    }
-}
-
-/* Links tables */
-
-@keyframes animation-links {
-    from {
-        background-color: $color-link;
-    }
-    to {
-        background-color: $color-link-focus;
-        transform-origin: center;
-    }
-}
-
-div:has(> a) {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-left: -5px;
-    margin-right: -5px;
-
-    > a {
-        margin-left: 5px;
-        margin-right: 5px;
-        flex: 1 1 0px;
-        display: table;
-        margin-bottom: 10px;
-        text-align: center;
-        align-self: stretch;
-        @include block($background-color: $color-link);
-
-        > span {
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        &:is(:hover, :active) {
-            animation-name: animation-links;
-            animation-duration: $time-link;
-            animation-iteration-count: initial;
-            animation-timing-function: linear;
-            animation-fill-mode: forwards;
-            transform-origin: center;
-        }
     }
 }
 
@@ -616,43 +630,43 @@ a {
     }
 }
 
-body h1,
-body h2,
-body h3,
-body h4,
-body h5,
-body h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 24px;
     margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
 }
 
-body h1 {
+h1 {
     padding-bottom: 0.3em;
     font-size: 2em;
     border-bottom: 1px solid #000;
 }
 
-body h2 {
+h2 {
     padding-bottom: 0.3em;
     font-size: 1.5em;
     border-bottom: 1px solid #000;
 }
 
-body h3 {
+h3 {
     font-size: 1.25em;
 }
 
-body h4 {
+h4 {
     font-size: 1em;
 }
 
-body h5 {
+h5 {
     font-size: 0.875em;
 }
 
-body h6 {
+h6 {
     font-size: 0.85em;
     color: #777;
 }
@@ -682,27 +696,11 @@ body ol ol ol {
 }
 
 body p,
-body blockquote,
 body ul,
 body ol,
 body dl {
     margin-top: 0;
     margin-bottom: 16px;
-}
-
-body blockquote {
-    padding: 0 1em;
-    color: #777;
-    border-left: 0.25em solid #ddd;
-    margin: 0;
-}
-
-body blockquote > :first-child {
-    margin-top: 0;
-}
-
-body blockquote > :last-child {
-    margin-bottom: 0;
 }
 
 body ul,

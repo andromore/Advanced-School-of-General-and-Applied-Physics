@@ -24,10 +24,10 @@ let divName = document.createElement("p");
 divName.setAttribute("id", "name");
 divName.innerText = "Студенческий сайт ВШОПФ";
 head.appendChild(divName);
-let divQuote = document.createElement("p");
+let divQuote = document.createElement("blockquote");
+divQuote.innerText = "Вот где-то здесь есть какая-то жизнь...";
 divQuote.setAttribute("id", "quote");
 head.appendChild(divQuote);
-quote("Вот где-то здесь есть какая-то жизнь...");
 
 // Генерация подножья сайта
 let foot = document.querySelector("footer > div#foot");

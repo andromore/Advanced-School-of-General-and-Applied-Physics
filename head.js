@@ -1,10 +1,5 @@
 const BaseURL = "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html";
 
-// Цитата на странице
-function quote(text) {
-    document.getElementById('quote').innerText = text;
-}
-
 // Новый загрузчик страниц
 function load(filename, push = true) {
     let xhr = new XMLHttpRequest();
@@ -74,6 +69,12 @@ catch {
 let title = document.createElement("title");
 title.textContent = "ВШОПФ";
 document.head.appendChild(title);
+
+// Иконка
+let icon = document.createElement("link");
+icon.setAttribute("rel", "icon");
+icon.setAttribute("href", "./logo.ico");
+document.head.appendChild(icon);
 
 // Кодировка
 let meta = document.createElement("meta");
