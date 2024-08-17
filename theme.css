@@ -500,8 +500,7 @@ article {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(0, 0, 0, 0);
-  padding: 10px;
-  padding-top: 0; }
+  padding: 10px; }
   article:not(:last-child) {
     margin-bottom: 10px; }
   article > h3 {
