@@ -436,6 +436,52 @@ p {
     &.yellow {
         @include block($color-yellow-background, $color-yellow-border);
     }
+    
+    &:is(.attention, .error) {
+        @include block($color-red-background, $color-red-border);
+
+        &::before {
+            color: #f00;
+            font-weight: bold;
+
+            
+        }
+        
+        &.attention::before {
+            content: "ВНИМАНИЕ!!! ";
+        }
+
+        &.error::before {
+            content: "ОШИБКА!!! ";
+        }
+    }
+    &.info {
+        @include block($color-blue-background, $color-blue-border);
+
+        &::before {
+            content: "ИНФОРМАЦИЯ: ";
+            color: #00f;
+            font-weight: bold;
+        }
+    }
+    &.problems {
+        @include block($color-yellow-background, $color-yellow-border);
+
+        &::before {
+            content: "ПРОБЛЕМЫ? ";
+            color: #bb0;
+            font-weight: bold;
+        }
+    }
+    &.victory {
+        @include block($color-green-background, $color-green-border);
+
+        &::before {
+            content: "ПОБЕДА!!! ";
+            color: #0c0;
+            font-weight: bold;
+        }
+    }
 }
 
 span.comment {

@@ -467,6 +467,45 @@ p.yellow {
   border-radius: 10px;
   padding: 10px; }
 
+p:is(.attention, .error) {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px; }
+  p:is(.attention, .error)::before {
+    color: #f00;
+    font-weight: bold; }
+  p:is(.attention, .error).attention::before {
+    content: "ВНИМАНИЕ!!! "; }
+  p:is(.attention, .error).error::before {
+    content: "ОШИБКА!!! "; }
+
+p.info {
+  background-color: rgba(0, 0, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px; }
+  p.info::before {
+    content: "ИНФОРМАЦИЯ: ";
+    color: #00f;
+    font-weight: bold; }
+
+p.problems {
+  background-color: rgba(255, 255, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px; }
+  p.problems::before {
+    content: "ПРОБЛЕМЫ? ";
+    color: #bb0;
+    font-weight: bold; }
+
+p.victory {
+  background-color: rgba(0, 255, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px; }
+  p.victory::before {
+    content: "ПОБЕДА!!! ";
+    color: #0c0;
+    font-weight: bold; }
+
 span.comment {
   color: #888888; }
 
