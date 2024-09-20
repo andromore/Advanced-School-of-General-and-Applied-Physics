@@ -100,3 +100,10 @@ let stylesheet = document.createElement("link");
 stylesheet.setAttribute("href", "./theme.css");
 stylesheet.setAttribute("rel", "stylesheet");
 document.head.appendChild(stylesheet);
+
+// VK Open API
+let script = document.createElement("script");
+script.setAttribute("type", "text/javascript");
+script.setAttribute("src", "https://vk.com/js/api/openapi.js?168");
+script.setAttribute("charset", "windows-1251");
+document.head.appendChild(script);
