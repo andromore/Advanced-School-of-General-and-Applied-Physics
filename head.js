@@ -24,7 +24,15 @@ function load(filename, push = true) {
             }
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
-                    main.appendChild(i.cloneNode(true));
+                    tmp = document.createElement(i.nodeName);
+                    for (j in i) {
+                        if (i.getAttribute(j)) {
+                            tmp.setAttribute(j, i.getAttribute(j));
+                        }
+                    }
+                    tmp.innerHTML = i.innerHTML;
+                    tmp.className = i.className;
+                    main.appendChild(tmp);
                 }
             }
             if (main.getElementsByTagName('base')[0]) {
