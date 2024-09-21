@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="..">
+        <script src="./head.js"></script>
+    </head>
+    <body>
+        <header>
+            <div id='head'></div>
+        </header>
+        <div id='body'>
+            <div id='left-bar'></div>
+            <main>
+                <h1>Ошибка загрузки страницы</h1>
+                <p class="error">В процессе загрузки страницы произошла неизвестная ошибка.
+                    Просим вас потратить всего пару минут для описания способа её воспроизведения,
+                чтобы мы могли её исправить.</p>
+                
+                <div id="vk_comments"></div>
+                <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168" charset="windows-1251"></script>
+                <script type="text/javascript">
+                    VK.init({apiId: 52345925, onlyWidgets: true});
+                    VK.Widgets.Comments("vk_comments", {height: 0});
+                </script>
+            </main>
+            <div id='right-bar'></div>
+        </div>
+        <footer>
+            <div id='foot'></div>
+        </footer>
+        <script src="./body.js"></script>
+    </body>
+</html>

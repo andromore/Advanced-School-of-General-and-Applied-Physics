@@ -39,7 +39,7 @@ function load(filename, push = true) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
         } else {
-            console.error('Сетевая ошибка, сообщим голубям!');
+            load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Служебная/Ошибка.html");
         }
     }
     xhr.send(null);
@@ -47,7 +47,7 @@ function load(filename, push = true) {
         if (push) window.history.pushState({ url: filename }, null, filename);
     }
     catch {
-        // Сыпется в локальной версии
+        alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
     }
 }
 
@@ -65,12 +65,7 @@ try {
     window.history.replaceState({ url: BaseURL }, null, BaseURL);
 }
 catch {
-    // Делать было нечего - делать было нечего
-    /*
-    Инструкция сломается только при выполнении локальных скриптов
-    (при отладке локальной версии в браузере - в рабочей версии всё будет нормально)
-    И на рабочую версию не повлияет
-    */
+    alert("Ошибка при попытке изменения базового URL (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
 }
 
 // Заголовок сайта
@@ -100,10 +95,3 @@ let stylesheet = document.createElement("link");
 stylesheet.setAttribute("href", "./theme.css");
 stylesheet.setAttribute("rel", "stylesheet");
 document.head.appendChild(stylesheet);
-
-// VK Open API
-let script = document.createElement("script");
-script.setAttribute("type", "text/javascript");
-script.setAttribute("src", "https://vk.com/js/api/openapi.js?168");
-script.setAttribute("charset", "windows-1251");
-document.head.appendChild(script);
