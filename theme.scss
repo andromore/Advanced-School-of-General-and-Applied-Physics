@@ -288,7 +288,24 @@ div#foot {
 
 /* Head and foot of site */
 
-div#head > p#name {
+img#logo {
+    display: inline-block;
+    margin: 0;
+    width: 60px;
+    height: 60px;
+    border: none;
+    position: static;
+    flex: 0 0 content;
+}
+
+div#head > div {
+    flex: 1 1 0px;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #000;
+}
+
+div#head p#name {
     border-bottom: 1px solid #000;
     font-size: 24px;
     font-weight: 600;
@@ -320,7 +337,7 @@ nav#main {
 
 /* Quotes */
 
-div#head > blockquote#quote {
+div#head blockquote#quote {
     font-style: italic;
     text-align: right;
     margin: 0;
@@ -352,6 +369,18 @@ blockquote:not(#quote) {
             content: "(c) ";
         }
     }
+}
+
+/* Columns and rows */
+
+div.column {
+    display: flex;
+    flex-direction: column;
+}
+
+div.row {
+    display: flex;
+    flex-direction: row;
 }
 
 /* Iframes */

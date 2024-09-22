@@ -20,14 +20,22 @@ document.body.insertBefore(header, divBody);
 
 // Генерация шапки сайта
 let head = document.querySelector("header > div#head");
+head.setAttribute("class", "row");
+let img = document.createElement("img");
+img.setAttribute("src", "./logo.png");
+img.setAttribute("id", "logo");
+head.appendChild(img);
+let tmp = document.createElement("div");
+tmp.setAttribute("class", "column");
+head.append(tmp);
 let divName = document.createElement("p");
 divName.setAttribute("id", "name");
 divName.innerText = "Студенческий сайт ВШОПФ";
-head.appendChild(divName);
+tmp.appendChild(divName);
 let divQuote = document.createElement("blockquote");
 divQuote.innerText = "Вот где-то здесь есть какая-то жизнь...";
 divQuote.setAttribute("id", "quote");
-head.appendChild(divQuote);
+tmp.appendChild(divQuote);
 
 // Генерация подножья сайта
 let foot = document.querySelector("footer > div#foot");
