@@ -38,17 +38,17 @@ function load(filename, push = true) {
             if (main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
+            try {
+                if (push) window.history.pushState({ url: filename }, null, filename);
+            }
+            catch {
+                alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
+            }
         } else {
             load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Служебная/Ошибка.html");
         }
     }
     xhr.send(null);
-    try {
-        if (push) window.history.pushState({ url: filename }, null, filename);
-    }
-    catch {
-        alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
-    }
 }
 
 // Обработчик событий
