@@ -714,7 +714,7 @@ body ol {
 
 body ol ol,
 body ul ol {
-  list-style-type: lower-roman; }
+  list-style-type: upper-alpha; }
 
 body ul ul ol,
 body ul ol ol,
