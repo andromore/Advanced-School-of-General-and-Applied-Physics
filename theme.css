@@ -611,6 +611,8 @@ div:has(> table.download) {
     div:has(> table.download) > table.download tr.after :is(th, td) {
       text-align: center;
       width: min-content; }
+    div:has(> table.download) > table.download tr.good td {
+      background: rgba(63, 255, 63, 0.3); }
     div:has(> table.download) > table.download > tbody > tr > td {
       background: rgba(255, 255, 255, 0.7); }
     div:has(> table.download) > table.download > tbody > tr:not(:last-child) > td {
