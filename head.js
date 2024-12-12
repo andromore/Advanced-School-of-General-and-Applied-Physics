@@ -102,3 +102,21 @@ script.setAttribute("type", "text/javascript");
 script.setAttribute("src", "https://vk.com/js/api/openapi.js?168");
 script.setAttribute("charset", "windows-1251");
 document.head.appendChild(script);
+
+// Описание страницы
+meta = document.createElement("meta");
+meta.setAttribute("name", "description");
+meta.setAttribute("content", "Студенческий сайт ВШОПФ - Высшей Школы Общей и Прикладной Физики - базового факультета Института Прикладной Физики РАН");
+document.head.appendChild(meta);
+
+// Поисковые роботы
+meta = document.createElement("meta");
+meta.setAttribute("name", "robots");
+meta.setAttribute("content", "all");
+document.head.appendChild(meta);
+
+// Ключевые слова
+meta = document.createElement("meta");
+meta.setAttribute("name", "keywords");
+meta.setAttribute("content", "ВШОПФ, Высшая Школа Общей и Прикладной Физики, ИПФ РАН, Институт Прикладной Физики Российской Академии Наук");
+document.head.appendChild(meta);
