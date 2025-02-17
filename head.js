@@ -55,7 +55,7 @@ function load(filename, push = true) {
 // Обработчик событий
 window.addEventListener("popstate", (event) => {
     if (event.state.url)
-        load(BaseURL + event.state.url, false);
+        load(event.state.url, false);
     else {
         load(StartURL, false);
     }
