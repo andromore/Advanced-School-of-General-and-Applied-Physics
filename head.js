@@ -1,10 +1,11 @@
-const BaseURL = "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/index.html";
+const BaseURL = "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/";
+const StartURL = window.location.href; // const StartURL = BaseURL + "index.html";
 
 // Новый загрузчик страниц
 function load(filename, push = true) {
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
-    xhr.open('GET', filename, true);
+    xhr.open('GET', filename.replace("./", BaseURL), true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             let main = document.getElementsByTagName("main")[0];
@@ -14,12 +15,12 @@ function load(filename, push = true) {
             container = tmp.getElementsByTagName("main")[0];
             for (a of container.getElementsByTagName("a")) {
                 if (a.hasAttribute("href")) {
-                    a.setAttribute("href", a.getAttribute("href").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                    a.setAttribute("href", a.getAttribute("href").replace("./", BaseURL));
                 }
             }
             for (img of container.getElementsByTagName("img")) {
                 if (img.hasAttribute("src")) {
-                    img.setAttribute("src", img.getAttribute("src").replace("./", "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/"));
+                    img.setAttribute("src", img.getAttribute("src").replace("./", BaseURL));
                 }
             }
             for (i of container.childNodes) {
@@ -39,13 +40,13 @@ function load(filename, push = true) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
             try {
-                if (push) window.history.pushState({ url: filename }, null, filename);
+                if (push) window.history.pushState({ url: BaseURL + filename }, null, BaseURL + filename);
             }
             catch {
-                alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
+                // alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
             }
         } else {
-            load("https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/Служебная/Ошибка.html");
+            load(BaseURL + "Служебная/Ошибка.html");
         }
     }
     xhr.send(null);
@@ -54,15 +55,15 @@ function load(filename, push = true) {
 // Обработчик событий
 window.addEventListener("popstate", (event) => {
     if (event.state.url)
-        load(event.state.url, false);
+        load(BaseURL + event.state.url, false);
     else {
-        load(BaseURL, false);
+        load(StartURL, false);
     }
 });
 
 // Изменение state начальной страницы
 try {
-    window.history.replaceState({ url: BaseURL }, null, BaseURL);
+    window.history.replaceState({ url: StartURL }, null, StartURL);
 }
 catch {
     alert("Ошибка при попытке изменения базового URL (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
