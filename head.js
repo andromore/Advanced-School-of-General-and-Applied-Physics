@@ -3,7 +3,7 @@ const StartURL = window.location.href; // const StartURL = BaseURL + "index.html
 
 // Новый загрузчик страниц
 function load(filename, push = true) {
-    if (filename.splice(0, 2) == "./")
+    if (filename.slice(0, 2) == "./")
         filename = filename.replace("./", BaseURL);
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
