@@ -1,32 +1,41 @@
+// Константы (в данном случае ссылки)
 const BaseURL = "https://andromore.github.io/Advanced-School-of-General-and-Applied-Physics/";
-const StartURL = window.location.href; // const StartURL = BaseURL + "index.html";
+const StartURL = window.location.href;
 
 // Новый загрузчик страниц
 function load(filename, push = true) {
+    // Приведение ссылок к единому виду - абсолютная ссылка на веб-ресурс
     if (filename.slice(0, 2) == "./")
         filename = filename.replace("./", BaseURL);
     else if (filename.slice(0, BaseURL.length) != BaseURL)
         throw Error("Wrong filename '" + filename + "' - I can't load it.");
+    // Запрос веб-ресурса
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
     xhr.open('GET', filename, true);
     xhr.onload = function () {
+        // Обработка результата запроса (200 - "всё хорошо", иначе обрабатываем ошибку)
         if (xhr.status === 200) {
+            // Очищаем принимающую страницу
             let main = document.getElementsByTagName("main")[0];
             main.innerHTML = "";
+            // Обрабатываем содержимое загружаемой страницы
             let tmp = document.createElement("div");
-            tmp.innerHTML = xhr.response;
-            container = tmp.getElementsByTagName("main")[0];
+            tmp.innerHTML = xhr.response; // Получаем содержимое всей загружаемой страница
+            container = tmp.getElementsByTagName("main")[0]; // Нужен только её контент
+            // Обрабатываем ссылки
             for (a of container.getElementsByTagName("a")) {
                 if (a.hasAttribute("href")) {
                     a.setAttribute("href", a.getAttribute("href").replace("./", BaseURL));
                 }
             }
+            // Обрабатываем изображения
             for (img of container.getElementsByTagName("img")) {
                 if (img.hasAttribute("src")) {
                     img.setAttribute("src", img.getAttribute("src").replace("./", BaseURL));
                 }
             }
+            // Перенос всех элементов дотошным копированием (чтобы работали скрипты)
             for (i of container.childNodes) {
                 if (i.nodeType == 1) {
                     tmp = document.createElement(i.nodeName);
@@ -40,27 +49,33 @@ function load(filename, push = true) {
                     main.appendChild(tmp);
                 }
             }
+            // База страницы должна быть единой и не должна отличаться от базы страницы, на которой вызывается метод
             if (main.getElementsByTagName('base')[0]) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
+            // Добавление посещения в историю
             try {
                 if (push) window.history.pushState({ url: filename }, null, filename);
             }
             catch {
+                // В локальной версии не работает управление историей
                 // alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
             }
         } else {
+            // Вызывается страница ошибки
             load(BaseURL + "Служебная/Ошибка.html");
         }
     }
     xhr.send(null);
 }
 
-// Обработчик событий
+// Обработчик событий истории
 window.addEventListener("popstate", (event) => {
     if (event.state.url)
         load(event.state.url, false);
     else {
+        // Если что-то пошло не так - загружаемся в начало (возможно редуцент)
+        console.log("Возвращаемся на начальную страницу - ошибка возвращения по истории");
         load(StartURL, false);
     }
 });
