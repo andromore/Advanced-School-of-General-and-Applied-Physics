@@ -5,6 +5,8 @@ const StartURL = window.location.href; // const StartURL = BaseURL + "index.html
 function load(filename, push = true) {
     if (filename.slice(0, 2) == "./")
         filename = filename.replace("./", BaseURL);
+    else if (filename.slice(0, BaseURL.length) != BaseURL)
+        throw Error("Wrong filename '" + filename + "' - I can't load it.");
     let xhr = new XMLHttpRequest();
     xhr.overrideMimeType("text/html");
     xhr.open('GET', filename, true);
@@ -42,7 +44,7 @@ function load(filename, push = true) {
                 main.removeChild(main.getElementsByTagName('base')[0]);
             }
             try {
-                if (push) window.history.pushState({ url: BaseURL + filename }, null, BaseURL + filename);
+                if (push) window.history.pushState({ url: filename }, null, filename);
             }
             catch {
                 // alert("Ошибка при управлении историей посещений сайта (требуется ввиду динамической загрузки страниц). Если ошибка произошла не в локальной версии, просьба перейти на страницу \"Служебные\" > \"Ошибка\" и сообщить о произошедшем.");
