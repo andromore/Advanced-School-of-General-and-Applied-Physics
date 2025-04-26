@@ -45,6 +45,8 @@ $color-details-open-summary: rgba(0, 0, 255, 0.2);
     background-color: $background-color;
     // @include borders($border-color);
     border-radius: $border-radius;
+    border-style: outset;
+    border-width: 1px;
     @include padding();
 }
 
@@ -446,6 +448,7 @@ nav#main {
             animation-timing-function: linear;
             animation-fill-mode: forwards;
             transform-origin: center;
+            border-style: inset;
         }
     }
 }
@@ -543,6 +546,9 @@ pre {
 
 details:not(table details) {
     margin-bottom: 10px;
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 10px;
 
     & > summary {
         background-color: $color-details-summary;
@@ -570,9 +576,7 @@ details:not(table details) {
 /* Special blocks */
 
 article {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(0, 0, 0, 0);
+    @include block(rgba(255, 255, 255, 0.5));
 
     &:not(:last-child) {
         margin-bottom: 10px;
@@ -581,12 +585,23 @@ article {
     padding: 10px;
 
     & > h3 {
-        margin-top: 10px;
+        margin-top: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-align: center;
+        border-width: 1px;
+        border-style: inset;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     & > :last-child:not(div:has(> a)) {
         margin-bottom: 0px;
+    }
+
+    & > div > a {
+        border-style: dashed;
+        border-width: 1px;
     }
 }
 
@@ -600,17 +615,20 @@ div:has(> table.download) {
     overflow: auto;
     border-radius: 10px;
     margin-bottom: 10px;
-
+    
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 10px;
+    border-color: rgba(0, 0, 0, 0.1);
+    
     > table.download {
         border-spacing: 0;
         width: 100%;
         margin: 0;
-        border: 1px solid rgba(0, 0, 0, 0);
-        border-radius: 10px;
 
         > thead > tr {
             background-color: $color-table-head;
-
+            
             > th {
                 border-bottom: 1px #000 solid;
             }

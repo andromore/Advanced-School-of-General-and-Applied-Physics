@@ -456,6 +456,8 @@ nav#main {
     align-self: stretch;
     background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
+    border-style: outset;
+    border-width: 1px;
     padding: 10px; }
     div:has(> a) > a > span,
     nav#main > a > span {
@@ -468,7 +470,8 @@ nav#main {
       animation-iteration-count: initial;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
-      transform-origin: center; }
+      transform-origin: center;
+      border-style: inset; }
 
 /* Group of images */
 div:has(> img) {
@@ -481,26 +484,36 @@ div:has(> img) {
 p.red {
   background-color: rgba(255, 0, 0, 0.1);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
 
 p.green {
   background-color: rgba(0, 255, 0, 0.15);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
 
 p.blue {
   background-color: rgba(0, 0, 255, 0.1);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
 
 p.yellow {
   background-color: rgba(255, 255, 0, 0.2);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
 
 p:is(.attention, .error) {
   background-color: rgba(255, 0, 0, 0.1);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
   p:is(.attention, .error)::before {
     color: #f00;
@@ -513,6 +526,8 @@ p:is(.attention, .error) {
 p.info {
   background-color: rgba(0, 0, 255, 0.1);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
   p.info::before {
     content: "ИНФОРМАЦИЯ: ";
@@ -522,6 +537,8 @@ p.info {
 p.problems {
   background-color: rgba(255, 255, 0, 0.2);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
   p.problems::before {
     content: "ПРОБЛЕМЫ? ";
@@ -531,6 +548,8 @@ p.problems {
 p.victory {
   background-color: rgba(0, 255, 0, 0.15);
   border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
   padding: 10px; }
   p.victory::before {
     content: "ПОБЕДА!!! ";
@@ -552,7 +571,10 @@ pre {
 
 /* Details */
 details:not(table details) {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  border-width: 1px;
+  border-style: outset;
+  border-radius: 10px; }
   details:not(table details) > summary {
     background-color: rgba(0, 95, 255, 0.15);
     border-radius: 10px;
@@ -570,17 +592,28 @@ details:not(table details) {
 
 /* Special blocks */
 article {
-  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  border-style: outset;
+  border-width: 1px;
+  padding: 10px;
   padding: 10px; }
   article:not(:last-child) {
     margin-bottom: 10px; }
   article > h3 {
-    margin-top: 10px;
-    text-align: center; }
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-width: 1px;
+    border-style: inset;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05); }
   article > :last-child:not(div:has(> a)) {
     margin-bottom: 0px; }
+  article > div > a {
+    border-style: dashed;
+    border-width: 1px; }
 
 *:has(> div:is(:has(> a), :last-child)) {
   padding-bottom: 0px; }
@@ -589,13 +622,15 @@ article {
 div:has(> table.download) {
   overflow: auto;
   border-radius: 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  border-width: 1px;
+  border-style: outset;
+  border-radius: 10px;
+  border-color: rgba(0, 0, 0, 0.1); }
   div:has(> table.download) > table.download {
     border-spacing: 0;
     width: 100%;
-    margin: 0;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 10px; }
+    margin: 0; }
     div:has(> table.download) > table.download > thead > tr {
       background-color: rgba(0, 0, 255, 0.1); }
       div:has(> table.download) > table.download > thead > tr > th {
@@ -611,8 +646,6 @@ div:has(> table.download) {
     div:has(> table.download) > table.download tr.after :is(th, td) {
       text-align: center;
       width: min-content; }
-    div:has(> table.download) > table.download tr.good td {
-      background: rgba(63, 255, 63, 0.3); }
     div:has(> table.download) > table.download > tbody > tr > td {
       background: rgba(255, 255, 255, 0.7); }
     div:has(> table.download) > table.download > tbody > tr:not(:last-child) > td {
