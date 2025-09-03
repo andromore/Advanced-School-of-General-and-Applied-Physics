@@ -377,7 +377,7 @@ main,
 div#head,
 div#foot,
 nav#main {
-  border-radius: 10px; }
+  border-radius: 20px; }
 
 /* Quotes */
 div#head blockquote#quote {
@@ -416,7 +416,7 @@ div.row {
 
 /* Iframes */
 iframe {
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid #000;
   margin-bottom: 10px; }
 
@@ -425,7 +425,7 @@ iframe {
   from {
     background-color: rgba(0, 95, 255, 0.15); }
   to {
-    background-color: rgba(0, 255, 127, 0.3);
+    background-color: #bfbfff;
     transform-origin: center; } }
 
 nav#main {
@@ -455,8 +455,8 @@ nav#main {
     text-align: center;
     align-self: stretch;
     background-color: rgba(0, 95, 255, 0.15);
-    border-radius: 10px;
-    border-style: outset;
+    border-radius: 20px;
+    border-style: solid;
     border-width: 1px;
     padding: 10px; }
     div:has(> a) > a > span,
@@ -470,8 +470,7 @@ nav#main {
       animation-iteration-count: initial;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
-      transform-origin: center;
-      border-style: inset; }
+      transform-origin: center; }
 
 /* Group of images */
 div:has(> img) {
@@ -483,36 +482,36 @@ div:has(> img) {
 /* Colored paragraphs - important messages */
 p.red {
   background-color: rgba(255, 0, 0, 0.1);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
 
 p.green {
   background-color: rgba(0, 255, 0, 0.15);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
 
 p.blue {
   background-color: rgba(0, 0, 255, 0.1);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
 
 p.yellow {
   background-color: rgba(255, 255, 0, 0.2);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
 
 p:is(.attention, .error) {
   background-color: rgba(255, 0, 0, 0.1);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
   p:is(.attention, .error)::before {
@@ -525,8 +524,8 @@ p:is(.attention, .error) {
 
 p.info {
   background-color: rgba(0, 0, 255, 0.1);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
   p.info::before {
@@ -536,8 +535,8 @@ p.info {
 
 p.problems {
   background-color: rgba(255, 255, 0, 0.2);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
   p.problems::before {
@@ -547,8 +546,8 @@ p.problems {
 
 p.victory {
   background-color: rgba(0, 255, 0, 0.15);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px; }
   p.victory::before {
@@ -573,15 +572,14 @@ pre {
 details:not(table details) {
   margin-bottom: 10px;
   border-width: 1px;
-  border-style: outset;
-  border-radius: 10px; }
+  border-style: solid;
+  border-radius: 20px; }
   details:not(table details) > summary {
     background-color: rgba(0, 95, 255, 0.15);
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px; }
   details:not(table details)[open] {
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
     padding: 10px; }
     details:not(table details)[open] > summary {
       background-color: rgba(0, 0, 255, 0.2);
@@ -589,12 +587,19 @@ details:not(table details) {
       margin-bottom: 10px; }
     details:not(table details)[open] > :last-child {
       margin-bottom: 0; }
+  details:not(table details) > summary:is(:hover, :active) {
+    animation-name: animation-links;
+    animation-duration: 0.25s;
+    animation-iteration-count: initial;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    transform-origin: center; }
 
 /* Special blocks */
 article {
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  border-style: outset;
+  border-radius: 20px;
+  border-style: solid;
   border-width: 1px;
   padding: 10px;
   padding: 10px; }
@@ -605,14 +610,11 @@ article {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
-    border-width: 1px;
-    border-style: inset;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.05); }
+    border-width: 1px; }
   article > :last-child:not(div:has(> a)) {
     margin-bottom: 0px; }
   article > div > a {
-    border-style: dashed;
+    border-style: solid;
     border-width: 1px; }
 
 *:has(> div:is(:has(> a), :last-child)) {
@@ -621,12 +623,11 @@ article {
 /* Tables with files download links */
 div:has(> table.download) {
   overflow: auto;
-  border-radius: 10px;
   margin-bottom: 10px;
   border-width: 1px;
-  border-style: outset;
-  border-radius: 10px;
-  border-color: rgba(0, 0, 0, 0.1); }
+  border-style: solid;
+  border-radius: 20px;
+  border-color: rgba(0, 0, 0, 0.5); }
   div:has(> table.download) > table.download {
     border-spacing: 0;
     width: 100%;
@@ -661,7 +662,7 @@ div:has(> table.download) {
 
 /* Images */
 img {
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid #000;
   max-width: 100%;
   display: block;

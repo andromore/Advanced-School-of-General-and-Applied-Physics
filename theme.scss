@@ -12,7 +12,7 @@ $color-yellow-border: rgba(255, 255, 0, 1);
 $color-yellow-background: rgba(255, 255, 0, 0.2);
 $color-gray-background: rgba(127, 127, 127, 0.2);
 
-$color-link-focus: rgba(0, 255, 127, 0.3);
+$color-link-focus: rgba(191, 191, 255, 1);
 $color-link: rgba(0, 95, 255, 0.15);
 $color-table-head: rgba(0, 0, 255, 0.1);
 $color-table-body: rgba(255, 255, 255, 0.7);
@@ -36,16 +36,16 @@ $color-details-open-summary: rgba(0, 0, 255, 0.2);
     #{$border}: 1px solid $border-color;
 }
 
-@mixin borders($border-color: #000, $border-radius: 10px) {
+@mixin borders($border-color: #000, $border-radius: 20px) {
     border-radius: $border-radius;
     @include border($border: border, $border-color: $border-color);
 }
 
-@mixin block($background-color: rgba(255, 255, 255, 0), $border-color: #000, $border-radius: 10px) {
+@mixin block($background-color: rgba(255, 255, 255, 0), $border-color: #000, $border-radius: 20px) {
     background-color: $background-color;
     // @include borders($border-color);
     border-radius: $border-radius;
-    border-style: outset;
+    border-style: solid;
     border-width: 1px;
     @include padding();
 }
@@ -334,7 +334,7 @@ main,
 div#head,
 div#foot,
 nav#main {
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 /* Quotes */
@@ -448,7 +448,6 @@ nav#main {
             animation-timing-function: linear;
             animation-fill-mode: forwards;
             transform-origin: center;
-            border-style: inset;
         }
     }
 }
@@ -547,18 +546,17 @@ pre {
 details:not(table details) {
     margin-bottom: 10px;
     border-width: 1px;
-    border-style: outset;
-    border-radius: 10px;
+    border-style: solid;
+    border-radius: 20px;
 
     & > summary {
         background-color: $color-details-summary;
-        border-radius: 10px;
+        border-radius: 20px;
         padding: 10px;
     }
 
     &[open] {
         background-color: $color-table-body;
-        border-radius: 10px;
         padding: 10px;
 
         & > summary {
@@ -570,6 +568,15 @@ details:not(table details) {
         & > :last-child {
             margin-bottom: 0;
         }
+    }
+
+    & > summary:is(:hover, :active) {
+        animation-name: animation-links;
+        animation-duration: $time-link;
+        animation-iteration-count: initial;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        transform-origin: center;
     }
 }
 
@@ -590,9 +597,6 @@ article {
         padding-bottom: 10px;
         text-align: center;
         border-width: 1px;
-        border-style: inset;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.05);
     }
 
     & > :last-child:not(div:has(> a)) {
@@ -600,7 +604,7 @@ article {
     }
 
     & > div > a {
-        border-style: dashed;
+        border-style: solid;
         border-width: 1px;
     }
 }
@@ -613,13 +617,12 @@ article {
 
 div:has(> table.download) {
     overflow: auto;
-    border-radius: 10px;
     margin-bottom: 10px;
     
     border-width: 1px;
-    border-style: outset;
-    border-radius: 10px;
-    border-color: rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-radius: 20px;
+    border-color: rgba(0, 0, 0, 0.5);
     
     > table.download {
         border-spacing: 0;
