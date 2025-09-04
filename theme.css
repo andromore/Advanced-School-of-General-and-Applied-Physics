@@ -206,26 +206,26 @@ div#foot {
 /* Backgrounds */
 @keyframes animation-background {
   0% {
-    background-image: url(./Фоны/0.jpg); }
+    background-image: url(./Фоны/0.png); }
   20% {
-    background-image: url(./Фоны/0.jpg); }
+    background-image: url(./Фоны/0.png); }
   25% {
-    background-image: url(./Фоны/1.jpg); }
+    background-image: url(./Фоны/1.png); }
   45% {
-    background-image: url(./Фоны/1.jpg); }
+    background-image: url(./Фоны/1.png); }
   50% {
-    background-image: url(./Фоны/2.jpg); }
+    background-image: url(./Фоны/2.png); }
   70% {
-    background-image: url(./Фоны/2.jpg); }
+    background-image: url(./Фоны/2.png); }
   75% {
-    background-image: url(./Фоны/3.jpg); }
+    background-image: url(./Фоны/3.png); }
   95% {
-    background-image: url(./Фоны/3.jpg); }
+    background-image: url(./Фоны/3.png); }
   100% {
-    background-image: url(./Фоны/0.jpg); } }
+    background-image: url(./Фоны/0.png); } }
 
 body {
-  background-image: url(./Фоны/0.jpg), url(./Фоны/1.jpg), url(./Фоны/2.jpg), url(./Фоны/3.jpg);
+  background-image: url(./Фоны/0.png), url(./Фоны/1.png), url(./Фоны/2.png), url(./Фоны/3.png);
   animation-name: animation-background;
   animation-duration: 100s;
   animation-timing-function: ease;
@@ -234,22 +234,13 @@ body {
   background-position: center;
   background-attachment: fixed; }
 
-header:has(> nav#main) {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.4)); }
-
-footer {
-  background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0)); }
-
-div#body {
-  background-color: rgba(255, 255, 255, 0.4); }
-
 nav#main,
 div#head,
 div#foot {
-  background-color: rgba(255, 255, 255, 0.8); }
+  background-color: rgba(255, 255, 255, 0.9); }
 
 main {
-  background-color: rgba(255, 255, 255, 0.7); }
+  background-color: rgba(255, 255, 255, 0.9); }
 
 /* Options of loaded pages */
 main header,
