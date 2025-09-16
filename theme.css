@@ -463,6 +463,22 @@ nav#main {
       animation-fill-mode: forwards;
       transform-origin: center; }
 
+div.nav {
+  margin-left: 0;
+  margin-right: 0; }
+  div.nav > a {
+    margin-left: 0;
+    margin-right: 0; }
+    div.nav > a:not(:only-child) {
+      border-right-width: 0; }
+    div.nav > a:first-child:not(:only-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0; }
+    div.nav > a:last-child:not(:only-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-right-width: 1px; }
+
 /* Group of images */
 div:has(> img) {
   display: flex;
