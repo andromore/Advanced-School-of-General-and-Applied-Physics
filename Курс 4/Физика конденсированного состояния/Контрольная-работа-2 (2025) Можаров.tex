@@ -1,0 +1,961 @@
+\documentclass[a4paper]{article}
+
+\usepackage{mathtext} % использование кириллицы в формулах
+\usepackage{cmap} % грамотное копирование кириллицы из pdf
+\usepackage[T2A]{fontenc} % внутрення кодировка
+\usepackage[utf8]{inputenc} % кодировка документа
+\usepackage[russian]{babel} % язык документа
+\usepackage{amssymb} % дополнительные символы
+\usepackage{amsfonts} % математические шрифты
+\usepackage{amsmath} % дополнительная математика
+\usepackage{indentfirst} % отступ и у первого абзаца
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage[hidelinks]{hyperref} % ссылки
+
+\title{Контрольная работа 2 по физике конденсированного состояния}
+\author{Можаров Андрей}
+
+\begin{document}
+
+\maketitle
+
+\section*{\centering Задача 1}
+
+\subsection*{Условие}
+
+Пользуясь кинетическим уравнением Больцмана в приближении упругого рассеяния
+электронов на сферически симметричных дефектах, рассчитайте ток, вызываемый в
+металле зависящим от времени однородным электрическим полем $\vec{E}(t)$.
+Получите явное выражение для частотно-зависящей проводимости $\sigma(\omega)$
+в случае периодически зависящего от времени поля
+$\vec{E}(t) = Re(\vec{E}(\omega) \cdot e^{-i\omega t})$.
+
+\subsection*{Решение}
+
+Запишем кинетическое уравнение Больцмана в общем виде:
+$$
+    St\{f\} = \dfrac{\partial f}{\partial t} + (\vec{v}, grad_{\vec{r}}\ f) + (\vec{F}, grad_{\vec{p}}\ f)
+$$
+Для его решения, рассмотрим линеаризуем функцию распределения
+$$
+    f = f_0 + f_1
+$$
+где $f_0 = f_0(\varepsilon(\vec{p}))$ --- равновесная функция распределения.
+В приближении упругого рассеяния имеем $|\vec{p}_i| = |\vec{p}_f|$
+(следствие закона сохранения энергии), откуда следует
+$$
+    \varepsilon(\vec{p}_i) = \varepsilon(\vec{p}_f) \hspace{2em}
+    f_0(\varepsilon(\vec{p}_i)) = f_0(\varepsilon(\vec{p}_f))
+$$
+Тогда рассмотрев общий вид интеграла столкновений, получим:
+$$
+    St\{f\} = \int W(\vec{p}_i, \vec{p}_f) (f(\vec{p}_f) - f(\vec{p}_i))\dfrac{d^3\vec{p}_f}{(2\pi\hbar)^3} = \int W(\vec{p}_i, \vec{p}_f) (f_1(\vec{p}_f) - f_1(\vec{p}_i))\dfrac{d^3\vec{p}_f}{(2\pi\hbar)^3}
+$$
+где $W(\vec{p}_i, \vec{p}_f)$ --- вероятность перехода из состояния с импульсом $\vec{p}_i$
+в состояние с импульсом $\vec{p}_f$.
+
+Ввиду сферической симметрии дефектов, а также упругости рассеяния,
+имеем
+$$
+    W(\vec{p}_i, \vec{p}_f) = W(\varepsilon, |\theta_f - \theta_i|)
+$$
+где углы $\theta_i$ и $\theta_f$ --- углы между осью $Oz$,
+выбранной по направлению поля, и соответствующим импульсом.
+Тогда также получим, что $f_1(\vec{p_f}) = f_1(\vec{p_i})cos(\theta_f - \theta_i)$,
+тогда получим интеграл столкновений в виде
+$$
+    St\{f\} = - f_1(\vec{p}_i)\int W(\varepsilon, |\theta_f - \theta_i|)(1 - cos(\theta_f - \theta_i)) \dfrac{d^3\vec{p}_f}{(2\pi\hbar)^3} = - \dfrac{f_1}{\tau_{tr}}
+$$
+где $\tau_{tr}$ --- транспортное время релаксации (далее просто $\tau$).
+
+Используя полученные результаты, запишем кинетическое уравнение в случае данной задачи
+в однородном поле:
+$$
+    \dfrac{\partial f_1}{\partial t} + e (\vec{E}(t), \vec{v})\dfrac{\partial f_0}{\partial \varepsilon} = - \dfrac{\partial f_1}{\partial \tau} 
+$$
+Тогда, переходя к комплексным амплитудам для поля и функции распределения, получим
+$$
+    f_1(\omega) = - \dfrac{e(\vec{E}(\omega), \vec{v})\tau}{1 - i\omega\tau}\dfrac{\partial f_0}{\partial \varepsilon}
+$$
+Тогда плотность тока $\vec{j}(\omega)$:
+$$
+    \vec{j}(\omega) = \int e\vec{v}f_1(\omega)\dfrac{2d^3\vec{p}}{(2\pi\hbar)^3}
+$$
+Подставляя, переходя к сферическим координатам, интегрируя по углам,
+после чего переходя от интегрирования по модулю импульса к интегрированию по энергии
+и учитывая
+$$
+    -\dfrac{\partial f_0}{\partial \varepsilon} \approx \delta(\varepsilon - \varepsilon_F) \hspace{1em} g(\varepsilon_F) = \dfrac{3n}{m v_F^2}
+$$
+получим из $\vec{j}(\omega) = \sigma(\omega)\vec{E}(\omega)$
+$$
+    \sigma(\omega) = \dfrac{ne^2\tau}{m(1 - i\omega\tau)} = \dfrac{\sigma_0}{1 - i\omega\tau}
+$$
+где $\sigma_0 = ne^2\tau/m$ --- статическая удельная электропроводимость.
+
+\subsection*{Ответ}
+
+$$
+    \sigma(\omega) = \dfrac{\sigma_0}{1 - i\omega\tau}
+$$
+(Также, фактически, решение данной задачи может быть найдено в книге <<Физика твёрдого тела>> (Том 1)
+за авторством Ашкрофта и Мермина \mbox{на стр. 31-32};
+Конкретно ответ данной задачи даётся выражением (1.29))
+
+\section*{\centering Задача 2}
+
+\subsection*{Условие}
+
+Считая, что источником электрического поля в металле является неравновесная
+электронная плотность и, используя локальный закон Ома
+в высокочастотном пределе ($\omega >> 1/\tau_{tr}$),
+$$
+    \vec{j}(\omega, \vec{r}) = \sigma(\omega) \cdot \vec{E}(\omega, \vec{r})
+$$
+где $\sigma(\omega)$ --- частотно-зависящая проводимость,
+вычисленная в предыдущей задаче, найдите частоту колебаний неравновесной
+электронной плотности $n_e(t, \vec{r})$.
+Оцените величину этой частоты, используя типичные
+значения электронной плотности в металлах.
+
+\subsection*{Решение}
+
+Для решения данной задачи используем следующую ниже систему уравнений:
+\begin{equation*}
+    \begin{cases}
+        \dfrac{\partial \rho}{\partial t} + div\ \vec{j} = 0 \hspace{1.8em} \text{ (Уравнение непрерывности)} \\
+        div\ \vec{E} = 4\pi\rho \hspace{3em} \text{ (Закон Гаусса/одно из уравнений Максвелла)} \\
+        \vec{j}(\omega) = \sigma(\omega) \vec{E}(\omega) \hspace{1em} \text{ (Закон Ома/материальное соотношение)}
+    \end{cases}
+\end{equation*}
+Перейдя к Фурье-компонентам и подставив закон Ома в уравнение непрерывности, получим
+$$
+    -i\omega\rho + \sigma(\omega) div\ \vec{E} = 0
+$$
+Подставив закон Гаусса, получим
+$$
+    -i\omega\rho + 4\pi\sigma(\omega)\rho = 0 \hspace{1em} \sigma(\omega) = \dfrac{i\omega}{4\pi}
+$$
+Используем выражение для $\sigma(\omega)$, вычисленное в предыдущей задаче,
+учтя высокочастотный предел $\omega >> 1/\tau$ ($\omega\tau >> 1$):
+$$
+    \sigma(\omega) = \dfrac{ine^2}{m\omega}
+$$
+Приравняв два выражения для $\sigma(\omega)$, получим:
+$$
+    \omega = \sqrt{\dfrac{4\pi ne^2}{m}}
+$$
+
+Сделаем численную оценку для $\omega$, взяв следующие значения:
+\begin{description}
+    \item[Концентрация электронов в металлах] $n \approx 10^{22} - 10^{23} \text{ см}^{-3}$
+    \item[Элементарный заряд] $e \approx 4,8 \cdot 10^{-10} \text{ ед. зар. СГСЭ}$
+    \item[Масса электрона] $m \approx 9,1 \cdot 10^{-28} \text{ г}$ 
+\end{description}
+Для данных значений имеем $\omega \approx 5,64 \cdot 10^{15} - 1,78 \cdot 10^{16} \text{ с}^{-1}$.
+
+\subsection*{Ответ}
+
+$$
+    \omega = \sqrt{\dfrac{4\pi ne^2}{m}} \approx 5,64 \cdot 10^{15} - 1,78 \cdot 10^{16} \text{ с}^{-1}
+$$
+(Также, фактически, решение данной задачи может быть найдено в книге <<Физика твёрдого тела>> (Том 1)
+за авторством Ашкрофта и Мермина \mbox{на стр. 32-33}; конкретно,
+формула из ответа данной задачи получается извлечением квадратного корня
+из выражения (1.38))
+
+\section*{\centering Задача 3}
+
+\subsection*{Условие}
+
+Используя стационарное уравнение Больцмана в приближении времени релаксации
+(т.е. $St\{f\} = - (f - f_0(\varepsilon)) / \tau$,
+где $f_0(\varepsilon)$ --- равновесная функция распределения, $\tau$ --- время
+релаксации, которое будем считать независящим от энергии $\varepsilon$) для электронов в
+однородном электрическом поле $\vec{E}$, найдите нелинейные по напряжённости поля
+поправки к закону Ома: $\delta j(E) = j(E) - \sigma \cdot E = \alpha_2 \cdot E^2 + \alpha_3 \cdot E^3 + \ldots$, здесь $j$ --- плотность
+электрического тока, $\sigma$ --- удельная проводимость.
+
+\subsection*{Решение}
+
+Запишем стационарное кинетическое уравнение Больцмана в общем виде
+$$
+    St\{f\} = \dfrac{\partial f}{\partial t} + (\vec{v}, grad_{\vec{r}}\ f) + (\vec{F}, grad_{\vec{p}}\ f)
+$$
+которое в приближении времени релаксации для электронов в электрическом поле $\vec{E}$ примет вид
+$$
+    \dfrac{f - f_0(\varepsilon)}{\tau} = e \left(\vec{E}, grad_{\vec{p}}\ f\right)
+$$
+или, выражая неравновесную функцию распределения $f$
+$$
+    f = f_0(\varepsilon) + e\tau (\vec{E}, grad_{\vec{p}}f)
+$$
+Считая $E = |\vec{E}|$ малым параметром,
+будем данное уравнение методом последовательных приближений
+$$
+    f(\vec{p}) = f_0(\varepsilon(\vec{p})) + \sum_{n=1}^{\infty} f_n(\vec{p})
+$$
+где $f_n(\vec{p}) \sim E^n$. Тогда, приравнивая равные порядки малости,
+получим (номер указывает порядок малости)
+\begin{enumerate}
+    \item $f_1 = e\tau(\vec{E}, grad_{\vec{p}}f_0)$
+    \item $f_2 = e\tau(\vec{E}, grad_{\vec{p}}f_1) = (e\tau)^2(\vec{E}, \nabla_{\vec{p}})^2f_0$
+    \item $f_3 = e\tau(\vec{E}, grad_{\vec{p}}f_2) = (e\tau)^3(\vec{E}, \nabla_{\vec{p}})^3f_0$
+\end{enumerate}
+что в общем случае принимает вид
+$$
+    f_n = e\tau(\vec{E}, grad_{\vec{p}})f_{n-1} = (e\tau)^n(\vec{E}, \nabla_{\vec{p}})^n f_0
+$$
+
+Рассмотрим плотность тока, которая в общем случае,
+определяется нижеследующим интегралом
+$$
+    \vec{j} = - e \int \vec{v}(\vec{p}) f(\vec{p})\dfrac{2d^3\vec{p}}{(2\pi\hbar)^3}
+$$
+тогда можно перейти от вектора плотности тока $\vec{j}$ к рассмотрению его модуля $j = |\vec{j}|$
+и определить поправки $j_n$ по соответствующим порядкам малости (выразив их,
+соответственно, $j_n$ через $f_n$)
+$$
+    j = \sum_n j_n, \hspace{1em} \text{ где } j_n = - \dfrac{e}{m}(e\tau)^n\int (\vec{E}, \nabla_{\vec{p}})^n f_0 \dfrac{2pd^3\vec{p}}{(2\pi\hbar)^3}
+$$
+Тогда $j_0 = 0$ (ток в отсутствие внешнего поля),
+а линейный член $j_1 = \sigma E$ (проводимость Друде).
+
+Квадратичный по полю член $j_2 = 0$ (и все чётные поправки по полю, аналогично),
+т.к. подынтегральное выражение является нечётной функцией по импульсу,
+а интеграл берётся в симметричных пределах.
+
+Вычислим $j_3$ <<по честному>>. Для этого найдём $f_3$
+(однако возьмём только члены, нечётные по импульсу, т.е. не зануляющиеся при интегрировании):
+\begin{gather*}
+    \nabla_{\vec{p}} = \dfrac{\partial}{\partial \vec{p}} = \dfrac{\partial \varepsilon}{\partial \vec{p}} \dfrac{\partial}{\partial \varepsilon} = \dfrac{\vec{p}}{m} \dfrac{\partial}{\partial \varepsilon} \\
+    f_1 = e\tau \dfrac{(\vec{E}, \vec{p})}{m} \dfrac{\partial f_0}{\partial \varepsilon} \\
+    f_2 = (e\tau E)^2 \left(\dfrac{1}{m} \dfrac{\partial f_0}{\partial \varepsilon} + \dfrac{p^2}{m^2} \dfrac{\partial^2 f_0}{\partial \varepsilon^2}\right) \\
+    f_3 = (e\tau)^3 E^2 \left(\dfrac{3(\vec{E}, \vec{p})}{m^2}\dfrac{\partial^2 f_0}{\partial \varepsilon^2} + \dfrac{(\vec{E}, \vec{p})p^2}{m^3}\dfrac{\partial^3 f_0}{\partial \varepsilon^3}\right)
+\end{gather*}
+Использовав правила усреднения по углам и переходя к интегрированию по энергии, получим
+$$
+    j_3 = -\frac{e^4 \tau^3 E^3}{m^2} \int_0^\infty \left[ 2\varepsilon \frac{\partial^2 f_0}{\partial \varepsilon^2} + \frac{4}{5} \varepsilon^2 \frac{\partial^3 f_0}{\partial \varepsilon^3} \right] g(\varepsilon) d\varepsilon
+$$
+Подавляя $f_0$, получим
+$$
+    j_3 = -\frac{e^4 \tau^3 E^3}{m^2} \int_0^\infty \left[ \frac{2\varepsilon}{(kT)^2} - \frac{4\varepsilon^2}{5(kT)^3} \right] f_0 g(\varepsilon) d\varepsilon
+$$
+Вспомним, что
+$$
+    n = \int f_0 g(\varepsilon) d\varepsilon \hspace{1em} \langle \varepsilon \rangle = \frac{1}{n} \int \varepsilon f_0 g(\varepsilon) d\varepsilon = \frac{3}{2} kT \hspace{1em} \langle \varepsilon^2 \rangle = \frac{15}{4} (kT)^2
+$$
+Подставляем средние значения:
+\begin{gather*}
+    j_3 = -\frac{e^4 \tau^3 E^3 n}{m^2} \left[ \frac{2 \langle \varepsilon \rangle}{(kT)^2} - \frac{4 \langle \varepsilon^2 \rangle}{5(kT)^3} \right] = n \left[ \frac{2 \cdot \frac{3}{2} kT}{(kT)^2} - \frac{4 \cdot \frac{15}{4} (kT)^2}{5(kT)^3} \right] \\
+    j_3 = -\frac{e^4 \tau^3 E^3 n}{m^2} \left[ \frac{3}{kT} - \frac{3}{kT} \right] = 0
+\end{gather*}
+
+\subsection*{Ответ}
+
+При данных приближениях
+$$
+    \delta j(E) = 0
+$$
+что будет неверно в общем случае при $\tau \not\equiv const$ и при больших импульсах.
+
+\section*{\centering Задача 4}
+
+\subsection*{Условие}
+
+Используя кинетическое уравнение Больцмана для свободных электронов в металле,
+найдите дифференциальную термо-э.д.с. металла в области температур $kT << \varepsilon_F$ в
+случаях, когда транспортное время свободного пробега электронов равно:
+\begin{enumerate}
+    \item 
+    $\tau_{tr}(\varepsilon) = \tau \equiv const$
+    \item
+    $\tau_{tr}(\varepsilon) = 1 / (v(\varepsilon)\sigma_{tr}n_i)$, где $n_i$ --- концентрация рассеивателей,
+    $v(\varepsilon) = \sqrt{2\varepsilon/m}$ --- скорость электрона с энергией,
+    $\sigma_{tr} = \pi a^2$ --- полное транспортное сечение рассеяния на твёрдой сфере радиуса.
+\end{enumerate}
+
+\newcommand{\bracets}[1]{\langle #1\rangle}
+
+\subsection*{Решение}
+
+Выражение для дифференциальной термо-ЭДС из лекций имеет следующий вид:
+$$
+    Q' = \dfrac{1}{eT}\dfrac{\bracets{\varepsilon} - \mu\bracets{1}}{\bracets{1}}
+$$
+где оператор усреднения $\bracets{F(\varepsilon)}$ определяется следующим образом
+$$
+    \bracets{F(\varepsilon)} = - \int_0^\infty K_0(\varepsilon) \dfrac{\partial f_0}{\partial \varepsilon} F(\varepsilon) \hspace{1em} K_0(\varepsilon) = \dfrac{1}{3} g(\varepsilon)v^2(\varepsilon)\tau_{tr}(\varepsilon)
+$$
+
+Применим разложение Зоммерфельда, приведённого в общем случае ниже,
+для вычисления интегралов $\bracets{1}$ и $\bracets{\varepsilon}$.
+$$
+    - \int_0^\infty F(\varepsilon) \dfrac{\partial f_0}{\partial \varepsilon} d\varepsilon \approx F(\mu) + \left.\dfrac{\pi^2}{6}(kT)^2\dfrac{d^2F}{d\varepsilon^2}\right|_{\varepsilon=\mu}
+$$
+Тогда
+$$
+    \bracets{1} = - \int_0^\infty K_0(\varepsilon) \dfrac{\partial f_0}{\partial \varepsilon} \approx K_0(\mu) + \left.\dfrac{(\pi kT)^2}{6} \dfrac{d^2K_0(\varepsilon)}{d\varepsilon^2}\right|_{\varepsilon = \mu}
+$$
+$$
+    \bracets{\varepsilon} = - \int_0^\infty \varepsilon K_0(\varepsilon) \dfrac{\partial f_0}{\partial \varepsilon} \approx \mu K_0(\mu) + \left.\dfrac{(\pi kT)^2}{6} \dfrac{d^2}{d\varepsilon^2}\left(\varepsilon K_0(\varepsilon)\right)\right|_{\varepsilon = \mu}
+$$
+И применим это к искомым случаям
+\begin{enumerate}
+    \item $\tau_{tr} = \tau \equiv const$:
+    
+    Вычисляем $K_0(\varepsilon)$:
+    \begin{gather*}
+        K_0(\varepsilon) = g(\varepsilon) \dfrac{v^2(\varepsilon)}{3} \tau_{tr}(\varepsilon) = \dfrac{3}{2} \dfrac{n}{\varepsilon_F}\sqrt{\dfrac{\varepsilon}{\varepsilon_F}} \cdot \dfrac{2\varepsilon}{3m} \cdot \tau = \dfrac{n\tau}{m} \left(\dfrac{\varepsilon}{\varepsilon_F}\right)^{3/2} := \alpha \varepsilon^{3/2}
+    \end{gather*}
+    Вычисляем производные:
+    \begin{gather*}
+        \dfrac{d}{d\varepsilon}K_0(\varepsilon) = \dfrac{3}{2} \alpha\varepsilon^{1/2} \hspace{2em}
+        \dfrac{d^2}{d\varepsilon^2}K_0(\varepsilon) = \dfrac{3}{4} \alpha\varepsilon^{-1/2} \\
+        \dfrac{d^2}{d\varepsilon^2} \varepsilon K_0(\varepsilon) = \varepsilon \dfrac{d^2}{d\varepsilon^2}K_0(\varepsilon) + 2 \dfrac{d}{d\varepsilon}K_0(\varepsilon) = \dfrac{15}{4}\alpha\varepsilon^{1/2}
+    \end{gather*}
+    Вычисляем усреднённые величины:
+    \begin{gather*}
+        \bracets{1} = \alpha\mu^{3/2} + \dfrac{(\pi kT)^2}{8} \alpha \mu^{-1/2} \hspace{2em} \bracets{\varepsilon} = \alpha \mu^{5/2} + \dfrac{5}{8} (\pi kT)^2 \alpha \mu^{1/2}
+    \end{gather*}
+    Вычисляем термо-ЭДС:
+    \begin{gather*}
+        Q' = \dfrac{1}{eT} \dfrac{\dfrac{(\pi kT)^2}{2}\alpha\mu^{1/2}}{\alpha\mu^{3/2} + \dfrac{(\pi kT)^2}{8} \alpha \mu^{-1/2}} = \dfrac{1}{eT} \dfrac{\mu}{\dfrac{2\mu^{2}}{(\pi kT)^2} + \dfrac{1}{4}} \approx \dfrac{\pi^2}{2} \dfrac{k^2T}{e\varepsilon_F}
+    \end{gather*}
+    \item $\tau_{tr}(\varepsilon) = 1 / (v(\varepsilon)\sigma_{tr}n_i)$:
+    
+    Вычисляем $K_0(\varepsilon)$:
+    \begin{gather*}
+        K_0(\varepsilon) = g(\varepsilon) \dfrac{v^2(\varepsilon)}{3} \tau_{tr}(\varepsilon) = \dfrac{3}{2} \dfrac{n}{\varepsilon_F}\sqrt{\dfrac{\varepsilon}{\varepsilon_F}} \cdot \dfrac{2\varepsilon}{3m} \cdot \dfrac{1}{\sqrt{\dfrac{2\varepsilon}{m}}\pi a^2 n_i} = \\
+        = \dfrac{\sqrt{2}}{2} \dfrac{n \varepsilon}{n_i \varepsilon^{3/2}_F \sqrt{m} \pi a^2} := \alpha \varepsilon
+    \end{gather*}
+    Вычисляем производные:
+    \begin{gather*}
+        \dfrac{d}{d\varepsilon} K_0(\varepsilon) = \alpha \hspace{2em}
+        \dfrac{d^2}{d\varepsilon^2} K_0(\varepsilon) = 0 \hspace{2em} \dfrac{d^2}{d\varepsilon^2} \varepsilon K_0(\varepsilon) = 2\alpha
+    \end{gather*}
+    Вычисляем усреднённые величины:
+    \begin{gather*}
+        \bracets{1} = \alpha \mu \hspace{2em} \bracets{\varepsilon} = \alpha \mu^2 + \dfrac{(\pi kT)^2}{3} \alpha
+    \end{gather*}
+    Вычисляем термо-ЭДС:
+    \begin{gather*}
+        Q' = \dfrac{1}{eT} \dfrac{\dfrac{(\pi kT)^2}{3}\alpha}{\alpha \mu} = \dfrac{(\pi kT)^2}{3eT\mu} \approx \dfrac{\pi^2}{3} \dfrac{k^2T}{e\varepsilon_F}
+    \end{gather*}
+\end{enumerate}
+
+\subsection*{Ответ}
+
+$$
+    Q_1' \approx \dfrac{\pi^2}{2} \dfrac{k^2T}{e\varepsilon_F} \hspace{5em} Q_2' \approx \dfrac{\pi^2}{3} \dfrac{k^2T}{e\varepsilon_F}
+$$
+
+\section*{\centering Задача 5}
+
+\subsection*{Условие}
+
+Найти коэффициенты компактности (относительный объём идентичных
+соприкасающихся шаров с центрами в узлах решётки) для г.ц.к. и о.ц.к. решёток Бравэ
+и структуры типа алмаза.
+
+\subsection*{Решение}
+
+Расчётная формула коэффициента компактности,
+который показывает какую долю объёма ячейки занимают атомы,
+имеет следующий вид
+$$
+    f = \dfrac{N \cdot V_\text{шара}}{V_\text{ячейки}}
+$$
+где $f$ --- коэффициент компактности,
+$N$ --- количество атомов в одной ячейке,
+$V_\text{шара}$ --- объём одного шара,
+$V_\text{ячейки}$ --- объём одной ячейки.
+
+\begin{description}
+    \item[Гранецентрированная кубическая решётка] (приведена на рис. \ref{ГЦК})
+    
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=3, every node/.style={shading=ball, ball color=blue!60}]
+            % Вершины нижнего основания
+            \node (A) at (0,0,0) [circle, minimum size=10pt] {};
+            \node (B) at (1,0,0) [circle, minimum size=10pt] {};
+            \node (C) at (1,0,1) [circle, minimum size=10pt] {};
+            \node (D) at (0,0,1) [circle, minimum size=10pt] {};
+            
+            % Центры граней (нижняя, боковые, передняя)
+            \node at (0.5,0,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Нижняя
+            \node at (1,0.5,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Правая
+            \node at (0,0.5,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Левая
+            
+            % Вершины верхнего основания
+            \node (E) at (0,1,0) [circle, minimum size=10pt] {};
+            \node (F) at (1,1,0) [circle, minimum size=10pt] {};
+            \node (G) at (1,1,1) [circle, minimum size=10pt] {};
+            \node (H) at (0,1,1) [circle, minimum size=10pt] {};
+            
+            % Центры граней (верхняя, задняя, передняя)
+            \node at (0.5,1,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Верхняя
+            \node at (0.5,0.5,0) [circle, minimum size=10pt, ball color=red!70] {}; % Задняя
+            \node at (0.5,0.5,1) [circle, minimum size=10pt, ball color=red!70] {}; % Передняя
+            
+            % Ребра куба для наглядности
+            \draw[thick, opacity=0.3] (0,0,0) -- (1,0,0) -- (1,0,1) -- (0,0,1) -- cycle;
+            \draw[thick, opacity=0.3] (0,1,0) -- (1,1,0) -- (1,1,1) -- (0,1,1) -- cycle;
+            \draw[thick, opacity=0.3] (0,0,0) -- (0,1,0) (1,0,0) -- (1,1,0) (1,0,1) -- (1,1,1) (0,0,1) -- (0,1,1);
+        \end{tikzpicture}
+        \caption{Элементарная ячейка г. ц. к. решётки}
+        \label{ГЦК}
+    \end{figure}
+
+    Здесь количество атомов в одной ячейке будет равным
+    $$
+        N = 8 \cdot \dfrac{1}{8} + 6 \cdot \dfrac{1}{2} = 4
+    $$
+    Связь радиуса шара $R$ с периодом решётки $a$:
+    можно выразить через диагональ грани $a\sqrt{2} = 4R$.
+    Тогда
+    $$
+        f = \dfrac{4 \cdot \dfrac{4}{3}\pi\left(\dfrac{a\sqrt{2}}{4}\right)^3}{a^3} = \dfrac{\pi\sqrt{2}}{6} \approx 0.74
+    $$
+
+    \item[Объемноцентрированная кубическая решётка] (приведена на рис. \ref{ОЦК})
+    
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=3, every node/.style={shading=ball, ball color=blue!60}]
+            % Вершины
+            \foreach \x in {0,1} \foreach \y in {0,1} \foreach \z in {0,1}
+            \node at (\x,\y,\z) [circle, minimum size=10pt] {};
+            
+            % Центральный атом
+            \node at (0.5,0.5,0.5) [circle, minimum size=10pt, ball color=green!70] {};
+            
+            % Ребра куба
+            \draw[thick, opacity=0.3] (0,0,0) -- (1,0,0) -- (1,0,1) -- (0,0,1) -- cycle;
+            \draw[thick, opacity=0.3] (0,1,0) -- (1,1,0) -- (1,1,1) -- (0,1,1) -- cycle;
+            \draw[thick, opacity=0.3] (0,0,0) -- (0,1,0) (1,0,0) -- (1,1,0) (1,0,1) -- (1,1,1) (0,0,1) -- (0,1,1);
+        \end{tikzpicture}
+        \caption{Элементарная ячейка о. ц. к. решётки}
+        \label{ОЦК}
+    \end{figure}
+
+    Здесь количество атомов в одной ячейке будет равным
+    $$
+        N = 8 \cdot \dfrac{1}{8} + 1 = 2
+    $$
+    Связь радиуса шара $R$ с периодом решётки $a$:
+    можно выразить через диагональ куба $a\sqrt{3} = 4R$.
+    Тогда
+    $$
+        f = \dfrac{2 \cdot \dfrac{4}{3}\pi\left(\dfrac{a\sqrt{3}}{4}\right)^3}{a^3} = \dfrac{\pi\sqrt{3}}{8} \approx 0.68
+    $$
+
+    \item[Структура типа алмаза] (приведена на рис. \ref{Алмаз})
+    
+    \begin{figure}[h]
+        \centering
+        \tdplotsetmaincoords{70}{120}
+        \begin{tikzpicture}[tdplot_main_coords, scale=3, line join=round, line cap=round, every node/.style={shading=ball}]
+            \foreach \x/\y/\z in {0/0/0, 1/0/0, 1/1/0, 0/1/0, 0/0/1, 1/0/1, 1/1/1, 0/1/1}
+                \node[circle, minimum size=10pt, ball color=blue!60] at (\x,\y,\z) {};
+            \foreach \x/\y/\z in {0.5/0.5/0, 0.5/0.5/1, 0.5/0/0.5, 0.5/1/0.5, 0/0.5/0.5, 1/0.5/0.5}
+                \node[circle, minimum size=10pt, ball color=red!70] at (\x,\y,\z) {};
+            \node[circle, ball color=green!70] at (0.25,0.75,0.25) {};
+            \node[circle, ball color=green!70] at (0.75,0.25,0.25) {};
+            \node[circle, ball color=green!70] at (0.75,0.75,0.75) {};
+            \node[circle, ball color=green!70] at (0.25,0.25,0.75) {};
+    
+            \draw[thick, color=black] (0.25,0.25,0.75) -- (0,0,1);
+            \draw[thick, color=black] (0.25,0.25,0.75) -- (0.5,0,0.5);
+            \draw[thick, color=black] (0.25,0.25,0.75) -- (0,0.5,0.5);
+            \draw[thick, color=black] (0.25,0.25,0.75) -- (0.5,0.5,1);
+            \draw[thick, color=black] (0.75,0.25,0.25) -- (0.5,0,0.5);
+            \draw[thick, color=black] (0.75,0.25,0.25) -- (1,0,0);
+            \draw[thick, color=black] (0.75,0.25,0.25) -- (1,0.5,0.5);
+            \draw[thick, color=black] (0.75,0.25,0.25) -- (0.5,0.5,0);
+            \draw[thick, color=black] (0.25,0.75,0.25) -- (0,1,0);
+            \draw[thick, color=black] (0.25,0.75,0.25) -- (0,0.5,0.5);
+            \draw[thick, color=black] (0.25,0.75,0.25) -- (0.5,0.5,0);
+            \draw[thick, color=black] (0.25,0.75,0.25) -- (0.5,1,0.5);
+            \draw[thick, color=black] (0.75,0.75,0.75) -- (1,1,1);
+            \draw[thick, color=black] (0.75,0.75,0.75) -- (0.5,0.5,1);
+            \draw[thick, color=black] (0.75,0.75,0.75) -- (1,0.5,0.5);
+            \draw[thick, color=black] (0.75,0.75,0.75) -- (0.5,1,0.5);
+    
+            % 3. Контур куба (пунктиром)
+            \draw[thick, opacity=0.3] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle;
+            \draw[thick, opacity=0.3] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle;
+            \draw[thick, opacity=0.3] (0,0,0) -- (0,0,1) (1,0,0) -- (1,0,1) (1,1,0) -- (1,1,1) (0,1,0) -- (0,1,1);
+        \end{tikzpicture}
+        \caption{Элементарная ячейка структуры типа алмаза}
+        \label{Алмаз}
+    \end{figure}
+    
+    Здесь количество атомов в одной ячейке будет равным
+    $$
+        N = 8 \cdot \dfrac{1}{8} + 6 \cdot \dfrac{1}{2} + 4 \cdot 1 = 8
+    $$
+    Рассмотрим двух <<ближайших соседей>> в точках $(0, 0, 0)$ и $(a/4, a/4, a/4)$.
+    Расстояние между ними равно $2R$, но с другой стороны оно же равно $\sqrt{3 \cdot (a/4)^2} = a\sqrt{3}/4$.
+    Тогда
+    $$
+        f = \dfrac{8 \cdot \dfrac{4}{3}\pi\left(\dfrac{a\sqrt{3}}{8}\right)^3}{a^3} = \dfrac{\pi\sqrt{3}}{16} \approx 0.34
+    $$
+
+\end{description}
+
+\subsection*{Ответ}
+
+$$
+    f_\text{г.ц.к.} \approx 0.74 \hspace{1em} f_\text{о.ц.к.} \approx 0.68 \hspace{1em} f_\text{стр. алмаза} \approx 0.34
+$$
+
+\section*{\centering Задача 6}
+
+\subsection*{Условие}
+
+Докажите, что идеальное отношение $c/a$ для гексагональной плотноупакованной
+структуры равно $\sqrt{8/3} \approx 1,633$. Найдите коэффициент компактности для этой
+структуры.
+
+\subsection*{Решение}
+
+\begin{figure}[h]
+    \centering
+    \tdplotsetmaincoords{70}{135}
+    \begin{tikzpicture}[tdplot_main_coords, scale=2, line join=round, line cap=round, 
+        every node/.style={circle, minimum size=10pt, ball color=blue!60}]
+
+        % Константы
+        \pgfmathsetmacro{\a}{1}
+        \pgfmathsetmacro{\c}{sqrt(8/3)}
+        \pgfmathsetmacro{\rMid}{\a/sqrt(3)} % Расстояние до центра треугольной лунки
+
+        % 1. Нижний слой A (z=0)
+        \node[ball color=red!70] (center) at (0,0,0) {}; % Центр
+        \foreach \ang in {0,60,120,180,240,300} {
+            \node (down\ang) at ({\a*cos(\ang)}, {\a*sin(\ang)}, 0) {};
+        }
+
+        % 2. Средний слой B (z = c/2)
+        % Эти три атома должны иметь другой цвет, как в вашем примере
+        \foreach \ang in {30,150,270} {
+            \node[ball color=green!70] (ball\ang) at ({\rMid*cos(\ang)}, {\rMid*sin(\ang)}, \c/2) {};
+        }
+
+        % 3. Верхний слой A (z = c)
+        \node[opacity=0.8, ball color=red!70] at (0,0,\c) {}; % Центр
+        \foreach \ang in {0,60,120,180,240,300} {
+            \node[opacity=0.8] at ({\a*cos(\ang)}, {\a*sin(\ang)}, \c) {};
+        }
+
+        % 4. Каркас (аналогично вашему draw[thick, opacity=0.3])
+        \begin{scope}[thick, opacity=0.3, black]
+            % Основания
+            \foreach \ang in {0,60,...,300} {
+                \draw ({\a*cos(\ang)}, {\a*sin(\ang)}, 0) -- ({\a*cos(\ang+60)}, {\a*sin(\ang+60)}, 0);
+                \draw ({\a*cos(\ang)}, {\a*sin(\ang)}, \c) -- ({\a*cos(\ang+60)}, {\a*sin(\ang+60)}, \c);
+                % Вертикальные ребра
+                \draw ({\a*cos(\ang)}, {\a*sin(\ang)}, 0) -- ({\a*cos(\ang)}, {\a*sin(\ang)}, \c);
+            }
+        \end{scope}
+
+        % 5. Тетраэдр
+        \draw[thick, color=black] (ball30) -- (down60);
+        \draw[thick, color=black] (ball30) -- (down0);
+        \draw[thick, color=black] (ball30) -- (center);
+        \draw[thick, color=black] (down60) -- (down0);
+        \draw[thick, color=black] (down0) -- (center);
+        \draw[thick, color=black] (center) -- (down60);
+    \end{tikzpicture}
+    \caption{Элементарная ячейка гексагональной плотноупакованной структуры}
+    \label{ИГЦК}
+\end{figure}
+
+Атомы в базисной плоскости касаются друг друга,
+поэтому сторона шестиугольника $a = 2R$.
+
+Центральный слой атомов располагается в «выемках» между атомами нижнего слоя.
+Рассмотрим тетраэдр (выделенный контур на рис. \ref{ИГЦК}), образованный тремя касающимися атомами в нижнем слое и одним атомом из среднего слоя,
+который лежит в углублении между ними.
+\begin{enumerate}
+    \item Все ребра этого тетраэдра равны $a$ (так как все атомы касаются друг друга).
+    \item Высота этого тетраэдра составляет ровно половину высоты всей ячейки,
+    то есть $c/2$.
+    \item Расстояние от вершины до центра основания (медиана треугольника в основании):
+    $r_d = \frac{a}{\sqrt{3}}$.
+\end{enumerate}
+Тогда по теореме Пифагора для высоты тетраэдра ($h = c/2$):
+\begin{gather*}
+    (c/2)^2 + (a/\sqrt{3})^2 = a^2 \\
+    \dfrac{c^2}{a^2} = \dfrac{8}{3}
+\end{gather*}
+Что и требовалось доказать.
+
+Найдём коэффициент компактности $f$.
+Число атомов в ячейке $N$ состоит из суммы:
+\begin{itemize}
+    \item 12 атомов в вершинах (каждый принадлежит 6 ячейкам): $12 \cdot 1/6 = 2$.
+    \item 2 атома в центрах оснований (каждый принадлежит 2 ячейкам): \mbox{$2 \cdot 1/2 = 1$}.
+    \item 3 атома внутри ячейки: $3 \cdot 1 = 3$.
+\end{itemize}
+Итого $N = 6$. Объём элементарной ячейки равен объёму прямоугольной призмы
+с правильным шестиугольником со стороной $a$ в основании.
+Площадь правильного шестиугольника будет равна
+шести площадям равносторонних треугольников со стороной $a$
+$$
+    S_\text{осн.} = 6 \cdot \dfrac{a^2 \sqrt{3}}{4} = \dfrac{3\sqrt{3}}{2}a^2
+$$
+Объём прямоугольной призмы будет равен произведению площади основания на высоту
+$$
+    V_\text{ячейки} = \dfrac{3\sqrt{3}}{2}a^2 \cdot a\sqrt{\dfrac{8}{3}} = 3\sqrt{2}a^2
+$$
+Тогда
+$$
+    f = \dfrac{8 \cdot \dfrac{4}{3}\pi\left(\dfrac{a}{2}\right)^3}{3\sqrt{2}a^3} = \dfrac{\pi}{3\sqrt{2}} \approx 0.74
+$$
+
+\subsection*{Ответ}
+
+$$
+    f = \dfrac{\pi}{3\sqrt{2}} \approx 0.74
+$$
+
+\section*{\centering Задача 7}
+
+\subsection*{Условие}
+
+\begin{enumerate}
+    \item Найдите плотность точек решётки в атомной плоскости (число узлов на единицу
+    площади), если расстояние между соседними плоскостями в семействе, которому
+    принадлежит данная плоскость, равно $d$, а объёмная плотность точек данной
+    решётки Бравэ равна $n$;
+    \item Найдите и изобразите семейство плоскостей в г.ц.к. и о.ц.к.
+    решётках Бравэ, для которых плотность точек максимальна (плоскости скола).
+\end{enumerate}
+
+\subsection*{Решение}
+
+\begin{enumerate}
+    \item Рассмотрим семейство параллельных кристаллографических плоскостей.
+    Пусть расстояние между соседними плоскостями равно $d$.
+    По определению семейства плоскостей,
+    каждая точка решётки Бравэ принадлежит какой-то одной плоскости
+    из этого семейства.
+
+    Выделим на одной из плоскостей участок площадью $S$.
+    Если мы продлим этот участок перпендикулярно плоскостям,
+    мы получим объём
+    $$
+        V = S \cdot d
+    $$
+    ограниченный цилиндрической поверхностью.
+
+    В объёме $V$, ограниченном расстоянием $d$, содержится ровно столько точек,
+    сколько их приходится на площадь $S$ одной плоскости.
+    Число точек в этом объёме
+    $$
+        N = n \cdot V = n \cdot S \cdot d
+    $$
+    Поверхностная плотность $\sigma$ --- это количество точек на единицу площади:
+    $$
+        \sigma = \frac{N}{S}
+    $$
+    Тогда
+    $$
+        \sigma = n \cdot d
+    $$
+    Т.е. чем больше межплоскостное расстояние,
+    тем выше плотность упаковки атомов в самой плоскости.
+
+    \item Согласно формуле $\sigma = nd$, плоскости с максимальной плотностью точек
+    --- это те плоскости, у которых межплоскостное расстояние $d$ максимально.
+
+    Пусть $\vec{a}_1, \vec{a}_2, \vec{a}_3$ --- основные векторы трансляции решётки Бравэ.
+    Любое семейство параллельных плоскостей характеризуется вектором обратной решётки $\vec{g}_{hkl}$:
+    $$
+        \vec{g}_{hkl} = h\vec{b}_1 + k\vec{b}_2 + l\vec{b}_3
+    $$
+    где $\vec{b}_i$ — базисные векторы обратной решётки.
+    Из свойств обратной решётки известно, что:
+    \begin{itemize}
+        \item Вектор $\vec{g}_{hkl}$ перпендикулярен плоскостям $(hkl)$.
+        \item Межплоскостное расстояние $d_{hkl}$ обратно пропорционально длине этого вектора:
+        $$
+            d_{hkl} = \frac{2\pi}{|\vec{g}_{hkl}|}
+        $$
+    \end{itemize}
+    Так как из пункта (а) мы знаем, что $\sigma = n \cdot d$,
+    то для поиска максимальной плотности $\sigma$ нам нужно найти минимальный по длине
+    ненулевой вектор обратной решётки $\vec{g}$.
+
+    Чтобы минимизировать $|\vec{g}_{hkl}|$, мы ищем такие целые индексы Миллера $(h, k, l)$,
+    при которых комбинация $h\vec{b}_1 + k\vec{b}_2 + l\vec{b}_3$
+    даст кратчайший вектор.
+    \begin{description}
+        \item[ГЦК] Решётка, обратная к ГЦК с параметром $a$,
+        является ОЦК решёткой с параметром $4\pi/a$.
+        Базисные векторы обратной решётки для ГЦК:
+        $$
+            \vec{b}_1 = \frac{4\pi}{a}(-\vec{i} + \vec{j} + \vec{k}), \quad \vec{b}_2 = \frac{4\pi}{a}(\vec{i} - \vec{j} + \vec{k}), \quad \vec{b}_3 = \frac{4\pi}{a}(\vec{i} + \vec{j} - \vec{k})
+        $$
+        В ОЦК решётке кратчайшими векторами являются векторы в узлы типа
+        $(\pm 1, \pm 1, \pm 1)$ в стандартных индексах (соответствует векторам
+        в вершины «куба» обратной решётки).
+        Это соответствует семейству плоскостей $(1, 1, 1)$. Приведено на рис. \ref{ГЦК-обратная}.
+        
+        \begin{figure}[h]
+            \centering
+            \begin{tikzpicture}[scale=3, every node/.style={shading=ball, ball color=blue!60}]
+                % Вершины нижнего основания
+                \node (A) at (0,0,0) [circle, minimum size=10pt] {};
+                \node (B) at (1,0,0) [circle, minimum size=10pt] {};
+                \node (C) at (1,0,1) [circle, minimum size=10pt] {};
+                \node (D) at (0,0,1) [circle, minimum size=10pt] {};
+                
+                \fill[yellow!70, opacity=0.5] (1,0,0) -- (0,1,0) -- (0,0,1) -- cycle;
+                \draw[yellow!70, very thick] (1,0,0) -- (0,1,0) -- (0,0,1) -- cycle;
+                
+                % Центры граней (нижняя, боковые, передняя)
+                \node at (0.5,0,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Нижняя
+                \node at (1,0.5,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Правая
+                \node at (0,0.5,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Левая
+                
+                % Вершины верхнего основания
+                \node (E) at (0,1,0) [circle, minimum size=10pt] {};
+                \node (F) at (1,1,0) [circle, minimum size=10pt] {};
+                \node (G) at (1,1,1) [circle, minimum size=10pt] {};
+                \node (H) at (0,1,1) [circle, minimum size=10pt] {};
+                
+                % Центры граней (верхняя, задняя, передняя)
+                \node at (0.5,1,0.5) [circle, minimum size=10pt, ball color=red!70] {}; % Верхняя
+                \node at (0.5,0.5,0) [circle, minimum size=10pt, ball color=red!70] {}; % Задняя
+                \node at (0.5,0.5,1) [circle, minimum size=10pt, ball color=red!70] {}; % Передняя
+                
+                % Ребра куба для наглядности
+                \draw[thick, opacity=0.3] (0,0,0) -- (1,0,0) -- (1,0,1) -- (0,0,1) -- cycle;
+                \draw[thick, opacity=0.3] (0,1,0) -- (1,1,0) -- (1,1,1) -- (0,1,1) -- cycle;
+                \draw[thick, opacity=0.3] (0,0,0) -- (0,1,0) (1,0,0) -- (1,1,0) (1,0,1) -- (1,1,1) (0,0,1) -- (0,1,1);
+            \end{tikzpicture}
+            \caption{Семейство плоскостей ГЦК с минимальной плотностью точек}
+            \label{ГЦК-обратная}
+        \end{figure}
+
+        \item[ОЦК] Решётка, обратная к ОЦК с параметром $a$,
+        является ГЦК решёткой с параметром $4\pi/a$.
+        Базисные векторы обратной решётки для ОЦК:
+        $$
+            \vec{b}_1 = \frac{4\pi}{a}(\vec{j} + \vec{k}), \quad \vec{b}_2 = \frac{4\pi}{a}(\vec{i} + \vec{k}), \quad \vec{b}_3 = \frac{4\pi}{a}(\vec{i} + \vec{j})
+        $$
+        В ГЦК решётке кратчайшими векторами являются векторы к центрам граней,
+        то есть векторы типа $(\pm 1, \pm 1, 0)$ и их перестановки.
+        Это соответствует семейству плоскостей $(1, 1, 0)$. Приведено на рис. \ref{ОЦК-обратная}.
+
+        \begin{figure}[h]
+            \centering
+            \begin{tikzpicture}[scale=3, every node/.style={shading=ball, ball color=blue!60}]
+                % Вершины
+                \foreach \x in {0,1} \foreach \y in {0,1} \foreach \z in {0,1}
+                \node at (\x,\y,\z) [circle, minimum size=10pt] {};
+
+                \fill[yellow!70, opacity=0.5] (1,0,0) -- (1,0,1) -- (0,1,1) -- (0,1,0) -- cycle;
+                \draw[yellow!70, very thick] (1,0,0) -- (1,0,1) -- (0,1,1) -- (0,1,0) -- cycle;
+                
+                % Центральный атом
+                \node at (0.5,0.5,0.5) [circle, minimum size=10pt, ball color=green!70] {};
+                
+                % Ребра куба
+                \draw[thick, opacity=0.3] (0,0,0) -- (1,0,0) -- (1,0,1) -- (0,0,1) -- cycle;
+                \draw[thick, opacity=0.3] (0,1,0) -- (1,1,0) -- (1,1,1) -- (0,1,1) -- cycle;
+                \draw[thick, opacity=0.3] (0,0,0) -- (0,1,0) (1,0,0) -- (1,1,0) (1,0,1) -- (1,1,1) (0,0,1) -- (0,1,1);
+            \end{tikzpicture}
+            \caption{Семейство плоскостей ОЦК с минимальной плотностью точек}
+            \label{ОЦК-обратная}
+        \end{figure}
+    \end{description}
+\end{enumerate}
+
+\subsection*{Ответ}
+
+\begin{enumerate}
+    \item $\sigma = n \cdot d$
+    \item Для ГЦК: $(1, 1, 1)$: Для ОЦК: $(1, 1, 0)$ (или другая, полученная перестановкой).
+\end{enumerate}
+
+\section*{\centering Задача 8}
+
+Найдите геометрический структурный фактор моноатомной г.ц.к. решётки Бравэ,
+представленной в виде простой кубической решётки с четырёхточечным базисом.
+Установите, какую структуру образуют точки обратной решётки с ненулевым
+структурным фактором. Почему можно было ожидать такой результат?
+
+\subsection*{Решение}
+
+Гранецентрированная кубическая (ГЦК) решетка может быть описана
+как простая кубическая решетка с ребром $a$,
+в узлах которой находится базис из 4 атомов.
+Координаты узлов базиса имеют следующий вид:
+$$
+    \begin{cases}
+        \vec{r}_1 = (0, 0, 0) \\
+        \vec{r}_2 = (1/2, 1/2, 0) \\
+        \vec{r}_3 = (0, 1/2, 1/2) \\
+        \vec{r}_4 = (1/2, 0, 1/2)
+    \end{cases}
+$$
+Геометрический структурный фактор определяется формулой
+$$
+    S(\vec{b}) = \sum_{j=1}^n e^{-i(\vec{b}, \vec{r}_j)}
+$$
+где $\vec{b}$ --- вектор обратной решётки, который имеет вид
+$$
+    \vec{b} = \dfrac{2\pi}{a} (h, k, l)
+$$
+где $h, k, l \in \mathbb{Z}$ --- индексы Миллера. Подставим и получим
+$$
+    S(h, k, l) = 1 + (-1)^{h + k} + (-1)^{k + l} + (-1)^{h + l}
+$$
+Рассмотрим различные случаи чётности степеней экспонент:
+\begin{enumerate}
+    \item 3 чётные: тогда $S = 4$ --- подходит.
+    
+    Этот случай выполняется, если ($h, k, l, a, b, c \in \mathbb{Z}$):
+    $$
+        \begin{cases}
+            h + k = 2a \\
+            k + l = 2b \\
+            h + l = 2c
+        \end{cases} \Rightarrow \begin{cases}
+            h = a + c - b \\
+            k = a + b - c \\
+            l = b + c - a
+        \end{cases}
+    $$
+    \item 2 четные, 1 нечётная: тогда $S = 2$ --- подходит.
+    
+    Этот случай выполняется, если ($h, k, l, a, b, c \in \mathbb{Z}$):
+    $$
+        \begin{cases}
+            h + k = 2a + 1 \\
+            k + l = 2b \\
+            h + l = 2c
+        \end{cases} \Rightarrow \begin{cases}
+            h = a + c - b + 1/2 \\
+            k = a + b - c + 1/2 \\
+            l = b + c - a
+        \end{cases}
+    $$
+    Не удовлетворяет условиям целых $h, k, l$.
+    \item 1 чётная, 2 нечётные: тогда $S = 0$ --- не подходит.
+    \item 3 нечётные: тогда $S = -2$ --- подходит.
+    
+    Этот случай выполняется, если ($h, k, l, a, b, c \in \mathbb{Z}$):
+    $$
+        \begin{cases}
+            h + k = 2a + 1 \\
+            k + l = 2b + 1 \\
+            h + l = 2c + 1
+        \end{cases} \Rightarrow \begin{cases}
+            h = a + c - b + 1/2 \\
+            k = a + b - c + 1/2 \\
+            l = b + c - a + 1/2
+        \end{cases}
+    $$
+    Не удовлетворяет условиям целых $h, k, l$.
+\end{enumerate}
+Таким образом, все три показателя экспоненты должны быть чётными.
+Это условие выполняется когда либо все числа из набора $(h, k, l)$
+чётные, либо все нечётные.
+
+Этот результат ожидаем из следующих соображений:
+рассмотрим примеры точек, удовлетворяющих полученному правилу.
+Это будут точки $(0, 0, 0)$, $(\pm 2, 0, 0)$ с перестановками,
+и т.д. Если построить эти точки на кубе со стороной 2,
+то можно видеть, что была получена ОЦК решётка,
+что можно было ожидать ввиду существования соответствующей теоремы.
+
+(Также, фактически, решение данной задачи может быть найдено в книге <<Физика твёрдого тела>> (Том 1)
+за авторством Ашкрофта и Мермина \mbox{на стр. 114-115} с той лишь оговоркой,
+что в данной книге оно проводится в обратную сторону относительно поставленной задачи)
+
+\section*{\centering Задача 9}
+
+\subsection*{Условие}
+
+Измельчённые в порошок образцы трёх различных моноатомных кубических
+кристаллов анализируются с помощью метода Дебая-Шеррера. Известно, что один из
+образцов --- гранецентрированный кубический, другой --- объёмноцентрированный
+кубический и третий имеет структуру типа алмаза. Примерные положения первых
+четырёх дифракционных колец характеризуются в каждом случае следующими углами
+отклонения от направления падения исходного пучка (в градусах):
+\begin{description}
+    \item[Образец A:] 42.2, 49.2, 72.0, 87.3;
+    \item[Образец B:] 28.8, 41.0, 50.8, 59.6;
+    \item[Образец C:] 42.8, 73.2, 89.0, 115.0;
+\end{description}
+Определите кристаллическую структуру образцов A, B и C.
+Если длина волны падающих рентгеновских лучей равна
+$1.5\ \overset{\circ }{\text{A}}$, чему равна длина стороны условной кубической ячейки в каждом из указанных
+случаев?
+
+\subsection*{Решение}
+
+Уравнение Вульфа-Брэгга для межплоскостного расстояния $d$ имеет вид:
+$$
+    2d \sin\left(\dfrac{\theta}{2}\right) = \lambda
+$$
+Для кубического кристалла с параметром решетки $a$ расстояние
+$d$ между плоскостями с индексами Миллера $(hkl)$ равно:
+$$
+    d = \frac{a}{\sqrt{h^2 + k^2 + l^2}}
+$$
+Объединяя данные две формулы, получаем выражение для углов дифракции:
+$$
+    \sin^2 \left(\dfrac{\theta}{2}\right) = \frac{\lambda^2}{4a^2} (h^2 + k^2 + l^2) := \dfrac{\lambda^2}{4a^2} \cdot S
+$$
+Тогда имеем:
+\begin{description}
+    \item[ОЦК:]
+    
+    Условие максимума: $h + k + l$ --- чётное. Тогда последовательность для $S$
+    примет вид: 2, 4, 6, 8, \ldots (Т.е. отношение имеет вид: 1 : 2 : 3 : 4 : 5 : \ldots)
+    \item[ГЦК:]
+    
+    Условие максимума: $h, k, l$ либо все чётные, либо все нечётные.
+    Тогда последовательность $S$ примет вид: 3, 4, 8, 11, 12, \ldots
+
+    \item[Структура типа алмаза:]
+    Условие максимума: $h, k, l$ либо все нечётные, либо все чётные и $h + k + l = 4n$.
+    Тогда последовательность значений $S$ примет вид: 3, 8, 11, 16, 19, \ldots
+\end{description}
+Тогда требуется преобразовать экспериментальные данные, которые приведены в таблице \ref{Экспериментальные данные}.
+\begin{table}[h]
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Образец & Образец А & Образец B & Образец C \\
+        \hline
+        $\theta$ & 42.2, 49.2, 72.0, 87.3 & 28.8, 41.0, 50.8, 59.6 & 42.8, 73.2, 89.0, 115.0 \\
+        \hline
+        $sin^2(\theta/2)$ & 0.129, 0.173, 0.345, 0.476 & 0.062, 0.123, 0.184, 0.247 & 0.133, 0.355, 0.491, 0.711 \\
+        \hline
+        Соотношение & 1 : 1.33 : 2.67 : 3.67 & 1 : 2 : 3 : 4 & 1 : 2.67 : 3.67 : 5.33 \\
+        \hline
+        Вывод & ГЦК & ОЦК & Структура алмаза \\
+        \hline
+    \end{tabular}
+    \caption{Экспериментальные данные}
+    \label{Экспериментальные данные}
+\end{table}
+
+\subsection*{Ответ}
+
+\begin{description}
+    \item[Образец A:] ГЦК
+    \item[Образец B:] ОЦК
+    \item[Образец C:] Структура типа алмаза
+\end{description}
+(Задача 1, Глава 6 в <<Физика твёрдого тела>> (Том 1) за авторством Ашкрофта и Мермина)
+
+\end{document}

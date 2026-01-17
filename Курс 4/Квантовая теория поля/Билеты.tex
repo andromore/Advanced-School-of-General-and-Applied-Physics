@@ -1,0 +1,1327 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tocloft}
+
+\usetikzlibrary{decorations.markings}
+\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+
+\title{Билеты по курсу\\<<{\it Квантовая теория поля}>>}
+\author{Google Gemini 3 Pro\\Александр Актанаев (оператор ИИ)\\Андрей Можаров (вёрстка \LaTeX)}
+\date{26 декабря 2025}
+
+\renewcommand{\thechapter}{Билет~№\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\cftchapnumwidth}{7em}
+
+\makeatletter
+
+\renewcommand{\@makechapterhead}[1]{
+{\parindent=0pt \centering\newpage \normalfont\Huge\bfseries
+\center{\thechapter}
+\center{\normalfont\Large\bfseries #1} \par
+\nopagebreak \vspace{1cm} } }
+
+\makeatother
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Уравнение Дирака. Свойства $\gamma$-матриц.}
+
+Исторически П. Дирак (1928 г.) искал релятивистски ковариантное уравнение для электрона, которое было бы лишено недостатков уравнения Клейна-Гордона (проблемы с вероятностной интерпретацией плотности тока и энергии). 
+
+Основные требования к уравнению:
+\begin{enumerate}
+    \item \textbf{Релятивистская инвариантность:} Уравнение должно быть симметричным относительно пространства и времени, т.е. содержать первые производные как по времени ($\partial/\partial t$), так и по координатам ($\partial/\partial x^i$).
+    \item \textbf{Линейность:} Уравнение должно быть линейным, чтобы выполнялся принцип суперпозиции.
+    \item \textbf{Соответствие классической физике:} В пределе должно получаться соотношение Эйнштейна для энергии-импульса: $E^2 = \vec{p}^2 + m^2$.
+\end{enumerate}
+
+\section{Вывод уравнения Дирака}
+
+Будем искать гамильтониан $H$ в форме, линейной по импульсу $\vec{p}$:
+\begin{equation} \label{eq:dirac_hamiltonian}
+    i \frac{\partial \psi}{\partial t} = H \psi = (\vec{\alpha} \cdot \hat{\vec{p}} + \beta m) \psi = (-i \vec{\alpha} \cdot \nabla + \beta m) \psi,
+\end{equation}
+где $\psi(\vec{x}, t)$ — некоторая многокомпонентная волновая функция (спинор), а $\vec{\alpha} = (\alpha_1, \alpha_2, \alpha_3)$ и $\beta$ — матрицы, которые нужно определить.
+
+Чтобы удовлетворить релятивистскому соотношению энергии $E^2 = p^2 + m^2$, возведем оператор энергии в квадрат:
+\begin{equation}
+    H^2 = (\alpha_i p_i + \beta m)(\alpha_j p_j + \beta m) = \alpha_i \alpha_j p_i p_j + (\alpha_i \beta + \beta \alpha_i) p_i m + \beta^2 m^2.
+\end{equation}
+Учитывая, что $p_i p_j = p_j p_i$, перепишем первое слагаемое как $\frac{1}{2}\{\alpha_i, \alpha_j\} p_i p_j$. Сравнивая с $E^2 = \vec{p}^2 + m^2$, получаем условия на матрицы:
+\begin{align}
+    \{\alpha_i, \alpha_j\} &= 2\delta_{ij} \cdot I, \label{eq:alpha_anticomm} \\
+    \{\alpha_i, \beta\} &= 0, \label{eq:alpha_beta_anticomm} \\
+    \beta^2 &= I. \label{eq:beta_sq}
+\end{align}
+Здесь $\{A, B\} = AB + BA$ — антикоммутатор.
+
+\subsection{Свойства матриц $\alpha_i$ и $\beta$}
+Из алгебраических свойств (\ref{eq:alpha_anticomm})-(\ref{eq:beta_sq}) следует:
+\begin{itemize}
+    \item Матрицы должны быть эрмитовыми ($\alpha_i^\dagger = \alpha_i$, $\beta^\dagger = \beta$), чтобы гамильтониан был эрмитовым.
+    \item Собственные значения матриц $\alpha_i$ и $\beta$ равны $\pm 1$ (так как их квадраты равны единичной матрице).
+    \item След матриц равен нулю ($\text{Tr}(\alpha_i) = \text{Tr}(\beta) = 0$). Это следует из антикоммутации, например: $\beta = -\alpha_i \beta \alpha_i^{-1} \Rightarrow \text{Tr}(\beta) = -\text{Tr}(\beta)$.
+    \item Минимальная размерность матриц, удовлетворяющих этим условиям, — $4 \times 4$. Следовательно, волновая функция $\psi$ должна быть четырехкомпонентным столбцом (биспинором).
+\end{itemize}
+
+\section{Ковариантная форма уравнения Дирака}
+
+Для перехода к явно лоренц-ковариантному виду введем $\gamma$-матрицы (гамма-матрицы). Умножим уравнение (\ref{eq:dirac_hamiltonian}) слева на $\beta$:
+\begin{equation}
+    i \beta \frac{\partial \psi}{\partial t} = -i \beta \vec{\alpha} \cdot \nabla \psi + \beta^2 m \psi.
+\end{equation}
+Введем обозначения:
+\begin{equation}
+    \gamma^0 = \beta, \quad \gamma^i = \beta \alpha_i \quad (i=1,2,3).
+\end{equation}
+Используя 4-вектор производной $\partial_\mu = (\partial_0, \nabla)$ и соглашение о суммировании по повторяющимся индексам, уравнение принимает вид:
+\begin{equation} \label{eq:covariant_dirac}
+    (i \gamma^\mu \partial_\mu - m) \psi = 0.
+\end{equation}
+Или, используя "слэш" - обозначение Фейнмана ($\slashed{a} = \gamma^\mu a_\mu$):
+\begin{equation}
+    (i \slashed{\partial} - m) \psi = 0.
+\end{equation}
+
+\section{Свойства $\gamma$-матриц}
+
+Матрицы Дирака $\gamma^\mu$ ($\mu = 0, 1, 2, 3$) являются генераторами \textbf{алгебры Клиффорда}. Их определяющее свойство (фундаментальное антикоммутационное соотношение):
+\begin{equation} \label{eq:clifford}
+    \{\gamma^\mu, \gamma^\nu\} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2 g^{\mu\nu} \cdot I,
+\end{equation}
+где $g^{\mu\nu} = \text{diag}(1, -1, -1, -1)$ — метрический тензор Минковского.
+
+\subsection{Эрмитово сопряжение}
+Из определения через эрмитовы $\alpha$ и $\beta$ следует:
+\begin{itemize}
+    \item $\gamma^0$ — эрмитова: $(\gamma^0)^\dagger = \beta^\dagger = \beta = \gamma^0$.
+    \item $\gamma^i$ — антиэрмитовы: $(\gamma^i)^\dagger = (\beta \alpha_i)^\dagger = \alpha_i^\dagger \beta^\dagger = \alpha_i \beta = -\beta \alpha_i = -\gamma^i$.
+\end{itemize}
+Оба свойства можно объединить в одну формулу:
+\begin{equation}
+    \gamma^{\mu\dagger} = \gamma^0 \gamma^\mu \gamma^0.
+\end{equation}
+
+\subsection{Матрица $\gamma^5$}
+Важную роль играет матрица $\gamma^5$, определяемая как произведение четырех основных матриц (иногда с множителем $i$):
+\begin{equation}
+    \gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3 = -\frac{i}{4!} \varepsilon_{\mu\nu\rho\sigma} \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma.
+\end{equation}
+Свойства $\gamma^5$:
+\begin{itemize}
+    \item Антикоммутирует со всеми $\gamma^\mu$: $\{\gamma^5, \gamma^\mu\} = 0$.
+    \item В квадрате дает единицу: $(\gamma^5)^2 = I$.
+    \item Эрмитова: $(\gamma^5)^\dagger = \gamma^5$.
+    \item Используется для определения операторов киральности (проекторов): $P_{L,R} = \frac{1 \mp \gamma^5}{2}$.
+\end{itemize}
+
+\section{Вычисление следов (Trace technology)}
+
+Для вычисления сечений рассеяния в КЭД часто требуется находить следы произведений $\gamma$-матриц. Основные тождества:
+
+\begin{enumerate}
+    \item \textbf{Линейность и цикличность:}
+        \begin{equation}
+            \text{Tr}(A+B) = \text{Tr}(A) + \text{Tr}(B), \quad \text{Tr}(ABC) = \text{Tr}(BCA).
+        \end{equation}
+
+    \item \textbf{След нечетного числа матриц:}
+        След произведения любого нечетного количества $\gamma$-матриц равен нулю.
+        \begin{equation}
+            \text{Tr}(\gamma^{\mu_1} \dots \gamma^{\mu_{2n+1}}) = 0.
+        \end{equation}
+        \textit{Доказательство:} Вставляем $(\gamma^5)^2=I$ под знак следа и используем $\{\gamma^5, \gamma^\mu\}=0$.
+
+    \item \textbf{След двух матриц:}
+        \begin{equation}
+            \text{Tr}(\gamma^\mu \gamma^\nu) = \text{Tr}(2g^{\mu\nu} - \gamma^\nu \gamma^\mu) = 8g^{\mu\nu} - \text{Tr}(\gamma^\mu \gamma^\nu) \Rightarrow \text{Tr}(\gamma^\mu \gamma^\nu) = 4g^{\mu\nu}.
+        \end{equation}
+        В общем случае: $\text{Tr}(\slashed{a}\slashed{b}) = 4(a \cdot b)$.
+
+    \item \textbf{След четырех матриц:}
+        \begin{equation}
+            \text{Tr}(\gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma) = 4(g^{\mu\nu}g^{\rho\sigma} - g^{\mu\rho}g^{\nu\sigma} + g^{\mu\sigma}g^{\nu\rho}).
+        \end{equation}
+
+    \item \textbf{Следы с $\gamma^5$:}
+        \begin{equation}
+            \text{Tr}(\gamma^5) = 0, \quad \text{Tr}(\gamma^5 \gamma^\mu \gamma^\nu) = 0.
+        \end{equation}
+        \begin{equation}
+            \text{Tr}(\gamma^5 \gamma^\mu \gamma^\nu \gamma^\rho \gamma^\sigma) = -4i \varepsilon^{\mu\nu\rho\sigma}.
+        \end{equation}
+\end{enumerate}
+
+\section{Свертки матриц (Contraction identities)}
+В вычислениях часто встречаются выражения вида $\gamma_\mu A \gamma^\mu$. Полезные формулы ($d$ — размерность пространства, обычно $d=4$):
+\begin{align}
+    \gamma_\mu \gamma^\mu &= d \cdot I = 4I, \\
+    \gamma_\mu \gamma^\nu \gamma^\mu &= (2-d)\gamma^\nu = -2\gamma^\nu, \\
+    \gamma_\mu \gamma^\nu \gamma^\rho \gamma^\mu &= 4g^{\nu\rho} + (d-4)\gamma^\nu \gamma^\rho = 4g^{\nu\rho}, \\
+    \gamma_\mu \gamma^\nu \gamma^\rho \gamma^\sigma \gamma^\mu &= -2 \gamma^\sigma \gamma^\rho \gamma^\nu.
+\end{align}
+
+\section{Представления матриц Дирака}
+
+Существует несколько способов выбрать конкретный вид матриц $4\times4$, удовлетворяющих алгебре (\ref{eq:clifford}). Физические результаты не зависят от выбора представления.
+
+\subsection{Стандартное представление (Дирака-Паули)}
+Удобно для описания частиц в нерелятивистском пределе.
+\begin{equation}
+    \gamma^0 = \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}, \quad \gamma^i = \begin{pmatrix} 0 & \sigma^i \\ -\sigma^i & 0 \end{pmatrix}, \quad \gamma^5 = \begin{pmatrix} 0 & I \\ I & 0 \end{pmatrix}.
+\end{equation}
+Здесь $\sigma^i$ — матрицы Паули, $I$ — единичная матрица $2\times2$.
+
+\subsection{Спинорное представление (Вейля, киральное)}
+Удобно для ультрарелятивистских частиц ($E \gg m$) и изучения киральной симметрии. $\gamma^5$ здесь диагональна.
+\begin{equation}
+    \gamma^0 = \begin{pmatrix} 0 & I \\ I & 0 \end{pmatrix}, \quad \gamma^i = \begin{pmatrix} 0 & \sigma^i \\ -\sigma^i & 0 \end{pmatrix}, \quad \gamma^5 = \begin{pmatrix} -I & 0 \\ 0 & I \end{pmatrix}.
+\end{equation}
+В этом представлении верхние две компоненты биспинора описывают левую ($L$) спиральность, а нижние — правую ($R$).
+
+\subsection{Представление Майораны}
+Выбирается так, чтобы все матрицы $\gamma^\mu$ были чисто мнимыми. Тогда уравнение Дирака становится действительным, что позволяет описывать истинно нейтральные частицы (майорановские фермионы).
+
+
+
+\chapter{Парадокс Клейна (формулировка).}
+
+Парадокс Клейна (O. Klein, 1929) — это физическое явление, возникающее при рассмотрении рассеяния релятивистской частицы (электрона) на высоком потенциальном барьере (ступеньке). 
+
+Суть парадокса заключается в том, что при высоте барьера $V_0$, превышающей порог рождения пары ($V_0 > E + mc^2$), коэффициент отражения электронов от барьера может стать меньше единицы, даже если их кинетическая энергия в области барьера формально отрицательна. Это противоречит интуиции нерелятивистской квантовой механики, где частица с энергией $E < V_0$ должна полностью отражаться (коэффициент отражения $R=1$), а в глубь барьера проникает лишь экспоненциально затухающая волна.
+
+\section{Постановка задачи}
+
+Рассмотрим одномерное движение релятивистского электрона с энергией $E$ и массой $m$ вдоль оси $z$. Пусть на него действует электростатический потенциал ступенчатого вида:
+\begin{equation}
+    V(z) = \begin{cases} 
+    0, & z < 0 \quad (\text{Область I}) \\
+    V_0, & z > 0 \quad (\text{Область II})
+    \end{cases}
+\end{equation}
+Стационарное уравнение Дирака имеет вид:
+\begin{equation}
+    (c\alpha_z \hat{p}_z + \beta mc^2 + V(z))\psi = E\psi.
+\end{equation}
+Здесь $\hat{p}_z = -i\hbar \frac{d}{dz}$. Для простоты будем использовать систему единиц $\hbar = c = 1$.
+
+\subsection{Волновые функции}
+
+Решение ищется в виде плоских волн.
+\begin{itemize}
+    \item \textbf{В области I ($z < 0$, $V=0$):}
+    Электрон падает на барьер справа. Импульс падающей частицы $p > 0$.
+    \begin{equation}
+        p = \sqrt{E^2 - m^2}.
+    \end{equation}
+    Волновая функция $\psi_I$ представляет собой сумму падающей и отраженной волн:
+    \begin{equation}
+        \psi_I(z) = A e^{ipz} \begin{pmatrix} 1 \\ 0 \\ \frac{p}{E+m} \\ 0 \end{pmatrix} + B e^{-ipz} \begin{pmatrix} 1 \\ 0 \\ \frac{-p}{E+m} \\ 0 \end{pmatrix}.
+    \end{equation}
+    Здесь мы выбрали спин, направленный вверх, и использовали стандартное представление матриц Дирака. Множители определяются из уравнения Дирака для свободной частицы.
+
+    \item \textbf{В области II ($z > 0$, $V=V_0$):}
+    Здесь уравнение имеет вид $(E - V_0)\psi = (-i\alpha_z \frac{d}{dz} + \beta m)\psi$.
+    Импульс $p'$ в этой области определяется соотношением:
+    \begin{equation}
+        (E - V_0)^2 = p'^2 + m^2 \quad \Rightarrow \quad p' = \pm \sqrt{(E - V_0)^2 - m^2}.
+    \end{equation}
+    Волновая функция прошедшей волны:
+    \begin{equation}
+        \psi_{II}(z) = C e^{ip'z} \begin{pmatrix} 1 \\ 0 \\ \frac{p'}{E-V_0+m} \\ 0 \end{pmatrix}.
+    \end{equation}
+\end{itemize}
+
+\section{Режимы рассеяния}
+
+Поведение решения критически зависит от величины $V_0$.
+
+\begin{enumerate}
+    \item \textbf{Нерелятивистский барьер ($V_0 < E - m$):} 
+    Классическое прохождение. $p'$ — вещественно.
+    
+    \item \textbf{Слабый потенциал ($E - m < V_0 < E + m$):}
+    Здесь $(E-V_0)^2 < m^2$, поэтому импульс $p'$ становится чисто мнимым: $p' = i\kappa$. Волна в области II экспоненциально затухает ($\psi_{II} \sim e^{-\kappa z}$), происходит полное внутреннее отражение. Это соответствует классической ситуации «туннелирования нет».
+    
+    \item \textbf{Сильный потенциал (Парадокс Клейна) ($V_0 > E + m$):}
+    В этом случае $(E - V_0)^2 > m^2$, и импульс $p'$ \textbf{снова становится вещественным}.
+    Это означает, что в области II, где классически частица находиться не может (ее полная энергия меньше потенциальной), снова возможно распространение незатухающих осциллирующих волн.
+\end{enumerate}
+
+\section{Вычисление токов и Парадокс}
+
+Рассмотрим случай сильного поля ($V_0 > E + m$).
+Из условия непрерывности волновой функции в точке $z=0$ ($\psi_I(0) = \psi_{II}(0)$) находим соотношения между коэффициентами $A, B, C$.
+Для токов вероятности $j = \psi^\dagger \alpha_z \psi$ получаем:
+\begin{align}
+    j_{inc} &\sim |A|^2 \frac{p}{E+m}, \\
+    j_{ref} &\sim |B|^2 \frac{p}{E+m}, \\
+    j_{trans} &\sim |C|^2 \frac{p'}{E-V_0+m}.
+\end{align}
+Парадокс возникает при выборе знака импульса $p'$ в прошедшей волне. Согласно теории групп (или требованию положительности групповой скорости), в области II мы должны выбрать решение, описывающее поток энергии \textit{от} границы.
+Для электронов с «отрицательной кинетической энергией» групповая скорость $v_{gr} = \frac{dE}{dp'}$ направлена противоположно импульсу. Это приводит к тому, что для описания уходящей частицы нужно выбирать решение с током, направленным \textit{вправо}.
+
+При $V_0 > E + m$ коэффициент отражения $R = |j_{ref}| / |j_{inc}|$ оказывается:
+\begin{equation}
+    R = \left( \frac{1 - r}{1 + r} \right)^2, \quad \text{где } r = \frac{p'}{p} \frac{E+m}{E-V_0+m}.
+\end{equation}
+В сильном поле величина $r < 0$ (так как $E - V_0 + m < 0$). 
+Следовательно, $R < 1$ не получается (как можно было бы ожидать для поглощения), а наоборот:
+Если строго следовать математике Дирака, ток прошедшей волны оказывается отрицательным (поток античастиц), и для сохранения полного потока отраженный ток должен быть \textbf{больше} падающего: $R > 1$. (В некоторых интерпретациях говорят о $R<1$, но с отрицательной проводимостью, суть одна — сохранение заряда требует учета рождения частиц).
+
+\section{Физическая интерпретация}
+
+\textbf{По Ландау-Лифшицу (Т. 4, §32, 35):}
+Парадокс разрешается отказом от одночастичной интерпретации уравнения Дирака в сильных полях.
+\begin{itemize}
+    \item Когда $V_0 > E + m$, потенциальная энергия настолько велика, что она «перекрывает» щель между положительным и отрицательным континуумом энергий ($2mc^2$).
+    \item Уровень энергии электрона $E$ справа от барьера оказывается на одной высоте с позитронными уровнями (состояниями с отрицательной энергией) сплошного спектра.
+    \item Происходит процесс \textbf{рождения электрон-позитронных пар}.
+    \item Падающий электрон отражается от барьера. Сильное электрическое поле на границе рождает пару $e^- e^+$. Электрон пары улетает вместе с отраженным электроном (увеличивая $j_{ref}$), а позитрон пары уходит в глубь барьера (в область II).
+    \item В области II движется позитрон с положительной энергией. В терминах уравнения Дирака это описывается как электрон с отрицательной энергией, движущийся вспять во времени.
+\end{itemize}
+
+Таким образом, «прошедшая волна» в области II — это не электрон, прошедший сквозь барьер, а поток позитронов, рожденных полем и уходящих на бесконечность. Это явление демонстрирует нестабильность вакуума в сверхкритических полях.
+
+
+
+\chapter{Симметрии и законы сохранения. Теорема Нетер. Интегралы движения.}
+
+В теории поля существует фундаментальная связь между свойствами симметрии физической системы и законами сохранения. Эта связь устанавливается **первой теоремой Нетер** (Эмми Нетер, 1918). 
+
+Утверждение теоремы: \textit{Каждой непрерывной однопараметрической группе симметрий действия $S$ соответствует закон сохранения, то есть существование тока $j^\mu(x)$, дивергенция которого равна нулю ($\partial_\mu j^\mu = 0$)}.
+
+Интеграл по пространству от временной компоненты этого тока $Q = \int d^3x \, j^0$ является сохраняющейся величиной (интегралом движения), то есть $\frac{dQ}{dt} = 0$.
+
+\section{Вывод теоремы Нетер}
+[(по книге Пескина-Шредера, §2.2)
+
+Пусть лагранжиан системы $\mathcal{L}(\phi, \partial_\mu \phi)$ зависит от набора полей $\phi(x)$ и их производных. Рассмотрим инфинитезимальное преобразование полей:
+\begin{equation}
+    \phi(x) \to \phi'(x) = \phi(x) + \alpha \Delta \phi(x),
+\end{equation}
+где $\alpha$ — бесконечно малый параметр, а $\Delta \phi(x)$ — деформация формы поля.
+
+Если данное преобразование является симметрией, то действие $S = \int d^4x \mathcal{L}$ должно быть инвариантным (с точностью до поверхностных членов, которые не влияют на уравнения движения). Это означает, что вариация лагранжиана должна иметь вид 4-дивергенции некоторого вектора $\mathcal{J}^\mu$:
+\begin{equation} \label{eq:lagr_var_sym}
+    \mathcal{L} \to \mathcal{L} + \alpha \partial_\mu \mathcal{J}^\mu.
+\end{equation}
+С другой стороны, прямое вычисление вариации лагранжиана как функции полей дает:
+\begin{equation} \label{eq:lagr_var_direct}
+    \delta \mathcal{L} = \frac{\partial \mathcal{L}}{\partial \phi} (\alpha \Delta \phi) + \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial_\mu (\alpha \Delta \phi).
+\end{equation}
+Используя уравнения движения Эйлера-Лагранжа $\partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = \frac{\partial \mathcal{L}}{\partial \phi}$, перепишем первое слагаемое в (\ref{eq:lagr_var_direct}). Тогда вариация примет вид полной производной:
+\begin{equation}
+    \delta \mathcal{L} = \alpha \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi \right).
+\end{equation}
+Приравнивая это выражение к (\ref{eq:lagr_var_sym}), получаем:
+\begin{equation}
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi \right) = \partial_\mu \mathcal{J}^\mu.
+\end{equation}
+Следовательно, ток, определяемый как:
+\begin{equation} \label{eq:noether_current}
+    j^\mu = \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi - \mathcal{J}^\mu,
+\end{equation}
+сохраняется:
+\begin{equation}
+    \partial_\mu j^\mu = 0.
+\end{equation}
+
+\section{Основные виды симметрий и интегралы движения}
+
+В зависимости от типа преобразования, получаются различные физические величины.
+
+\subsection{Трансляционная инвариантность (Сдвиг в пространстве-времени)}
+Преобразование координат: $x^\mu \to x^\mu - a^\mu$.
+Поле меняется как скаляр (для скалярного поля): $\phi(x) \to \phi(x+a) \approx \phi(x) + a^\nu \partial_\nu \phi$.
+Здесь $\Delta \phi = \partial_\nu \phi$, а вектор $\mathcal{J}^\mu$ возникает из того, что лагранжиан тоже сдвигается в аргументе: $\mathcal{L} \to \mathcal{L} + a^\nu \partial_\nu \mathcal{L} = \mathcal{L} + a^\nu \partial_\mu (\delta^\mu_\nu \mathcal{L})$.
+
+Подставляя в формулу Нетер (\ref{eq:noether_current}), получаем 4 сохраняющихся тока (по одному для каждого индекса $\nu$), которые образуют **канонический тензор энергии-импульса** $T^\mu_{\phantom{\mu}\nu}$:
+\begin{equation}
+    T^\mu_{\phantom{\mu}\nu} = \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial_\nu \phi - \delta^\mu_\nu \mathcal{L}.
+\end{equation}
+Закон сохранения: $\partial_\mu T^{\mu\nu} = 0$.
+
+\textbf{Интегралы движения:}
+\begin{itemize}
+    \item **Энергия (Гамильтониан):** $H = P^0 = \int d^3x \, T^{00}$.
+    \item **Импульс:** $P^i = \int d^3x \, T^{0i}$.
+\end{itemize}
+
+\subsection{Лоренц-инвариантность (Вращения и бусты)}
+Преобразование координат: $x^\mu \to x^\mu + \omega^\mu_{\phantom{\mu}\nu} x^\nu$ (где $\omega_{\mu\nu} = -\omega_{\nu\mu}$).
+Поле преобразуется с учетом своего спина: $\phi(x) \to (1 + \frac{1}{2}\omega_{\rho\sigma} S^{\rho\sigma}) \phi(x - \omega x)$.
+
+Соответствующий ток (имеющий три индекса) называется тензором момента количества движения $M^{\mu\rho\sigma}$. Он сохраняется: $\partial_\mu M^{\mu\rho\sigma} = 0$.
+Его можно выразить через тензор энергии-импульса и спиновую часть:
+\begin{equation}
+    M^{\mu\rho\sigma} = x^\rho T^{\mu\sigma} - x^\sigma T^{\mu\rho} + S^{\mu\rho\sigma}_{spin}.
+\end{equation}
+\textbf{Интегралы движения:}
+\begin{itemize}
+    \item **Момент импульса:** $J^{ij} = \int d^3x \, M^{0ij}$. (Пространственные вращения).
+    \item **Интеграл центра инерции:** $K^{0i} = \int d^3x \, M^{00i}$. (Лоренцевы бусты).
+\end{itemize}
+
+\subsection{Внутренние симметрии (Фазовые преобразования)}
+Рассмотрим комплексное поле (например, заряженное скалярное или дираковское). Лагранжиан инвариантен относительно глобального изменения фазы (группа $U(1)$):
+\begin{equation}
+    \phi \to e^{i\alpha} \phi \approx (1 + i\alpha) \phi.
+\end{equation}
+Здесь $\Delta \phi = i\phi$, $\Delta \phi^* = -i\phi^*$. Лагранжиан не меняется ($\mathcal{J}^\mu = 0$).
+
+Ток Нетер:
+\begin{equation}
+    j^\mu = i \left[ \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \phi - \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi^*)} \phi^* \right].
+\end{equation}
+Для дираковского поля ($\mathcal{L} = \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi$) это векторный ток:
+\begin{equation}
+    j^\mu = \bar{\psi} \gamma^\mu \psi.
+\end{equation}
+\textbf{Интеграл движения:}
+\begin{itemize}
+    \item **Электрический заряд** (или число частиц минус число античастиц): $Q = \int d^3x \, j^0$.
+\end{itemize}
+
+\section{Резюме}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Симметрия} & \textbf{Сохраняющийся ток} & \textbf{Интеграл движения} \\ \hline
+Трансляции времени & Тензор $T^{\mu\nu}$ & Энергия $E$ \\ \hline
+Трансляции координат & Тензор $T^{\mu\nu}$ & Импульс $\vec{P}$ \\ \hline
+Вращения пространства & Тензор момента $M^{\mu\rho\sigma}$ & Момент импульса $\vec{J}$ \\ \hline
+Фазовые преобразования & Векторный ток $j^\mu$ & Заряд $Q$ \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\chapter{Канонический формализм. Квантование скалярного поля. Классическая теория скалярного поля.}
+
+Рассмотрим действительное скалярное поле $\phi(x)$, описывающее свободные частицы со спином 0 и массой $m$ (нейтральные мезоны).
+Динамика поля определяется лагранжевой плотностью (Лагранжианом):
+\begin{equation}
+    \mathcal{L} = \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 = \frac{1}{2} [\dot{\phi}^2 - (\nabla \phi)^2 - m^2 \phi^2].
+\end{equation}
+Уравнение движения, следующее из принципа наименьшего действия (уравнение Эйлера-Лагранжа), есть уравнение Клейна-Гордона:
+\begin{equation}
+    (\partial^2 + m^2)\phi = 0 \quad \text{или} \quad (\square + m^2)\phi = 0.
+\end{equation}
+
+\subsection{Переход к Гамильтонову формализму}
+Для квантования нам необходимо определить канонически сопряженный импульс $\pi(x)$:
+\begin{equation}
+    \pi(x) = \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)} = \dot{\phi}(x).
+\end{equation}
+Плотность гамильтониана $\mathcal{H}$ строится через преобразование Лежандра:
+\begin{equation}
+    \mathcal{H} = \pi \dot{\phi} - \mathcal{L} = \pi^2 - \left[ \frac{1}{2} \pi^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \right] = \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2.
+\end{equation}
+Полный гамильтониан системы: $H = \int d^3x \, \mathcal{H}$.
+
+\section{Каноническое квантование}
+
+Процедура квантования заключается в замене классических полей $\phi(x)$ и $\pi(x)$ на операторы, действующие в Гильбертовом пространстве состояний, и наложении на них **одновременных канонических коммутационных соотношений** (ETCR — Equal Time Commutation Relations).
+
+По аналогии с квантовой механикой ($[\hat{x}_i, \hat{p}_j] = i\delta_{ij}$), для полей постулируется:
+\begin{align}
+    [\phi(\vec{x}, t), \pi(\vec{y}, t)] &= i \delta^{(3)}(\vec{x} - \vec{y}), \\
+    [\phi(\vec{x}, t), \phi(\vec{y}, t)] &= 0, \\
+    [\pi(\vec{x}, t), \pi(\vec{y}, t)] &= 0.
+\end{align}
+(Здесь и далее $\hbar = 1$).
+
+\section{Разложение по плоским волнам (Моды)}
+
+Так как уравнение Клейна-Гордона линейно, поле можно представить в виде суперпозиции плоских волн. В квантовой теории коэффициенты разложения становятся операторами рождения и уничтожения.
+
+Общее решение записывается как интеграл Фурье:
+\begin{equation} \label{eq:mode_expansion}
+    \phi(\vec{x}, t) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \left( a_{\vec{p}} e^{-ip \cdot x} + a_{\vec{p}}^\dagger e^{ip \cdot x} \right)\Bigg|_{p^0=E_p},
+\end{equation}
+где $E_p = \sqrt{\vec{p}^2 + m^2}$, а $p \cdot x = E_p t - \vec{p}\cdot\vec{x}$.
+Соответственно, для импульса $\pi = \dot{\phi}$:
+\begin{equation}
+    \pi(\vec{x}, t) = \int \frac{d^3p}{(2\pi)^3} (-i) \sqrt{\frac{E_p}{2}} \left( a_{\vec{p}} e^{-ip \cdot x} - a_{\vec{p}}^\dagger e^{ip \cdot x} \right).
+\end{equation}
+
+\subsection{Коммутаторы операторов рождения и уничтожения}
+Используя соотношения для полей $\phi$ и $\pi$, можно найти коммутаторы для операторов $a_{\vec{p}}$ и $a_{\vec{p}}^\dagger$:
+\begin{align}
+    [a_{\vec{p}}, a_{\vec{q}}^\dagger] &= (2\pi)^3 \delta^{(3)}(\vec{p} - \vec{q}), \\
+    [a_{\vec{p}}, a_{\vec{q}}] &= [a_{\vec{p}}^\dagger, a_{\vec{q}}^\dagger] = 0.
+\end{align}
+Нормировочный множитель $(2\pi)^3$ является стандартным в релятивистской теории (в отличие от $\delta_{pq}$ в квантовой механике в ящике).
+
+\section{Пространство состояний (Пространство Фока)}
+
+\begin{itemize}
+    \item \textbf{Вакуум $|0\rangle$:} Состояние с наименьшей энергией, определяемое тем, что оно уничтожается любым оператором уничтожения:
+    \begin{equation}
+        a_{\vec{p}} |0\rangle = 0 \quad \text{для всех } \vec{p}.
+    \end{equation}
+    
+    \item \textbf{Одночастичное состояние:} Действие оператора рождения на вакуум создает частицу с импульсом $\vec{p}$:
+    \begin{equation}
+        |\vec{p}\rangle = \sqrt{2E_p} \, a_{\vec{p}}^\dagger |0\rangle.
+    \end{equation}
+    Множитель $\sqrt{2E_p}$ введен для релятивистски-инвариантной нормировки состояний:
+    $\langle \vec{p} | \vec{q} \rangle = 2E_p (2\pi)^3 \delta^{(3)}(\vec{p} - \vec{q})$.
+
+    \item \textbf{Многочастичные состояния:} Строятся путем многократного действия операторов рождения. Так как все $a^\dagger$ коммутируют между собой, состояния симметричны относительно перестановки частиц, что соответствует статистике \textbf{Бозе-Эйнштейна}.
+\end{itemize}
+
+\section{Гамильтониан и проблема нулевых колебаний}
+
+Выразим гамильтониан $H = \int d^3x (\frac{1}{2}\pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2\phi^2)$ через операторы $a_{\vec{p}}$ и $a_{\vec{p}}^\dagger$. Подставляя разложение (\ref{eq:mode_expansion}) и интегрируя по $x$, получаем:
+\begin{equation}
+    H = \int \frac{d^3p}{(2\pi)^3} E_p \left( a_{\vec{p}}^\dagger a_{\vec{p}} + \frac{1}{2} [a_{\vec{p}}, a_{\vec{p}}^\dagger] \right).
+\end{equation}
+Используя $[a_{\vec{p}}, a_{\vec{p}}^\dagger] = \delta(0) \to \infty$, видим, что второе слагаемое дает бесконечную энергию вакуума (сумма энергий нулевых колебаний осцилляторов $\frac{1}{2}\hbar\omega$ по всем модам):
+\begin{equation}
+    E_{vac} = \frac{1}{2} \int \frac{d^3p}{(2\pi)^3} E_p \cdot (2\pi)^3 \delta(0) \to \infty.
+\end{equation}
+Так как в эксперименте измеряется только разность энергий, эту бесконечную константу отбрасывают. Формально это делается с помощью процедуры \textbf{нормального упорядочения} (обозначается $: \dots :$), при которой все операторы рождения ставятся левее операторов уничтожения:
+\begin{equation}
+    :a_{\vec{p}} a_{\vec{p}}^\dagger: = a_{\vec{p}}^\dagger a_{\vec{p}}.
+\end{equation}
+Перенормированный (нормальный) гамильтониан:
+\begin{equation}
+    :H: = \int \frac{d^3p}{(2\pi)^3} E_p a_{\vec{p}}^\dagger a_{\vec{p}}.
+\end{equation}
+Для этого гамильтониана $H |0\rangle = 0$.
+
+\section{Импульс системы}
+Аналогично, оператор полного импульса поля $\vec{P} = -\int d^3x \pi \nabla \phi$ в нормальном упорядочении принимает вид:
+\begin{equation}
+    :\vec{P}: = \int \frac{d^3p}{(2\pi)^3} \vec{p} \, a_{\vec{p}}^\dagger a_{\vec{p}}.
+\end{equation}
+
+\section{Причинность}
+В квантовой теории поля причинность выражается требованием, чтобы измерения в пространственно-подобных точках (интервал $(x-y)^2 < 0$) не влияли друг на друга. Это значит, что коммутатор полей должен исчезать вне светового конуса:
+\begin{equation}
+    [\phi(x), \phi(y)] = 0, \quad \text{если } (x-y)^2 < 0.
+\end{equation}
+Прямое вычисление показывает:
+\begin{equation}
+    [\phi(x), \phi(y)] = D(x-y) - D(y-x),
+\end{equation}
+где $D(x-y)$ — амплитуда распространения частицы. Вне светового конуса амплитуда перехода частицы $x \to y$ точно сокращается с амплитудой перехода $y \to x$, что обеспечивает причинность.
+
+
+
+\chapter{Фейнмановский пропагатор скалярного поля.}
+
+В квантовой теории поля процессы рассеяния и распространения частиц описываются с помощью функций Грина. Для построения диаграммной техники Фейнмана ключевую роль играет \textbf{фейнмановский пропагатор} (причинная функция Грина). 
+
+Физически пропагатор $D_F(x-y)$ представляет собой амплитуду вероятности того, что частица, рожденная в точке $y$, распространится (пропагирует) в точку $x$.
+
+\section{Определение через Т-произведение}
+
+Фейнмановский пропагатор для вещественного скалярного поля $\phi(x)$ определяется как вакуумное среднее от хронологически упорядоченного произведения операторов поля:
+\begin{equation} \label{eq:prop_def}
+    D_F(x-y) = \langle 0 | T \phi(x) \phi(y) | 0 \rangle,
+\end{equation}
+где символ $T$-упорядочения действует следующим образом:
+\begin{equation}
+    T \phi(x) \phi(y) = 
+    \begin{cases} 
+    \phi(x)\phi(y), & \text{если } x^0 > y^0 \\
+    \phi(y)\phi(x), & \text{если } y^0 > x^0 
+    \end{cases}
+    = \theta(x^0 - y^0)\phi(x)\phi(y) + \theta(y^0 - x^0)\phi(y)\phi(x).
+\end{equation}
+Это определение обеспечивает причинность: частица всегда движется из более раннего момента времени в более поздний. В случае комплексного поля это соответствует распространению частицы из $y$ в $x$ (если $x^0 > y^0$) или античастицы из $x$ в $y$ (если $y^0 > x^0$).
+
+\section{Функция Грина уравнения Клейна-Гордона}
+
+Пропагатор $D_F(x-y)$ является функцией Грина для оператора Клейна-Гордона:
+\begin{equation}
+    (\partial^2 + m^2) D_F(x-y) = -i \delta^{(4)}(x-y).
+\end{equation}
+\textit{Доказательство:}
+Применим оператор $(\partial^2 + m^2) = (\partial_0^2 - \nabla^2 + m^2)$ к выражению (\ref{eq:prop_def}).
+Дифференцирование ступенчатых функций $\theta(t)$ по времени дает $\delta(t)$.
+\begin{align*}
+    \partial_0 [T\phi(x)\phi(y)] &= \delta(x^0-y^0)\phi(x)\phi(y) - \delta(y^0-x^0)\phi(y)\phi(x) + T(\partial_0\phi(x))\phi(y) \\
+    &= 0 + T \pi(x)\phi(y) \quad (\text{так как коммутатор полей при } x^0=y^0 \text{ равен } 0).
+\end{align*}
+Вторая производная:
+\begin{align*}
+    \partial_0^2 [T\phi(x)\phi(y)] &= \delta(x^0-y^0)[\pi(x), \phi(y)] + T(\partial_0^2\phi(x))\phi(y).
+\end{align*}
+Используя одновременной коммутатор $[\pi(\vec{x}), \phi(\vec{y})] = -i\delta^{(3)}(\vec{x}-\vec{y})$ и уравнение движения $(\partial^2+m^2)\phi=0$, получаем искомое равенство.
+
+\section{Импульсное представление}
+
+Для вычислений удобнее работать в импульсном пространстве. Сделаем преобразование Фурье:
+\begin{equation}
+    D_F(x-y) = \int \frac{d^4p}{(2\pi)^4} e^{-ip \cdot (x-y)} \tilde{D}_F(p).
+\end{equation}
+Подставляя это в уравнение $(\partial^2 + m^2)D_F = -i\delta$, получаем алгебраическое уравнение $(-p^2 + m^2)\tilde{D}_F(p) = -i$.
+Отсюда 
+\begin{equation} \label{eq:prop_mom}
+    \tilde{D}_F(p) = \frac{i}{p^2 - m^2 + i\varepsilon}.
+\end{equation}
+Бесконечно малая добавка $i\varepsilon$ ($\varepsilon \to +0$) вводится для того, чтобы правильно обойти полюса при интегрировании.
+
+\section{Контур интегрирования (Правило Фейнмана)}
+
+Знаменатель в (\ref{eq:prop_mom}) имеет полюса в точках:
+\begin{equation}
+    p^2 - m^2 + i\varepsilon = (p^0)^2 - \vec{p}^2 - m^2 + i\varepsilon = 0 \quad \Rightarrow \quad p^0 = \pm \sqrt{\vec{p}^2 + m^2 - i\varepsilon} \approx \pm (E_{\vec{p}} - i\varepsilon).
+\end{equation}
+Полюса смещены с вещественной оси:
+\begin{itemize}
+    \item Полюс $+E_{\vec{p}}$ смещен вниз (в нижнюю полуплоскость).
+    \item Полюс $-E_{\vec{p}}$ смещен вверх (в верхнюю полуплоскость).
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        % Axes
+        \draw[->] (-4,0) -- (4,0) node[right] {Re $p^0$};
+        \draw[->] (0,-2) -- (0,2) node[above] {Im $p^0$};
+        
+        % Poles
+        \fill (2,-0.2) circle (2pt) node[below right] {$+E_{\vec{p}}$};
+        \fill (-2,0.2) circle (2pt) node[above left] {$-E_{\vec{p}}$};
+        
+        % Contour
+        \draw[thick, blue, decoration={markings, mark=at position 0.5 with {\arrow{>}}}, postaction={decorate}] (-4,0.1) -- (-2.2, 0.1) arc (90:270:0.1) -- (1.8, -0.1) arc (90:-90:0.1) -- (4, -0.1);
+        \node[blue, above] at (0,0.2) {Контур Фейнмана};
+    \end{tikzpicture}
+    \caption{Расположение полюсов и контур интегрирования для фейнмановского пропагатора.}
+\end{figure}
+
+При вычислении интеграла по $p^0$:
+\begin{equation}
+    D_F(x-y) = \int \frac{d^3p}{(2\pi)^3} e^{i\vec{p}\cdot(\vec{x}-\vec{y})} \int \frac{dp^0}{2\pi} \frac{i e^{-ip^0(x^0-y^0)}}{(p^0 - E_{\vec{p}} + i\varepsilon)(p^0 + E_{\vec{p}} - i\varepsilon)}.
+\end{equation}
+\begin{itemize}
+    \item Если $x^0 > y^0$ ($t > 0$), замыкаем контур в нижней полуплоскости ($e^{-ip^0 t} \to 0$ при Im $p^0 \to -\infty$). В контур попадает полюс $+E_{\vec{p}}$. Это дает вклад $e^{-iE_{\vec{p}}t}$ (положительно-частотная мода, частица).
+    \item Если $x^0 < y^0$ ($t < 0$), замыкаем контур в верхней полуплоскости. В контур попадает полюс $-E_{\vec{p}}$. Это дает вклад $e^{iE_{\vec{p}}t}$ (отрицательно-частотная мода, античастица).
+\end{itemize}
+Таким образом, один и тот же контур (Фейнмановский) автоматически учитывает $T$-упорядочение.
+
+\section{Связь с другими функциями Грина}
+
+Помимо фейнмановского ($D_F$), существуют другие пропагаторы, отличающиеся правилом обхода полюсов:
+\begin{itemize}
+    \item \textbf{Запаздывающий ($D_R$):} Оба полюса обходятся сверху. $D_R(x) = 0$ при $x^0 < 0$.
+    \item \textbf{Опережающий ($D_A$):} Оба полюса обходятся снизу. $D_A(x) = 0$ при $x^0 > 0$.
+\end{itemize}
+Фейнмановский пропагатор можно выразить через них как:
+\begin{equation}
+    D_F(x) = \theta(x^0) D^{(+)}(x) - \theta(-x^0) D^{(-)}(x),
+\end{equation}
+где $D^{(\pm)}$ — частотные части функции Паули-Йордана.
+
+
+
+\chapter{Нормальное произведение операторов.}
+
+В квантовой теории поля операторы полей $\phi(x)$ строятся линейно из операторов рождения $a^\dagger_k$ и уничтожения $a_k$. При построении составных операторов (например, гамильтониана $H$ или тока $j^\mu$) часто возникают произведения полей в одной точке. 
+
+Если просто перемножить операторы полей, возникают расходимости. Например, гамильтониан свободного скалярного поля (см. Билет 4) имеет вид:
+\begin{equation}
+    H = \sum_k E_k (a^\dagger_k a_k + \frac{1}{2}).
+\end{equation}
+Слагаемое $\sum \frac{1}{2}E_k$ дает бесконечную энергию вакуума. Аналогично, вакуумное среднее от простого произведения полей $\langle 0 | \phi(x)\phi(y) | 0 \rangle$ не равно нулю (оно равно пропагатору).
+
+Для устранения этих вакуумных вкладов и приведения операторов к виду, в котором они "аннулируют" вакуум (т.е. $\langle 0 | \mathcal{O} | 0 \rangle = 0$), вводится процедура \textbf{нормального упорядочения}.
+
+\section{Определение нормального произведения}
+
+\textbf{Нормальным произведением} (или $N$-произведением) операторов поля называется такой порядок сомножителей, при котором \textbf{все операторы рождения стоят слева от всех операторов уничтожения}.
+
+Обозначение: $: \hat{A} \hat{B} \dots :$ или $N(\hat{A} \hat{B} \dots)$.
+
+\subsection{Для бозонных полей}
+Пусть $\phi(x)$ — скалярное поле. Разложим его на положительно-частотную часть $\phi^+(x)$ (содержит операторы уничтожения $a$) и отрицательно-частотную часть $\phi^-(x)$ (содержит операторы рождения $a^\dagger$):
+\begin{equation}
+    \phi(x) = \phi^+(x) + \phi^-(x).
+\end{equation}
+\textit{Примечание по обозначениям:} В книгах (например, у Боголюбова) часто используется обозначение $\phi^-$ для уничтожения и $\phi^+$ для рождения. Здесь мы следуем конвенции Пескина-Шредера, где $\phi^+ \sim e^{-ipx} a$ (частота $E>0$ в экспоненте) и $\phi^- \sim e^{ipx} a^\dagger$. Главное — разделить операторы $a$ и $a^\dagger$.
+
+Нормальное произведение двух полей определяется как:
+\begin{equation}
+    : \phi(x) \phi(y) : = \phi^+(x)\phi^+(y) + \phi^-(x)\phi^+(y) + \phi^-(y)\phi^+(x) + \phi^-(x)\phi^-(y).
+\end{equation}
+Здесь слагаемое, которое в обычном произведении стояло бы "неправильно" ($\phi^+(x)\phi^-(y) \sim a a^\dagger$), переставлено местами ($\phi^-(y)\phi^+(x) \sim a^\dagger a$).
+
+В общем случае для набора операторов рождения и уничтожения:
+\begin{equation}
+    : a_{k_1} a^\dagger_{k_2} a_{k_3} : = a^\dagger_{k_2} a_{k_1} a_{k_3}.
+\end{equation}
+Порядок среди самих операторов рождения (или уничтожения) не важен для бозонов, так как они коммутируют: $[a^\dagger_k, a^\dagger_q] = 0$.
+
+\subsection{Для фермионных полей}
+Для фермионов (поля Дирака $\psi, \bar{\psi}$) операторы антикоммутируют. При перестановке фермионных операторов в процессе нормального упорядочения необходимо учитывать знак.
+
+Правило: Переставляем операторы рождения налево, уничтожения направо, домножая на $(-1)$ за каждую перестановку между фермионными операторами.
+
+Пример для двух полей:
+Пусть $\psi = \psi^+ + \psi^-$ (где $\psi^+$ уничтожает частицы, $\psi^-$ рождает античастицы).
+\begin{equation}
+    : \psi_\alpha \psi_\beta : = \psi_\alpha^+ \psi_\beta^+ + \psi_\alpha^- \psi_\beta^+ + \psi_\beta^- \psi_\alpha^+ + \psi_\alpha^- \psi_\beta^-.
+\end{equation}
+Но если мы берем произведение $\psi$ и $\bar{\psi}$:
+\begin{equation}
+    : a_p a_q^\dagger : = - a_q^\dagger a_p.
+\end{equation}
+
+\section{Свойства нормального произведения}
+
+\begin{enumerate}
+    \item \textbf{Нулевое вакуумное среднее:}
+    По определению, справа в каждом слагаемом нормального произведения стоит оператор уничтожения (действующий на $|0\rangle_R$) или слева стоит оператор рождения (действующий на $\langle 0|_L$). Поэтому:
+    \begin{equation}
+        \langle 0 | : \hat{A} \hat{B} \dots : | 0 \rangle = 0.
+    \end{equation}
+    (За исключением случая, когда произведение состоит только из c-чисел).
+
+\item \textbf{Линейность и дистрибутивность:}
+    Операция нормального упорядочения линейна:
+    \begin{equation}
+        : (\alpha \hat{A} + \beta \hat{B}) \hat{C} : = \alpha : \hat{A} \hat{C} : + \beta : \hat{B} \hat{C} :.
+    \end{equation}
+
+\item \textbf{Связь с обычным произведением (Теорема Вика для двух операторов):}
+    Разница между обычным и нормальным произведением — это c-число (коммутатор или антикоммутатор).
+    Для бозонных полей:
+    \begin{equation}
+        \phi(x)\phi(y) = : \phi(x)\phi(y) : + \underbrace{[\phi^+(x), \phi^-(y)]}_{\text{спаривание}}.
+    \end{equation}
+    Величина $D(x-y) = [\phi^+(x), \phi^-(y)] = \langle 0 | \phi(x)\phi(y) | 0 \rangle$ называется \textbf{спариванием} (contraction).
+    В итоге:
+    \begin{equation}
+        \phi(x)\phi(y) = : \phi(x)\phi(y) : + \langle 0 | \phi(x)\phi(y) | 0 \rangle.
+    \end{equation}
+\end{enumerate}
+
+\section{Примеры использования}
+
+\subsection{Гамильтониан скалярного поля}
+Классический гамильтониан $H = \int d^3x \frac{1}{2}(\pi^2 + (\nabla\phi)^2 + m^2\phi^2)$.
+В квантовой теории мы постулируем, что физический гамильтониан — это нормальное произведение классического выражения:
+\begin{equation}
+    :H: = \int \frac{d^3p}{(2\pi)^3} E_p : (a_p a_p^\dagger + a_p^\dagger a_p) : \cdot \frac{1}{2} = \int \frac{d^3p}{(2\pi)^3} E_p a_p^\dagger a_p.
+\end{equation}
+Энергия вакуума $\langle 0 | :H: | 0 \rangle = 0$ автоматически отброшена.
+
+\subsection{Ток в КЭД}
+Ток фермионов $j^\mu = \bar{\psi} \gamma^\mu \psi$.
+Вакуумное среднее $\langle 0 | \bar{\psi} \gamma^\mu \psi | 0 \rangle$ в "наивной" теории бесконечно (суммирование по всем состояниям моря Дирака).
+Физический ток определяется как нормальное произведение:
+\begin{equation}
+    j^\mu(x) = : \bar{\psi}(x) \gamma^\mu \psi(x) :.
+\end{equation}
+Это определение гарантирует, что в вакууме нет тока и заряда. Также это обеспечивает симметрию заряда: $Q = \int :j^0: d^3x \sim N_{e^-} - N_{e^+}$. Без нормального упорядочения заряд позитрона имел бы тот же знак, что и электрона (из-за бесконечного фона моря Дирака), или возникали бы бесконечные константы.
+
+\section{Обобщение: Теорема Вика}
+(Подробнее в вопросах про S-матрицу, но суть важна здесь).
+Нормальное произведение является основой для разложения $T$-произведения (хронологического), которое входит в формулу Дайсона для S-матрицы.
+\begin{equation}
+    T(\phi(x_1) \dots \phi(x_n)) = : \phi(x_1) \dots \phi(x_n) : + \sum \text{все возможные спаривания}.
+\end{equation}
+Это позволяет вычислять матричные элементы процессов рассеяния, сводя их к комбинаторике нормальных произведений.
+
+
+
+\chapter{Спинорное поле. Импульсное представление.}
+
+Спинорное поле $\psi(x)$ описывает фермионы со спином $1/2$ (например, электроны и кварки). Свободное поле подчиняется уравнению Дирака:
+\begin{equation}
+    (i \gamma^\mu \partial_\mu - m) \psi(x) = 0.
+\end{equation}
+Для перехода к квантовой теории и импульсному представлению необходимо найти полный набор решений этого уравнения в виде плоских волн, а затем разложить поле по этим модам.
+
+\section{Решения в виде плоских волн (Классический уровень)}
+
+Будем искать решения в виде плоских волн с определенным 4-импульсом $p^\mu$ ($p^2 = m^2, p^0 > 0$). Существует два типа решений:
+\begin{enumerate}
+    \item \textbf{Решения с положительной энергией} (соответствуют частицам):
+    \begin{equation}
+        \psi(x) = u^s(p) e^{-ip \cdot x}.
+    \end{equation}
+    \item \textbf{Решения с отрицательной энергией} (соответствуют античастицам):
+    \begin{equation}
+        \psi(x) = v^s(p) e^{ip \cdot x}.
+    \end{equation}
+\end{enumerate}
+Здесь $s = 1, 2$ — индекс спина (поляризации).
+
+Подставляя эти анзацы в уравнение Дирака, получаем алгебраические уравнения для биспиноров (спиноров) $u(p)$ и $v(p)$:
+\begin{align}
+    (\slashed{p} - m) u^s(p) &= 0, \label{eq:u_eq} \\
+    (\slashed{p} + m) v^s(p) &= 0. \label{eq:v_eq}
+\end{align}
+где $\slashed{p} = \gamma^\mu p_\mu$.
+
+\subsection{Явный вид спиноров (в представлении Дирака-Паули)}
+В системе покоя частицы ($p^\mu = (m, 0, 0, 0)$) уравнения (\ref{eq:u_eq})-(\ref{eq:v_eq}) дают:
+\begin{equation}
+    u^s(p_{rest}) = \sqrt{2m} \begin{pmatrix} \xi^s \\ 0 \end{pmatrix}, \quad v^s(p_{rest}) = \sqrt{2m} \begin{pmatrix} 0 \\ \eta^s \end{pmatrix},
+\end{equation}
+где $\xi^s$ и $\eta^s$ — двухкомпонентные спиноры Паули (например, $\binom{1}{0}$ и $\binom{0}{1}$). Множитель $\sqrt{2m}$ выбран для релятивистской нормировки.
+
+Для произвольного импульса $p$ спиноры получаются действием оператора буста или прямым решением уравнения:
+\begin{equation}
+    u^s(p) = \begin{pmatrix} \sqrt{p \cdot \sigma} \xi^s \\ \sqrt{p \cdot \bar{\sigma}} \xi^s \end{pmatrix}, \quad 
+    v^s(p) = \begin{pmatrix} \sqrt{p \cdot \sigma} \eta^s \\ -\sqrt{p \cdot \bar{\sigma}} \eta^s \end{pmatrix},
+\end{equation}
+где $\sigma^\mu = (1, \vec{\sigma})$, $\bar{\sigma}^\mu = (1, -\vec{\sigma})$.
+
+\subsection{Свойства спиноров}
+Для квантования критически важны соотношения ортогональности, нормировки и полноты.
+
+\begin{enumerate}
+    \item \textbf{Лоренц-инвариантная нормировка:}
+    \begin{align}
+        \bar{u}^r(p) u^s(p) &= 2m \delta^{rs}, \\
+        \bar{v}^r(p) v^s(p) &= -2m \delta^{rs}, \\
+        \bar{u}^r(p) v^s(p) &= \bar{v}^r(p) u^s(p) = 0.
+    \end{align}
+    (Здесь $\bar{u} = u^\dagger \gamma^0$ — дираковское сопряжение). Обратите внимание: $u^\dagger u = 2E_p \delta^{rs}$ (плотность вероятности $\sim E$, испытывает Лоренцево сокращение).
+
+    \item \textbf{Соотношения полноты (Spin sums):}
+    При вычислении сечений рассеяния часто нужно суммировать по поляризациям конечных частиц и усреднять по начальным.
+    \begin{align}
+        \sum_{s=1,2} u^s(p) \bar{u}^s(p) &= \slashed{p} + m, \\
+        \sum_{s=1,2} v^s(p) \bar{v}^s(p) &= \slashed{p} - m.
+    \end{align}
+\end{enumerate}
+
+\section{Квантование (Разложение по модам)}
+
+В квантовой теории поля $\psi(x)$ становится оператором. Мы раскладываем его по полному набору плоских волн, вводя операторы рождения и уничтожения.
+Так как спиноры описывают фермионы, частицы и античастицы различаются (электрон $e^-$ и позитрон $e^+$).
+
+\textbf{Разложение поля:}
+\begin{equation} \label{eq:psi_expansion}
+    \psi(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_{s=1,2} \left( a^s_{\vec{p}} u^s(p) e^{-ip \cdot x} + b^{s\dagger}_{\vec{p}} v^s(p) e^{ip \cdot x} \right).
+\end{equation}
+\textbf{Дираковски сопряженное поле:}
+\begin{equation}
+    \bar{\psi}(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_{s=1,2} \left( b^s_{\vec{p}} \bar{v}^s(p) e^{-ip \cdot x} + a^{s\dagger}_{\vec{p}} \bar{u}^s(p) e^{ip \cdot x} \right).
+\end{equation}
+
+Здесь введены два типа операторов:
+\begin{itemize}
+    \item $a^s_{\vec{p}}$ — оператор уничтожения частицы (электрона) с импульсом $\vec{p}$ и спином $s$.
+    \item $b^{s\dagger}_{\vec{p}}$ — оператор рождения античастицы (позитрона) с импульсом $\vec{p}$ и спином $s$.
+\end{itemize}
+Обратите внимание: при $e^{ipx}$ (отрицательная частота) стоит оператор рождения античастицы, чтобы энергия состояния была положительной.
+
+\section{Антикоммутационные соотношения}
+
+Для фермионов статистика требует, чтобы операторы подчинялись **антикоммутационным** соотношениям ($\{A, B\} = AB + BA$):
+\begin{align}
+    \{a^r_{\vec{p}}, a^{s\dagger}_{\vec{q}}\} &= (2\pi)^3 \delta^{(3)}(\vec{p} - \vec{q}) \delta^{rs}, \\
+    \{b^r_{\vec{p}}, b^{s\dagger}_{\vec{q}}\} &= (2\pi)^3 \delta^{(3)}(\vec{p} - \vec{q}) \delta^{rs}.
+\end{align}
+Все остальные антикоммутаторы (например, $\{a, a\}$, $\{b, b\}$, $\{a, b^\dagger\}$) равны нулю.
+
+Это приводит к принципу Паули: $(a^{s\dagger}_{\vec{p}})^2 = 0$ (нельзя создать два фермиона в одном состоянии).
+
+\section{Гамильтониан и энергия}
+
+Классический гамильтониан поля Дирака:
+\begin{equation}
+    H = \int d^3x \bar{\psi} (-i \vec{\gamma} \cdot \nabla + m) \psi.
+\end{equation}
+Подставляя разложение (\ref{eq:psi_expansion}) и используя ортогональность спиноров, получаем:
+\begin{equation}
+    H = \int \frac{d^3p}{(2\pi)^3} E_p \sum_s (a^{s\dagger}_{\vec{p}} a^s_{\vec{p}} - b^s_{\vec{p}} b^{s\dagger}_{\vec{p}}).
+\end{equation}
+Знак «минус» перед вторым слагаемым возникает из-за антикоммутации. Чтобы энергия была положительной, мы используем нормальное упорядочение для фермионов (перестановка операторов меняет знак, $:b b^\dagger: = - b^\dagger b$):
+\begin{equation}
+    :H: = \int \frac{d^3p}{(2\pi)^3} E_p \sum_s (a^{s\dagger}_{\vec{p}} a^s_{\vec{p}} + b^{s\dagger}_{\vec{p}} b^s_{\vec{p}}).
+\end{equation}
+Теперь энергия системы равна сумме энергий частиц ($N_e$) и античастиц ($N_{\bar{e}}$), и она всегда положительно определена.
+
+
+
+\chapter{Фейнмановский пропагатор поля Дирака.}
+
+Фейнмановский пропагатор для поля Дирака $S_F(x-y)$ — это причинная функция Грина, описывающая распространение фермионов (электронов и позитронов) между двумя точками пространства-времени. В диаграммной технике он соответствует внутренней фермионной линии, соединяющей две вершины.
+
+\section{Определение через Т-произведение}
+
+Аналогично скалярному случаю, пропагатор определяется как вакуумное среднее от хронологически упорядоченного произведения полей. Однако для фермионов определение $T$-произведения включает знак минус при перестановке операторов:
+
+\begin{equation}
+    S_F(x-y) = \langle 0 | T \psi(x) \bar{\psi}(y) | 0 \rangle,
+\end{equation}
+где
+\begin{equation} \label{eq:T_product_fermi}
+    T \psi(x) \bar{\psi}(y) = 
+    \begin{cases} 
+    \psi(x)\bar{\psi}(y), & \text{если } x^0 > y^0 \\
+    -\bar{\psi}(y)\psi(x), & \text{если } y^0 > x^0 
+    \end{cases}
+\end{equation}
+Знак минус необходим для сохранения лоренц-инвариантности и связи со спином (статистика Ферми-Дирака). Операторы полей антикоммутируют вне светового конуса, и минус компенсирует перестановку.
+
+\section{Дифференциальное уравнение}
+
+Пропагатор $S_F(x-y)$ является функцией Грина для оператора Дирака. 
+Подействуем оператором $(i \slashed{\partial}_x - m)$ на определение (\ref{eq:T_product_fermi}):
+\begin{align}
+    (i \slashed{\partial}_x - m) S_F(x-y) &= (i \gamma^0 \partial_0 + i \vec{\gamma}\cdot\nabla - m) \left[ \theta(x^0-y^0)\psi(x)\bar{\psi}(y) - \theta(y^0-x^0)\bar{\psi}(y)\psi(x) \right] \nonumber \\
+    &= \langle 0 | T (i \slashed{\partial} - m)\psi(x) \cdot \bar{\psi}(y) | 0 \rangle \nonumber \\
+    &\quad + i \gamma^0 \left[ \partial_0 \theta(x^0-y^0)\psi(x)\bar{\psi}(y) - \partial_0 \theta(y^0-x^0)\bar{\psi}(y)\psi(x) \right].
+\end{align}
+Первое слагаемое равно нулю, так как $\psi(x)$ удовлетворяет уравнению Дирака.
+Во втором слагаемом используем $\partial_0 \theta(t) = \delta(t)$:
+\begin{equation}
+    \dots = i \gamma^0 \delta(x^0-y^0) \langle 0 | \{ \psi(x), \bar{\psi}(y) \} | 0 \rangle.
+\end{equation}
+Используя одновременной антикоммутатор $\{ \psi(\vec{x}), \psi^\dagger(\vec{y}) \} = \delta^{(3)}(\vec{x}-\vec{y})$ (помня, что $\bar{\psi} = \psi^\dagger \gamma^0$, то есть $\{ \psi, \bar{\psi} \} = \gamma^0 \delta^{(3)}$), получаем $\gamma^0 \gamma^0 = 1$.
+Итоговое уравнение:
+\begin{equation}
+    (i \slashed{\partial} - m) S_F(x-y) = i \delta^{(4)}(x-y).
+\end{equation}
+(Обратите внимание: множитель $i$ справа — это стандартная конвенция в физике частиц, отличающаяся от математической теории функций Грина).
+
+\section{Импульсное представление}
+
+Сделаем преобразование Фурье:
+\begin{equation}
+    S_F(x-y) = \int \frac{d^4p}{(2\pi)^4} e^{-ip \cdot (x-y)} \tilde{S}_F(p).
+\end{equation}
+Подставляя в уравнение, получаем алгебраическое соотношение для матрицы $4\times4$:
+\begin{equation}
+    (\slashed{p} - m) \tilde{S}_F(p) = i.
+\end{equation}
+Формально решение записывается как обратная матрица:
+\begin{equation}
+    \tilde{S}_F(p) = \frac{i}{\slashed{p} - m}.
+\end{equation}
+Чтобы избавиться от матрицы в знаменателе, домножим числитель и знаменатель на $(\slashed{p} + m)$ и воспользуемся тождеством $(\slashed{p} - m)(\slashed{p} + m) = p^2 - m^2$:
+\begin{equation}
+    \tilde{S}_F(p) = \frac{i(\slashed{p} + m)}{p^2 - m^2 + i\varepsilon}.
+\end{equation}
+Здесь, как и в скалярном случае, добавка $+i\varepsilon$ определяет правило обхода полюсов (Фейнмановский обход), соответствующее причинному распространению.
+
+\section{Связь со скалярным пропагатором}
+
+Пропагатор Дирака можно выразить через скалярный пропагатор $D_F(x-y)$:
+\begin{equation}
+    S_F(x-y) = (i \slashed{\partial} + m) D_F(x-y).
+\end{equation}
+Это следует из того, что $(\slashed{p} + m)$ в числителе в координатном пространстве переходит в оператор $(i \slashed{\partial} + m)$. Это отражает тот факт, что частица со спином 1/2 переносит не только массу (как скаляр), но и спиновую информацию.
+
+\section{Структура пропагатора (Частицы и Античастицы)}
+
+Рассмотрим вычеты в полюсах $p^0 = \pm E_p$.
+\begin{enumerate}
+    \item \textbf{При $x^0 > y^0$ (распространение вперед во времени):}
+    Контур интегрирования замыкается снизу, захватывая полюс $p^0 = +E_p$.
+    Числитель $(\slashed{p} + m)$ на массовой поверхности (где $\slashed{p} u = m u$) можно переписать через спиновые суммы:
+    \begin{equation}
+        \slashed{p} + m = \sum_{s=1,2} u^s(p) \bar{u}^s(p).
+    \end{equation}
+    Это означает, что пропагатор переносит частицу (электрон) из $y$ в $x$, суммируя по всем возможным спиновым состояниям.
+    
+    \item \textbf{При $y^0 > x^0$ (распространение назад во времени):}
+    Контур замыкается сверху, полюс $p^0 = -E_p$.
+    Здесь работает проектор на состояния с отрицательной энергией:
+    \begin{equation}
+        \slashed{p} - m = \sum_{s=1,2} v^s(p) \bar{v}^s(p).
+    \end{equation}
+    Это интерпретируется как распространение античастицы (позитрона) из $x$ в $y$.
+\end{enumerate}
+
+Таким образом, формула Фейнмана автоматически объединяет распространение электронов и позитронов в одну функцию.
+
+
+
+\chapter{Матрица рассеяния. Представление взаимодействия.}
+
+Основной задачей квантовой теории поля является вычисление вероятностей переходов между состояниями в процессах столкновения частиц.
+Пусть в далеком прошлом ($t \to -\infty$) система находится в начальном состоянии $|i\rangle$ (in-state), представляющем собой набор свободных частиц. В результате взаимодействия в далеком будущем ($t \to +\infty$) система переходит в конечное состояние $|f\rangle$ (out-state).
+
+Амплитуда вероятности этого перехода определяется матричным элементом оператора рассеяния $\hat{S}$:
+\begin{equation}
+    S_{fi} = \langle f | \hat{S} | i \rangle.
+\end{equation}
+Оператор $\hat{S}$ называется \textbf{матрицей рассеяния}. Он унитарен ($S^\dagger S = I$), что гарантирует сохранение полной вероятности (сумма вероятностей перехода во все возможные конечные состояния равна 1).
+
+\section{Представления в квантовой механике}
+
+Для вычисления $\hat{S}$ удобно использовать **представление взаимодействия** (Interaction Picture), которое является промежуточным между представлением Шредингера и представлением Гейзенберга.
+
+Разделим полный гамильтониан системы на свободную часть $H_0$ и гамильтониан взаимодействия $H_{int}$:
+\begin{equation}
+    H = H_0 + H_{int}.
+\end{equation}
+
+\subsection{Представление Шредингера (Sch)}
+\begin{itemize}
+    \item Операторы не зависят от времени (если нет явной зависимости): $\hat{O}_S$.
+    \item Состояния зависят от времени и подчиняются уравнению Шредингера:
+    \begin{equation}
+        i \frac{d}{dt} |\psi_S(t)\rangle = (H_0 + H_{int}) |\psi_S(t)\rangle.
+    \end{equation}
+\end{itemize}
+
+\subsection{Представление Гейзенберга (Heis)}
+\begin{itemize}
+    \item Состояния не зависят от времени: $|\psi_H\rangle = |\psi_S(0)\rangle$.
+    \item Операторы эволюционируют с полным гамильтонианом: $\hat{O}_H(t) = e^{iHt} \hat{O}_S e^{-iHt}$.
+\end{itemize}
+
+\subsection{Представление взаимодействия (Int)}
+Здесь мы хотим «спрятать» тривиальную эволюцию свободных частиц в операторы, а сложную динамику взаимодействия оставить в состояниях.
+
+Определим вектор состояния в представлении взаимодействия $|\psi_I(t)\rangle$ через шредингеровский вектор:
+\begin{equation}
+    |\psi_I(t)\rangle = e^{iH_0 t} |\psi_S(t)\rangle.
+\end{equation}
+Операторы в представлении взаимодействия определяются как:
+\begin{equation}
+    \hat{O}_I(t) = e^{iH_0 t} \hat{O}_S e^{-iH_0 t}.
+\end{equation}
+В частности, операторы поля $\phi_I(x)$ в этом представлении удовлетворяют \textbf{свободным} уравнениям движения (Клейна-Гордона или Дирака), что позволяет использовать для них разложение по плоским волнам (как в Билетах 4 и 7).
+
+\section{Уравнение Шредингера в представлении взаимодействия}
+
+Найдем, как меняется состояние $|\psi_I(t)\rangle$ со временем. Дифференцируем определение:
+\begin{align}
+    i \frac{d}{dt} |\psi_I(t)\rangle &= i \frac{d}{dt} (e^{iH_0 t} |\psi_S(t)\rangle) \nonumber \\
+    &= i (iH_0) e^{iH_0 t} |\psi_S(t)\rangle + e^{iH_0 t} i \frac{d}{dt} |\psi_S(t)\rangle \nonumber \\
+    &= -H_0 |\psi_I(t)\rangle + e^{iH_0 t} (H_0 + H_{int}) |\psi_S(t)\rangle \nonumber \\
+    &= -H_0 |\psi_I(t)\rangle + e^{iH_0 t} H_0 e^{-iH_0 t} |\psi_I(t)\rangle + e^{iH_0 t} H_{int} e^{-iH_0 t} |\psi_I(t)\rangle.
+\end{align}
+Первые два члена сокращаются. Последний член — это гамильтониан взаимодействия в представлении взаимодействия:
+\begin{equation}
+    H_I(t) = e^{iH_0 t} H_{int} e^{-iH_0 t}.
+\end{equation}
+Таким образом, уравнение эволюции принимает вид (аналог уравнения Шредингера, но только с $H_I$):
+\begin{equation} \label{eq:int_schrodinger}
+    i \frac{d}{dt} |\psi_I(t)\rangle = H_I(t) |\psi_I(t)\rangle.
+\end{equation}
+Важно: В отличие от $H_{int}$ (который обычно постоянен), $H_I(t)$ зависит от времени.
+
+\section{Оператор временной эволюции}
+
+Введем унитарный оператор эволюции $U(t, t_0)$, который переводит состояние из момента $t_0$ в момент $t$:
+\begin{equation}
+    |\psi_I(t)\rangle = U(t, t_0) |\psi_I(t_0)\rangle.
+\end{equation}
+Подставляя это в уравнение (\ref{eq:int_schrodinger}), получаем уравнение для оператора:
+\begin{equation} \label{eq:U_diff}
+    i \frac{d}{dt} U(t, t_0) = H_I(t) U(t, t_0),
+\end{equation}
+с начальным условием $U(t_0, t_0) = 1$.
+
+\section{Ряд Дайсона}
+
+Уравнение (\ref{eq:U_diff}) можно переписать в интегральной форме:
+\begin{equation}
+    U(t, t_0) = 1 - i \int_{t_0}^t dt_1 H_I(t_1) U(t_1, t_0).
+\end{equation}
+Решаем его методом итераций:
+\begin{enumerate}
+    \item Нулевое приближение: $U^{(0)} = 1$.
+    \item Первое приближение:
+    \begin{equation}
+        U^{(1)}(t, t_0) = 1 - i \int_{t_0}^t dt_1 H_I(t_1).
+    \end{equation}
+    \item Второе приближение (подставляем $U^{(1)}$ под интеграл):
+    \begin{equation}
+        U^{(2)}(t, t_0) = 1 - i \int_{t_0}^t dt_1 H_I(t_1) + (-i)^2 \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1) H_I(t_2).
+    \end{equation}
+    Обратите внимание на пределы интегрирования во втором члене: $t_0 < t_2 < t_1 < t$. Операторы стоят в хронологическом порядке (более ранний $t_2$ справа).
+\end{enumerate}
+
+Этот ряд можно записать компактно с помощью символа $T$-произведения (хронологического упорядочения), который автоматически расставляет операторы по времени и позволяет расширить пределы интегрирования до $t$:
+\begin{equation}
+    \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1) H_I(t_2) = \frac{1}{2!} \int_{t_0}^t dt_1 \int_{t_0}^t dt_2 T[H_I(t_1) H_I(t_2)].
+\end{equation}
+Общая формула для оператора эволюции (ряд Дайсона):
+\begin{equation}
+    U(t, t_0) = T \exp \left( -i \int_{t_0}^t dt' H_I(t') \right).
+\end{equation}
+
+\section{S-матрица}
+
+Матрица рассеяния — это предел оператора эволюции, когда начальный момент уходит в $-\infty$, а конечный в $+\infty$:
+\begin{equation}
+    \hat{S} = U(\infty, -\infty) = T \exp \left( -i \int_{-\infty}^{\infty} d^4x \mathcal{H}_I(x) \right).
+\end{equation}
+Здесь мы перешли от гамильтониана $H_I(t) = \int d^3x \mathcal{H}_I(x)$ к плотности гамильтониана взаимодействия $\mathcal{H}_I(x)$.
+
+Это выражение является отправной точкой для построения теории возмущений. Разложение экспоненты в ряд дает слагаемые разного порядка по константе связи, которые графически изображаются с помощью диаграмм Фейнмана.
+
+
+
+\chapter{Электромагнитное взаимодействие. Матричные элементы S-матрицы. Правила Фейнмана.}
+
+Квантовая электродинамика (КЭД) описывает взаимодействие спинорного поля (электронов/позитронов) с векторным электромагнитным полем (фотонами). 
+Лагранжиан взаимодействия строится на основе принципа \textit{минимальной связи} (замена обычной производной на ковариантную: $\partial_\mu \to D_\mu = \partial_\mu + ieA_\mu$).
+
+Плотность гамильтониана взаимодействия (в представлении взаимодействия):
+\begin{equation}
+    \mathcal{H}_{int} = -\mathcal{L}_{int} = j^\mu A_\mu = e \bar{\psi} \gamma^\mu \psi A_\mu,
+\end{equation}
+где:
+\begin{itemize}
+    \item $e > 0$ — элементарный заряд (заряд электрона равен $-e$).
+    \item $\psi(x)$ — оператор электрон-позитронного поля.
+    \item $A_\mu(x)$ — оператор электромагнитного поля.
+\end{itemize}
+
+\section{Матричные элементы S-матрицы}
+
+Амплитуда вероятности перехода из начального состояния $|i\rangle$ в конечное $|f\rangle$ дается элементом S-матрицы:
+\begin{equation}
+    S_{fi} = \langle f | \hat{S} | i \rangle = \langle f | T \exp \left( -i \int d^4x e \bar{\psi}(x) \gamma^\mu \psi(x) A_\mu(x) \right) | i \rangle.
+\end{equation}
+Разложение экспоненты в ряд теории возмущений дает:
+\begin{equation}
+    S = 1 + S^{(1)} + S^{(2)} + \dots
+\end{equation}
+\begin{itemize}
+    \item $S^{(1)} \sim \int (\bar{\psi} A \psi)$: Описывает процессы с участием 3 частиц (рождение фотона электроном и т.д.). В свободном пространстве запрещено законами сохранения энергии-импульса.
+    \item $S^{(2)} \sim \frac{(-ie)^2}{2!} \int d^4x d^4y T[(\bar{\psi}\gamma^\mu \psi A_\mu)_x (\bar{\psi}\gamma^\nu \psi A_\nu)_y]$. Описывает основные процессы: рассеяние электрона на электроне, комптон-эффект и т.д.
+\end{itemize}
+
+Для вычисления матричных элементов используется **Теорема Вика**: $T$-произведение операторов сводится к сумме нормальных произведений ($: \dots :$) со всеми возможными спариваниями (пропагаторами).
+\begin{itemize}
+    \item Спаривание полей $\psi(x)$ и $\bar{\psi}(y)$ дает фермионный пропагатор $S_F(x-y)$.
+    \item Спаривание полей $A_\mu(x)$ и $A_\nu(y)$ дает фотонный пропагатор $D_F^{\mu\nu}(x-y)$.
+    \item Неспаренные операторы действуют на внешние состояния $|i\rangle$ и $|f\rangle$, рождая или уничтожая частицы.
+\end{itemize}
+
+\section{Инвариантная амплитуда $\mathcal{M}$}
+
+Матричный элемент всегда содержит дельта-функцию, обеспечивающую сохранение полного 4-импульса:
+\begin{equation}
+    S_{fi} = \delta_{fi} + i (2\pi)^4 \delta^{(4)}(P_f - P_i) \mathcal{M}_{fi}.
+\end{equation}
+Величина $\mathcal{M}$ называется \textbf{инвариантной амплитудой} (или матричным элементом Фейнмана). Именно для вычисления $i\mathcal{M}$ формулируются правила Фейнмана.
+
+\section{Правила Фейнмана для КЭД (в импульсном пространстве)}
+
+Чтобы вычислить $i\mathcal{M}$ для заданного процесса, нужно нарисовать все топологически различные диаграммы данного порядка теории возмущений и сопоставить элементам диаграммы аналитические выражения.
+
+\subsection{Элементы диаграммы}
+
+\begin{enumerate}
+    \item \textbf{Вершина взаимодействия:}
+    В каждой точке, где сходятся две фермионные линии и одна фотонная:
+    \begin{equation*}
+        \quad \Rightarrow \quad -ie \gamma^\mu
+    \end{equation*}
+    (Интегрирование по координатам дает $(2\pi)^4\delta(\sum p)$, что учитывается в сохранении импульса в каждом узле).
+
+    \item \textbf{Внутренние линии (Пропагаторы):}
+    \begin{itemize}
+        \item \textbf{Фотон} (линия с импульсом $k$, соединяющая индексы $\mu$ и $\nu$):
+        \begin{equation}
+            \frac{-i g_{\mu\nu}}{k^2 + i\varepsilon}
+        \end{equation}
+        (В фейнмановской калибровке).
+        \item \textbf{Фермион} (электрон/позитрон, линия с импульсом $p$):
+        \begin{equation}
+            \frac{i(\slashed{p} + m)}{p^2 - m^2 + i\varepsilon}
+        \end{equation}
+    \end{itemize}
+
+    \item \textbf{Внешние линии (Поляризационные волновые функции):}
+    \begin{itemize}
+        \item \textbf{Входящий электрон} (импульс $p$, спин $s$): $u^s(p)$.
+        \item \textbf{Выходящий электрон} (импульс $p$, спин $s$): $\bar{u}^s(p)$.
+        \item \textbf{Входящий позитрон} (античастица): $\bar{v}^s(p)$.
+        \item \textbf{Выходящий позитрон}: $v^s(p)$.
+        \item \textbf{Входящий фотон} (импульс $k$, поляризация $\lambda$): $\varepsilon_\mu^\lambda(k)$.
+        \item \textbf{Выходящий фотон}: $\varepsilon_\mu^{\lambda*}(k)$.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Построение выражения}
+
+\begin{enumerate}
+    \item \textbf{Направление:} Фермионные линии имеют стрелки. Выражение для фермионной цепочки записывается \textit{против} направления стрелок (справа налево в матричном смысле):
+    $$ \bar{u}(p') \dots \gamma^\mu \dots u(p) $$
+    \item \textbf{Сохранение импульса:} В каждой вершине выполняется закон сохранения 4-импульса (сумма входящих равна сумме выходящих).
+    \item \textbf{Интегрирование:} По каждому внутреннему импульсу $q$, который не фиксирован законом сохранения (петли), проводится интегрирование $\int \frac{d^4q}{(2\pi)^4}$.
+    \item \textbf{Знаки:}
+    \begin{itemize}
+        \item Каждый замкнутый фермионный цикл дает множитель $(-1)$.
+        \item Знак минус возникает при перестановке тождественных фермионов в конечном состоянии (статистика Ферми).
+    \end{itemize}
+    \item \textbf{Симметрийные факторы:} В КЭД они обычно равны 1, но нужно быть внимательным с тождественными фотонами.
+\end{enumerate}
+
+\section{Пример: Рассеяние электрона на мюоне ($e^- \mu^- \to e^- \mu^-$)}
+
+В низшем порядке ($e^2$) есть одна диаграмма: обмен виртуальным фотоном.
+Пусть $p_1, p_2$ — импульсы начальных электрона и мюона, $p_3, p_4$ — конечных. Обменный импульс $q = p_1 - p_3 = p_4 - p_2$.
+
+Амплитуда $i\mathcal{M}$:
+\begin{equation}
+    i\mathcal{M} = \underbrace{[\bar{u}(p_3) (-ie\gamma^\mu) u(p_1)]}_{\text{электронный ток}} \cdot \underbrace{\frac{-ig_{\mu\nu}}{q^2}}_{\text{пропагатор}} \cdot \underbrace{[\bar{u}(p_4) (-ie\gamma^\nu) u(p_2)]}_{\text{мюонный ток}}.
+\end{equation}
+Итого:
+\begin{equation}
+    \mathcal{M} = -\frac{e^2}{q^2} (\bar{u}_3 \gamma^\mu u_1) (\bar{u}_4 \gamma_\mu u_2).
+\end{equation}
+Квадрат модуля этой амплитуды (после суммирования по спинам) дает сечение рассеяния.
+
+
+
+\chapter{Эффективные линии. Уравнения Дайсона для функций Грина.}
+
+В теории возмущений мы оперируем свободными пропагаторами (тонкими линиями на диаграммах), которые описывают распространение невзаимодействующих частиц. Однако в полной теории частица постоянно взаимодействует с вакуумными флуктуациями (виртуальными парами, фотонами и т.д.). 
+
+\textbf{Эффективная линия} (или точный пропагатор, одетая линия) описывает распространение частицы с учетом всех возможных взаимодействий с вакуумом. На диаграммах эффективные линии обычно обозначаются жирными линиями или линиями с заштрихованным кружком.
+
+Соотношения, связывающие точные пропагаторы с «голыми» (свободными) пропагаторами и собственно-энергетическими частями, называются \textbf{уравнениями Дайсона} (F. Dyson, 1949).
+
+\section{Собственно-энергетические части}
+
+Для построения уравнений Дайсона необходимо ввести понятие одночастично-неприводимых (1PI — One-Particle Irreducible) диаграмм.
+
+\subsection{Собственная энергия электрона $\Sigma(p)$}
+Рассмотрим все диаграммы, имеющие две внешние электронные линии. Выделим из них те, которые \textit{нельзя} разделить на две несвязные части, разрезав одну внутреннюю электронную линию.
+Сумма всех таких диаграмм (без внешних пропагаторов) называется \textbf{собственно-энергетической частью} электрона (или массовым оператором $M(p)$ в терминологии Ландау-Лифшица).
+Обозначим её $-i\Sigma(p)$.
+
+Примеры вкладов в $\Sigma(p)$:
+\begin{itemize}
+    \item Однопетлевая диаграмма (собственная энергия 2-го порядка): испускание и поглощение виртуального фотона.
+    \item Двухпетлевые диаграммы и т.д.
+\end{itemize}
+
+\subsection{Поляризационный оператор фотона $\Pi^{\mu\nu}(q)$}
+Аналогично, для фотона рассматриваются диаграммы с двумя внешними фотонными линиями, которые нельзя разбить разрезанием одной фотонной линии. Сумма таких диаграмм называется \textbf{поляризационным оператором}.
+Обозначим его $i\Pi^{\mu\nu}(q)$.
+В силу калибровочной инвариантности $\Pi^{\mu\nu}(q) = (q^2 g^{\mu\nu} - q^\mu q^\nu)\Pi(q^2)$.
+
+\section{Уравнение Дайсона для электрона}
+
+\subsection{Графический вывод}
+Точный пропагатор электрона $S(p)$ (или $G(p)$) представляет собой сумму ряда, где частица может произвольное число раз испытывать виртуальные взаимодействия, описываемые $\Sigma(p)$.
+Этот ряд представляет собой геометрическую прогрессию:
+\begin{center}
+    \begin{tikzpicture}
+        % Full propagator
+        \draw[ultra thick] (0,0) -- (1.5,0);
+        \node at (2,0) {=};
+        
+        % Free propagator
+        \draw (2.5,0) -- (4,0);
+        \node at (4.5,0) {+};
+        
+        % One insertion
+        \draw (5,0) -- (6,0);
+        \fill[gray!50] (6,0) circle (0.3);
+        \node at (6,0) {$\Sigma$};
+        \draw (6.3,0) -- (7.3,0);
+        \node at (7.8,0) {+};
+        
+        % Two insertions
+        \draw (8.3,0) -- (9.3,0);
+        \fill[gray!50] (9.3,0) circle (0.3);
+        \node at (9.3,0) {$\Sigma$};
+        \draw (9.6,0) -- (10.6,0);
+        \fill[gray!50] (10.6,0) circle (0.3);
+        \node at (10.6,0) {$\Sigma$};
+        \draw (10.9,0) -- (11.9,0);
+        \node at (12.4,0) {+ ...};
+    \end{tikzpicture}
+\end{center}
+Обозначим свободный пропагатор $S_0(p) = \frac{i}{\slashed{p} - m_0}$. Тогда ряд записывается как:
+\begin{equation}
+    S(p) = S_0(p) + S_0(p)(-i\Sigma(p))S_0(p) + S_0(p)(-i\Sigma(p))S_0(p)(-i\Sigma(p))S_0(p) + \dots
+\end{equation}
+Это можно переписать в виде рекуррентного уравнения (уравнения Дайсона):
+\begin{equation}
+    S(p) = S_0(p) + S_0(p)(-i\Sigma(p))S(p).
+\end{equation}
+Здесь справа стоит \textbf{точный} пропагатор $S(p)$, что соответствует суммированию всего «хвоста» прогрессии.
+
+\subsection{Аналитический вид}
+Умножим уравнение на $S_0^{-1}(p)$ слева и на $S^{-1}(p)$ справа:
+\begin{equation}
+    S^{-1}(p) = S_0^{-1}(p) - (-i\Sigma(p)) = S_0^{-1}(p) + i\Sigma(p).
+\end{equation}
+Вспоминая явный вид $S_0^{-1}(p) = -i(\slashed{p} - m_0)$ (с точностью до $i$, в зависимости от конвенции), получаем выражение для точного пропагатора:
+\begin{equation}
+    S(p) = \frac{i}{\slashed{p} - m_0 - \Sigma(p)}.
+\end{equation}
+\textit{Физический смысл:} Взаимодействие приводит к сдвигу массы частицы. Физическая масса $m$ определяется полюсом точного пропагатора: $\slashed{p} - m_0 - \Sigma(\slashed{p}=m) = 0$.
+
+\section{Уравнение Дайсона для фотона}
+
+Аналогично строится уравнение для точного фотонного пропагатора $D_{\mu\nu}(q)$ (в Ландау-Лифшице обозначается $\mathcal{D}_{\mu\nu}$).
+Пусть свободный пропагатор $D_{0\mu\nu}(q) = \frac{-ig_{\mu\nu}}{q^2}$.
+Суммирование вставок поляризационного оператора дает:
+\begin{equation}
+    D_{\mu\nu}(q) = D_{0\mu\nu}(q) + D_{0\mu\rho}(q) (i\Pi^{\rho\sigma}(q)) D_{\sigma\nu}(q).
+\end{equation}
+Для скалярной части пропагатора (в фейнмановской калибровке) это дает:
+\begin{equation}
+    D(q^2) = \frac{-i}{q^2(1 - \Pi(q^2))}.
+\end{equation}
+В общем виде для обратных пропагаторов (символически):
+\begin{equation}
+    D^{-1} = D_0^{-1} - \Pi.
+\end{equation}
+
+\section{Полная система уравнений Дайсона-Швингера}
+
+В более строгой формулировке (Боголюбов-Ширков, Ландау-Лифшиц §107) уравнения Дайсона связывают точные пропагаторы не просто с $\Sigma$ и $\Pi$, а выражают сами $\Sigma$ и $\Pi$ через точные пропагаторы и \textbf{точную вершинную часть} $\Gamma^\mu$.
+
+\begin{enumerate}
+    \item \textbf{Уравнение для массового оператора:}
+    Массовый оператор $\Sigma(p)$ сам выражается через точный фотонный пропагатор $D$, точный электронный пропагатор $S$ и точную вершину $\Gamma$:
+    \begin{equation}
+        \Sigma(p) = ie^2 \int \frac{d^4k}{(2\pi)^4} \gamma^\mu S(p+k) \Gamma^\nu(p+k, p) D_{\mu\nu}(k).
+    \end{equation}
+    Графически это означает, что «блоб» собственной энергии раскрывается в однопетлевую структуру, но с жирными линиями и закрашенной вершиной.
+
+    \item \textbf{Уравнение для поляризационного оператора:}
+    \begin{equation}
+        \Pi^{\mu\nu}(q) = -ie^2 \text{Tr} \int \frac{d^4p}{(2\pi)^4} \gamma^\mu S(p+q) \Gamma^\nu(p+q, p) S(p).
+    \end{equation}
+\end{enumerate}
+
+Таким образом, мы имеем систему интегральных уравнений (уравнения Дайсона-Швингера) для точных функций Грина $S, D, \Gamma$. Эта система незамкнута (уравнение для $\Gamma$ будет включать более сложные функции), но является основой для непертурбативных методов и анализа перенормировок.
+
+\section{Эффективные линии и перенормировка}
+
+Введение эффективных линий позволяет переписать ряды теории возмущений более компактно (скелетные диаграммы), где вместо обычных линий используются жирные. Это ключевой шаг в процедуре перенормировки:
+\begin{itemize}
+    \item Бесконечности, возникающие в петлях $\Sigma$ и $\Pi$, «прячутся» в перенормировку массы ($m_0 \to m$) и волновой функции ($Z$-факторы).
+    \item Вблизи массовой поверхности ($p^2 \approx m^2$) точный пропагатор ведет себя как свободный, умноженный на константу перенормировки $Z_2$:
+    \begin{equation}
+        S(p) \approx \frac{iZ_2}{\slashed{p} - m}.
+    \end{equation}
+\end{itemize}
+
+\end{document}

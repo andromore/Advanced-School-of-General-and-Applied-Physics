@@ -1,0 +1,110 @@
+\documentclass[a4paper]{article}
+
+\usepackage{mathtext} % использование кириллицы в формулах
+\usepackage{cmap} % грамотное копирование кириллицы из pdf
+\usepackage[T2A]{fontenc} % внутрення кодировка
+\usepackage[utf8]{inputenc} % кодировка документа
+\usepackage[russian]{babel} % язык документа
+\usepackage{amssymb} % дополнительные символы
+\usepackage{amsfonts} % математические шрифты
+\usepackage{amsmath} % дополнительная математика
+\usepackage{indentfirst} % отступ и у первого абзаца
+
+\title{Зачётная задача\\по квантовой теории поля}
+\author{Можаров Андрей}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Ответ:}
+$$
+    \dfrac{d\sigma}{d\Omega} = \dfrac{e^2a^2E^2\pi}{4\beta^6}\left(1 - v^2sin^2\dfrac{\theta}{2}\right)exp\left(-\dfrac{2p^2}{\beta^2}sin^2\dfrac{\theta}{2}\right)
+$$
+
+\subsection*{Решение:}
+
+В низшем порядке теории возмущений
+$S$-матрица процесса рассеяния электрона во внешнем поле
+$A^\mu(x)$ имеет вид:
+$$
+    S_{fi} = -ie \int d^4x \, \bar{\psi}_f(x) \gamma_\mu \psi_i(x) A^\mu(x)
+$$
+Поскольку заданный потенциал статический
+($A^0(x) = \varphi(\vec{x}) = a e^{-\beta^2 |\vec{x}|^2}$ и $\vec{A} = 0$),
+энергия электрона сохраняется ($E_i = E_f = E$).
+
+Тогда амплитуду перехода можно записать через потенциал в импульсном представлении:
+$$
+    \mathcal{M}_{fi} = e \left[ \bar{u}(p_f, s_f) \gamma^0 u(p_i, s_i) \right] \mathcal{F}\{\varphi\}(\vec{q})
+$$
+где $\vec{q} = \vec{p}_f - \vec{p}_i$ — переданный импульс.
+
+Рассчитаем Фурье-образ гауссова потенциала
+$\varphi(\vec{r}) = a e^{-\beta^2 r^2}$:
+$$
+    \mathcal{F}\{\varphi\}(\vec{q}) = \int d^3x \, e^{-i\vec{q}\cdot\vec{x}} a e^{-\beta^2 r^2} = a \left( \int_{-\infty}^{\infty} e^{-\beta^2 x^2 - i q_x x} dx \right)^3
+$$
+Используя табличный интеграл Гаусса
+$$
+    \int_{-\infty}^{\infty} e^{-Ax^2 - Bx} dx = \sqrt{\frac{\pi}{A}} e^{B^2/4A}
+$$
+получаем:
+$$
+    \mathcal{F}\{\varphi\}(\vec{q}) = a \left( \frac{\pi}{\beta^2} \right)^{3/2} \exp\left( -\frac{q^2}{4\beta^2} \right)
+$$
+Квадрат модуля переданного импульса связан с углом рассеяния $\theta$ формулой:
+$$
+    q^2 = (\vec{p}_f - \vec{p}_i)^2 = 2p^2 (1 - \cos\theta) = 4p^2 \sin^2\frac{\theta}{2}
+$$
+
+Дифференциальное сечение рассеяния в статическом поле дается формулой:
+$$
+    \frac{d\sigma}{d\Omega} = \frac{e^2 |\mathcal{F}\{\varphi\}(\vec{q})|^2}{16\pi^2} \sum_{s_f} |\bar{u}(p_f, s_f) \gamma^0 u(p_i, s_i)|^2
+$$
+Нам дано, что начальный электрон полностью поляризован (спиральность $\lambda = -1$).
+Конечная поляризация не фиксируется, поэтому мы суммируем по $s_f$.
+
+Для расчета спиновой части используем оператор плотности для начального состояния
+с фиксированной поляризацией:
+$$
+    \rho_i = u_i \bar{u}_i = (\hat{p}_i + m) \frac{1 + \gamma^5 \hat{\zeta}}{2}
+$$
+где $\zeta$ — 4-вектор поляризации
+и введено обозначение $\hat{a} = a_\mu \gamma^\mu$.
+Здесь
+$$
+    \dfrac{1 + \gamma^5 \hat{\zeta}}{2}
+$$
+имеет смысл оператора проектирования на спин.
+Сумма по конечным спинам:
+$\sum_{s_f} u_f \bar{u}_f = \hat{p}_f + m$.
+Тогда:
+$$
+    \sum_{s_f} |\bar{u}_f \gamma^0 u_i|^2 = \text{Tr} \left[ \gamma^0 (\hat{p}_i + m) \frac{1 + \gamma^5 \hat{\zeta}}{2} \gamma^0 (\hat{p}_f + m) \right]
+$$
+В электромагнитных взаимодействиях, сохраняющих четность,
+сечение рассеяния электрона с определенной спиральностью
+на скалярном (статическом) потенциале совпадает с неполяризованным сечением
+(так как след от члена с $\gamma^5$ обращается в нуль).
+Следовательно, результат эквивалентен обычному сечению Мотта:
+$$
+    \sum_{s_f} |\dots|^2 = \frac{1}{2} \text{Tr} [\dots] \times 2 = 8 E^2 \left( 1 - v^2 \sin^2\frac{\theta}{2} \right)
+$$
+где $v = p/E$ — скорость электрона.
+
+Подставляем все компоненты в формулу сечения:
+$$
+    \frac{d\sigma}{d\Omega} = \frac{e^2}{16\pi^2} \left[ a^2 \frac{\pi^3}{\beta^6} \exp\left( -\frac{2p^2 \sin^2(\theta/2)}{\beta^2} \right) \right] \cdot 8E^2 \left( 1 - v^2 \sin^2\frac{\theta}{2} \right)
+$$
+После сокращения коэффициентов получаем:
+$$
+    \frac{d\sigma}{d\Omega} = \frac{e^2 a^2 \pi}{2 \beta^6} E^2 \left( 1 - v^2 \sin^2\frac{\theta}{2} \right) \exp\left( -\frac{2p^2 \sin^2(\theta/2)}{\beta^2} \right)
+$$
+Ответ:
+$$
+    \frac{d\sigma}{d\Omega} = \frac{e^2 a^2 \pi E^2}{2 \beta^6} \left( 1 - v^2 \sin^2\frac{\theta}{2} \right) e^{-\frac{2p^2 \sin^2(\theta/2)}{\beta^2}}
+$$
+где $E$ — энергия, $p$ — импульс, а $v$ — скорость налетающего электрона.
+
+\end{document}
