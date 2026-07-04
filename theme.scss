@@ -533,6 +533,18 @@ p {
             font-weight: bold;
         }
     }
+    &.author {
+        text-align: right;
+        font-style: italic;
+        color: gray;
+
+        &::before {
+            content: "Автор: ";
+            font-style: normal;
+            color: #333;
+        }
+
+    }
 }
 
 span.comment {

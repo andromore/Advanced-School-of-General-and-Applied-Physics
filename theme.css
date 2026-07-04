@@ -562,6 +562,15 @@ p.victory {
     color: #0c0;
     font-weight: bold; }
 
+p.author {
+  text-align: right;
+  font-style: italic;
+  color: gray; }
+  p.author::before {
+    content: "Автор: ";
+    font-style: normal;
+    color: #333; }
+
 span.comment {
   color: #888888; }
 
