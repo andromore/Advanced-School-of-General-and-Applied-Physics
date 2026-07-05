@@ -454,14 +454,17 @@ nav#main {
     nav#main > a > span {
       display: table-cell;
       vertical-align: middle; }
-    div:has(> a) > a:is(:hover, :active),
-    nav#main > a:is(:hover, :active) {
+    div:has(> a) > a:is(:hover, :active):not(.disabled),
+    nav#main > a:is(:hover, :active):not(.disabled) {
       animation-name: animation-links;
       animation-duration: 0.25s;
       animation-iteration-count: initial;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
       transform-origin: center; }
+    div:has(> a) > a.disabled,
+    nav#main > a.disabled {
+      background-color: rgba(0, 0, 0, 0.1); }
 
 div.nav {
   margin-left: 0;

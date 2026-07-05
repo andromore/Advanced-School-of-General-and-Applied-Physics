@@ -429,13 +429,17 @@ nav#main {
             vertical-align: middle;
         }
 
-        &:is(:hover, :active) {
+        &:is(:hover, :active):not(.disabled) {
             animation-name: animation-links;
             animation-duration: $time-link;
             animation-iteration-count: initial;
             animation-timing-function: linear;
             animation-fill-mode: forwards;
             transform-origin: center;
+        }
+
+        &.disabled {
+            background-color: rgba(0, 0, 0, 0.1);
         }
     }
 }
