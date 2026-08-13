@@ -1,0 +1,186 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{indentfirst}
+
+\begin{document}
+
+% --- ТИТУЛЬНЫЙ ЛИСТ ---
+\begin{titlepage}
+    \centering
+    Федеральное государственное автономное образовательное учреждение высшего образования \\
+    «Национальный исследовательский Нижегородский государственный университет им. Н.И. Лобачевского» \par
+    \vspace{4cm}
+    \Large \textbf{Отчёт по лабораторной работе} \\
+    \Huge \textbf{«Поляризация»} \par
+    \vspace{3cm}
+    \large
+    \textit{Выполнили:} \\
+    Кукушкин Юрий, Калинин Дмитрий, \\
+    Можаров Андрей, Зинягин Алексей, \\
+    Рассулов Илья \par \vspace{1em}
+    \textit{Проверил:} \\
+    Старобор Алексей Викторович \par
+    \vfill
+    2025 г.
+\end{titlepage}
+
+% --- РАЗДЕЛ 1: ПОСТОЯННАЯ ВЕРДЕ ---
+\section{Постоянная Верде среды}
+
+Постоянной Верде называют коэффициент пропорциональности между углом поворота плоскости поляризации $\theta$ и интегралом от продольной компоненты напряженности магнитного поля $H_z$ по длине кристалла $L$:
+\begin{equation}
+\theta = V \int_{-L/2+\epsilon_0}^{L/2+\epsilon_0} H_z(z) dz = L \cdot H_z \cdot V
+\end{equation}
+
+Для нахождения постоянной проводились вычисления интеграла магнитного поля методом трапеций для различных сред:
+
+\begin{itemize}
+    \item \textbf{Оксид тербия ($Tb_2O_3$):} $L = 0.7$ мм, $\int_{-0.35}^{0.35} H_z(z) dz = 9.462862$ Кэ$\cdot$мм.
+    \item \textbf{Тербий-алюминиевый гранат ($Tb_3Al_5O_{12}$):} $L = 3$ мм, $\int_{-1.5}^{1.5} H_z(z) dz = 40.509526$ Кэ$\cdot$мм.
+    \item \textbf{Тербий-галлиевый гранат ($Tb_3Ga_5O_{12}$):} $L = 9.6$ мм, $\int_{-4.8}^{4.8} H_z(z) dz = 128.220031$ Кэ$\cdot$мм.
+\end{itemize}
+
+$$
+    \theta = \varphi \hspace{1em} V = \dfrac{\varphi}{\int_{-L/2}^{L/2} H_z(z)dz}
+$$
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Материал среды & Длина ($L$), мм & Угол поворота ($\varphi$) & V, град/(Кэ$\cdot$мм\\
+\midrule
+$Tb_3Ga_5O_{12}$ & 9,6 & $148^{\circ} 40'$ ($391^{\circ} 20'$ полн.) & 3,05 \\
+$Tb_3Al_5O_{12}$ & 3 & $174^{\circ} 20'$ & 4,3 \\
+$Tb_2O_3$        & 0,7 & $41^{\circ} 40'$ & 4,4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% --- РАЗДЕЛ 2: ГЛЮКОЗА ---
+\section{Удельное вращение водного раствора глюкозы}
+
+Плотность глюкозы: $\rho_\text{глюк.} = 1,562 \dfrac{\text{г}}{\text{см}^3}$.
+$$
+    C' = \dfrac{V_\text{глюкозы}}{V_\text{раствора}}\rho_\text{глюкозы}
+$$
+$$
+    \Delta V = \Delta V_\text{глюкозы} = \Delta V_\text{раствора} = 0,05 \text{ мл}
+$$
+$$
+    \Delta C' = \dfrac{\rho_\text{глюкозы}\Delta V_\text{глюкозы}}{\Delta V_\text{раствора}} \sqrt{1 + \left(\dfrac{V_\text{глюкозы}}{V_\text{раствора}}\right)^2}
+$$
+
+Удельное вращение $[\alpha]$ определяется как вращение плоскости поляризации слоем вещества толщиной $L=1$ дм при концентрации $C = 1$ г/мл. Формула расчета:
+\begin{equation}
+[\alpha] = \frac{\alpha \cdot 100}{L \cdot C}
+\end{equation}
+
+Для измерений использовалась установка, включающая лазер, кювету ($L=40$ мм), вращающийся поляризатор и осциллограф.
+
+\subsection*{Результаты измерений для глюкозы}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccccc}
+\toprule
+Концентрация & $V_{\text{р-ра}}$ (мл) & $V_{\text{воды}}$ (мл) & $V_{\text{глюк}}$ (мл) & $\varphi, ^\circ$ & $C$, г/см$^3$ \\
+\midrule
+40\% & 5 & 3 & 2 & 19.46 & 0,62 \\
+35\% & 5,71 & 3,71 & 2 & 18.00 & 0,54 \\
+30\% & 6,6 & 4,6 & 2 & 16.00 & 0.47 \\
+25\% & 8 & 6 & 2 & 13.30 & 0,39 \\
+20\% & 10 & 8  & 2 & 10.24 & 0,31 \\
+15\% & 13,3 & 11,3 & 2 & 7.38  & 0,23 \\
+10\% & 20 & 18 & 2 & 6.00 & 0,16 \\
+\bottomrule
+\end{tabular}
+\caption{Результаты измерений для глюкозы с учетом дополнительных данных}
+\end{table}
+
+На основе аппроксимации графика $\varphi_{мин}(C)$ получен угловой коэффициент $\langle k \rangle = 31,2 \dfrac{\text{град} \cdot \text{см}^3}{\text{г}}$. 
+Итоговое удельное вращение: $[\alpha] = (78 \pm 2) \frac{\text{град} \cdot \text{см}^2}{\text{г}}$.
+
+% --- РАЗДЕЛ 3: КРИСТАЛЛ DKDP ---
+\section{Кристалл DKDP: Двулучепреломление}
+
+% Разность фаз между обыкновенной и необыкновенной волнами
+\begin{equation}
+\varphi = 2\pi l \frac{n' - n''}{\lambda}
+\end{equation}
+
+% Итоговое выражение для разности фаз с учетом угла падения
+\begin{equation}
+\varphi = 2\pi \frac{d}{\lambda \cos \rho} (n_0 - n_e) \sin^2 \rho
+\end{equation}
+
+% Разность фаз в приближении малых углов (x << f)
+\begin{equation}
+\varphi = 2\pi \frac{d(n_0 - n_e)}{\lambda f} \frac{x^2}{\sqrt{f^2 + x^2}}
+\end{equation}
+
+% Формула для определения разности показателей преломления
+\begin{equation}
+(n_0 - n_e) = \frac{\varphi \lambda}{2\pi d} \frac{f^2}{x^2}
+\end{equation}
+
+% Условия экстремумов (максимумы и минимумы)
+\begin{itemize}
+    \item \textbf{Для максимумов ($\varphi = 2\pi k$):} 
+    \begin{equation}
+    (n_0 - n_e) = \frac{k \lambda}{d} \frac{f^2}{x^2}
+    \end{equation}
+    
+    \item \textbf{Для минимумов ($\varphi = (2k + 1)\pi$):} 
+    \begin{equation}
+    (n_0 - n_e) = \frac{(2k + 1) \lambda}{2d} \frac{f^2}{x^2}
+    \end{equation}
+\end{itemize}
+
+% Расчет погрешностей
+\begin{equation}
+\delta(n_0 - n_e) = \delta d + 2\delta f + 2\delta x
+\end{equation}
+\begin{equation}
+\Delta(n_0 - n_e) = (n_0 - n_e) \cdot \delta(n_0 - n_e)
+\end{equation}
+
+Параметры кристалла DKDP: $\lambda = 650$~нм , $d = 3$~мм , $F = 96$~мм, $n_0 = 1,4931$.
+
+$\Delta f = 1$ мм, $\Delta x = 0,05$ мм, $\Delta d = 0,1$ мм.   
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+Номер кольца & $x$, мм & $(n_0 - n_e)$ & $\delta (n_0 - n_e)$ & $\Delta (n_0 - n_e)$ \\
+\midrule
+1max & 5,9  & 0,057 & 0,071 & 0,004 \\
+1min & 8,65 & 0,040 & 0,066 & 0,003 \\
+2max & 10,2 & 0,038 & 0,064 & 0,002 \\
+2min & 13,13& 0,029 & 0,062 & 0,002 \\
+3max & 14,1 & 0,030 & 0,061 & 0,002 \\
+3min & 15,2 & 0,030 & 0,061 & 0,002 \\
+4max & 15,7 & 0,032 & 0,061 & 0,002 \\
+4min & 16,8 & 0,032 & 0,060 & 0,002 \\
+5max & 17,8 & 0,032 & 0,060 & 0,002 \\
+5min & 18,6 & 0,032 & 0,060 & 0,002 \\
+6max & 19,8 & 0,031 & 0,059 & 0,002 \\
+6min & 20,15& 0,032 & 0,059 & 0,002 \\
+7max & 20,7 & 0,033 & 0,059 & 0,002 \\
+7min & 21,5 & 0,032 & 0,059 & 0,002 \\
+\midrule
+ & & 0,034 & 0,061 & 0,002 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Среднее, соответственно, $(n_0 - n_e) = (0,034 \pm 0,002)$.
+
+\end{document}
